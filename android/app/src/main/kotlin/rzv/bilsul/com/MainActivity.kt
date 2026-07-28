@@ -1,4 +1,4 @@
-package com.bilalsul.rzv
+package rzv.bilsul.com
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
