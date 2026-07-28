@@ -26,6 +26,8 @@
   <tr>
     <td>Android</td>
     <td>
+    <a href="https://f-droid.org/packages/rzv.bilsul.com">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/%22Get_it_on_F-droid%22_Badge.png" alt="Get it on F-droid" height="45">
       <a href="https://github.com/bilalsul/rzv/releases/latest">
           <img src="screens/github-badge.png" alt="从 GitHub 下载" height="45">
         </a>
