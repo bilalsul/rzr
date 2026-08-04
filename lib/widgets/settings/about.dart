@@ -194,7 +194,7 @@ Future<void> openAboutDialog(BuildContext context) async {
                   title: Text(L10n.of(context).appAuthor),
                   onTap: () {
                     launchUrl(
-                      Uri.parse('https://bilsul.com'),
+                      Uri.parse('https://bilalsul.github.io'),
                       mode: LaunchMode.externalApplication,
                     );
                   },
