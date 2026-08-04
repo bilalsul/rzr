@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.9
+- Fix: Fix crash on launch on Android
+- Clean: Remove Google Play links; use F-Droid and GitHub
+
+- Fix: 修复 Android 启动崩溃问题
+- Clean: 移除 Google Play 链接；使用 F-Droid 和 GitHub
+
 ## 0.6.7
 - Fix: Fix broken theme for different dialogs in Zip Manager and About
 - Feat: Add Changelog Viewing and App Licenses in About
