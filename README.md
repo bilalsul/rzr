@@ -16,7 +16,7 @@
 
 Extract .zip Github/Gitlab/Bitbucket repositories and open files in code editor and markdown viewer on mobile — perfect for students, code readers and quick access.
 
-![Repo Zip Viewer (RZV) Banner](screens/export/playstore.png)  
+![Repo Zip Viewer (RZV) Banner](screens/export/store.png)  
 
 <table border="1">
   <tr>
