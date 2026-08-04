@@ -47,7 +47,6 @@
   "aboutCheckForUpdates": "檢查更新",
   "updateNewVersion": "新版本： ",
   "updateCurrentVersion": "目前版本： ",
-  "updateViaPlayStore": "Play 商店",
   "updateViaGithub": "透過 GitHub",
   "updateViaOfficialWebsite": "透過網站",
   "commonSkip": "略過",

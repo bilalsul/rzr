@@ -31,9 +31,6 @@
       <a href="https://github.com/bilalsul/rzv/releases/latest">
           <img src="screens/github-badge.png" alt="从 GitHub 下载" height="45">
         </a>
-      <a href="https://play.google.com/store/apps/details?id=com.bilalworku.gzip">
-          <img src="screens/googleplay.png" alt="在 Google Play 上获取" height="45">
-        </a>
     </td>
   </tr>
 </table>
@@ -99,7 +96,7 @@
 
 **Repo Zip Viewer (RZV)** – 随时随地查看代码。  
 
-📱 可在 [Google Play]() 上获取（或 [获取最新 APK 版本](https://github.com/bilalsul/rzv/releases/latest)）
+📱 [获取最新 APK 版本](https://github.com/bilalsul/rzv/releases/latest)
 
 ## 许可证
 

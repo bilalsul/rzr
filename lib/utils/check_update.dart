@@ -158,15 +158,6 @@ $changelogBody''',
               },
               child: Text(L10n.of(context).updateViaGithub),
             ),
-            TextButton(
-              onPressed: () {
-                launchUrl(
-                  Uri.parse('https://play.google.com/store/apps/details?id=com.bilalworku.gzip'),
-                  mode: LaunchMode.externalApplication,
-                );
-              },
-              child: Text(L10n.of(context).updateViaPlayStore),
-            ),
           ],
         );
       },

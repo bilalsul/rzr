@@ -47,7 +47,6 @@
   "aboutCheckForUpdates": "Güncellemeleri kontrol et",
   "updateNewVersion": "Yeni sürüm: ",
   "updateCurrentVersion": "Mevcut sürüm: ",
-  "updateViaPlayStore": "Play Store",
   "updateViaGithub": "GitHub aracılığıyla",
   "updateViaOfficialWebsite": "Web Sitesi aracılığıyla",
   "commonSkip": "Atla",

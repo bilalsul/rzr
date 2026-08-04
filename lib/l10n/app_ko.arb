@@ -47,7 +47,6 @@
   "aboutCheckForUpdates": "업데이트 확인",
   "updateNewVersion": "새 버전: ",
   "updateCurrentVersion": "현재 버전: ",
-  "updateViaPlayStore": "Play 스토어",
   "updateViaGithub": "GitHub 경유",
   "updateViaOfficialWebsite": "웹사이트 경유",
   "commonSkip": "건너뛰기",

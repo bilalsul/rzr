@@ -47,7 +47,6 @@
   "aboutCheckForUpdates": "Vérifier les mises à jour",
   "updateNewVersion": "Nouvelle version : ",
   "updateCurrentVersion": "Version actuelle : ",
-  "updateViaPlayStore": "Play Store",
   "updateViaGithub": "Via GitHub",
   "updateViaOfficialWebsite": "Via Site Web",
   "commonSkip": "Passer",

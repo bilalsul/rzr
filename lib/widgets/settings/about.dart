@@ -194,8 +194,7 @@ Future<void> openAboutDialog(BuildContext context) async {
                   title: Text(L10n.of(context).appAuthor),
                   onTap: () {
                     launchUrl(
-                      Uri.parse(
-                          'https:play.google.com/store/apps/details?id=com.bilalworku.gzip'),
+                      Uri.parse('https://bilsul.com'),
                       mode: LaunchMode.externalApplication,
                     );
                   },

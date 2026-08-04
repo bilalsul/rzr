@@ -47,7 +47,6 @@
   "aboutCheckForUpdates": "Проверить обновления",
   "updateNewVersion": "Новая версия: ",
   "updateCurrentVersion": "Текущая версия: ",
-  "updateViaPlayStore": "Play Store",
   "updateViaGithub": "Через GitHub",
   "updateViaOfficialWebsite": "Через Веб-сайт",
   "commonSkip": "Пропустить",
