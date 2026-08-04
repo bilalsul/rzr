@@ -48,7 +48,7 @@ Perfect for:
 - Quickly checking repos shared as zip downloads
 - Learning from famous projects without setting up git
 
-No cloning. No internet after import. Privacy-focused.
+No cloning. Read and browse files offline after import. Privacy-focused.
 
 ## Features
 
@@ -62,7 +62,7 @@ No cloning. No internet after import. Privacy-focused.
 - Toggleable File Explorer & advanced features via **Plugins** system
 - Supports huge projects (with progress indicator during extraction)
 - Multiple languages (English, Italian, French, German, Arabic, Spanish, Portuguese, Turkish, Chinese (Simplified & Traditional), Japanese, Korean, Russian)
-- No unnecessary permissions – only storage access to read local .zip files
+- Only the INTERNET permission (used to download repository archives and check for new versions); no unnecessary permissions
 
 | Imported Projects          | Plugins Manager            |
 |----------------------------|----------------------------|
