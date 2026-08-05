@@ -1,6 +1,6 @@
-A mobile code reader for reading git projects in a code editor. Download source code from GitHub, GitLab or Bitbucket in "owner/repo" format and read it on the go.
+<i>RZR</i> is a mobile code reader for reading git projects in a code editor. Download source code from GitHub, GitLab or Bitbucket in "owner/repo" format and read it on the go.
 
-Features:
+<b>Features:</b>
 * Download GitHub, GitLab and Bitbucket repos as zip with the in-app Zip Manager plugin.
 * Read source code in the Monaco editor with support for 100+ programming languages. Customizable with plugins.
 * In-app folder/file tree browser for managing extracted zip projects once enabled.
@@ -10,6 +10,10 @@ Features:
 * Supports English and 13 other languages.
 * Optional AI assistant plugin, using user-supplied API keys for OpenAI, Anthropic, and Gemini.
 
-The app uses the INTERNET permission to download repository archives and check for new versions on GitHub. No tracking or analytics.
+The app uses the <i>INTERNET</i> permission to download repository archives, check for new versions on GitHub and AI plugin. No tracking or analytics.
 
-The AI plugin is not implemented yet in 0.6.9 and will be added in upcoming versions.
+The AI plugin is not implemented yet in 0.6.9 and will be added in upcoming releases.
+
+Read RZR User guide <a href="bilalsul.github.io/rzr">here</a>
+
+Help us translate us the app to your languague and check strings <a href="https://github.com/bilalsul/rzr/blob/develop-live/CONTRIBUTING.md#translations">here</a>

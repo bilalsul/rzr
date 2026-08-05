@@ -1,6 +1,6 @@
-一款在代码编辑器中阅读 git 项目的移动端代码阅读器。以 "owner/repo" 格式从 GitHub、GitLab 或 Bitbucket 下载源代码，随时随地进行阅读。
+<i>RZR</i> 是一款在代码编辑器中阅读 git 项目的移动端代码阅读器。以 "owner/repo" 格式从 GitHub、GitLab 或 Bitbucket 下载源代码，随时随地进行阅读。
 
-功能：
+<b>功能：</b>
 * 通过内置的 Zip 管理器插件，将 GitHub、GitLab 和 Bitbucket 仓库下载为 zip。
 * 在 Monaco 编辑器中阅读源代码，支持 100 多种编程语言，可通过插件自定义。
 * 应用内文件夹/文件树浏览器，用于管理解压后的 zip 项目（启用后可用）。
@@ -10,6 +10,10 @@
 * 支持英语及其他 13 种语言。
 * 可选的 AI 助手插件，需使用用户提供的 API 密钥（OpenAI、Anthropic 和 Gemini）。
 
-应用使用 INTERNET 权限来下载仓库压缩包并在 GitHub 上检查新版本。无跟踪、无分析。
+应用使用 <i>INTERNET</i> 权限来下载仓库压缩包、在 GitHub 上检查新版本以及使用 AI 插件。无跟踪、无分析。
 
 AI 插件在 0.6.9 中尚未实现，将在后续版本中加入。
+
+阅读 RZR 用户指南，请点击<a href="bilalsul.github.io/rzr">这里</a>
+
+帮助我们翻译应用，并查看字符串检查方法，请点击<a href="https://github.com/bilalsul/rzr/blob/develop-live/CONTRIBUTING.md#translations">这里</a>
