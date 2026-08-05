@@ -1,0 +1,27 @@
+Welcome to the RZV User Guide.
+
+# Contents
+
+- [1. Quick Start](quick_start)
+    - [1.1 What is RZV](quick_start#11-what-is-rzv)
+    - [1.2 Basic Usage](quick_start#12-basic-usage)
+    - [1.3 Opening a Repository](quick_start#13-opening-a-repository)
+    - [1.4 Browsing Files](quick_start#14-browsing-files)
+- [2. Zip Manager](zip_manager)
+    - [2.1 Downloading a Repository](zip_manager#21-downloading-a-repository)
+    - [2.2 Branch Selection](zip_manager#22-branch-selection)
+    - [2.3 Extracted Projects](zip_manager#23-extracted-projects)
+- [3. Code Editor](code_editor)
+    - [3.1 Syntax Highlighting](code_editor#31-syntax-highlighting)
+    - [3.2 Editor Options](code_editor#32-editor-options)
+    - [3.3 Font Size and Font Family](code_editor#33-font-size-and-font-family)
+- [4. Markdown Previewer](markdown_previewer)
+    - [4.1 Previewing README files](markdown_previewer#41-previewing-readme-files)
+    - [4.2 Preview Settings](markdown_previewer#42-preview-settings)
+- [5. Customization](customization)
+    - [5.1 Themes and Accent Colors](customization#61-themes-and-accent-colors)
+    - [5.2 Plugins System](customization#62-plugins-system)
+    - [5.3 Interface Languages](customization#63-interface-languages)
+- [6. FAQ](faq)
+- [7. Donate](donate)
+- [8. Privacy Policy](privacy)

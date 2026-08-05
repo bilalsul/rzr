@@ -1,0 +1,38 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+#header_wrap .inner {
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+.highlighter-rouge {
+  margin-bottom: 16px;
+}
+
+table {
+  border: 1px solid #e0e3e6;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.92rem;
+  background-color: #fafafa;
+}
+
+tr:nth-child(2n) {
+  background-color: #f3f5f5;
+}
+
+table th {
+  color: inherit;
+  background: transparent;
+  font-weight: bold;
+  padding: 8px;
+  border: 1px solid #e0e3e6;
+}
+
+table td {
+  padding: 8px;
+  border: 1px solid #e0e3e6;
+}
