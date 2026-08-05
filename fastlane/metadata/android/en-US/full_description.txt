@@ -1,31 +1,15 @@
-Extract .zip Github/Gitlab/Bitbucket repositories and open files in a code editor and markdown viewer on mobile — perfect for students, code readers and quick access.
-
-Explore any Github, Gitlab or Bitbucket repository — just download it as a .zip and open it instantly in a beautiful, read-only code editor. No cloning or Git setup needed; files are read offline after import.
-
-Perfect for:
-- Studying open-source projects on the go
-- Reviewing code during travel or commutes
-- Quickly checking repos shared as zip downloads
-- Learning from famous projects without setting up git
+A mobile code reader for reading git projects in a code editor. Download source code from GitHub, GitLab or Bitbucket in "owner/repo" format and read it on the go.
 
 Features:
-- Import any git repository as a .zip file (GitHub "Download ZIP", GitLab export, etc.)
-- In-app Zip Manager to download a repository and extract it, with branch selection and download cancellation
-- Full folder/file tree browser
-- Syntax-highlighted read-only code editor (Monaco Editor via WebView)
-- Instant Markdown preview for READMEs and .md files
-- Search across files and inside file contents
-- Customizable: font size, font family, zoom, light/dark theme and accent colors
-- Toggleable File Explorer and advanced features via Plugins system
-- Supports huge projects (with progress indicator during extraction)
-- Multiple languages (English, Italian, French, German, Arabic, Spanish, Portuguese, Turkish, Chinese, Japanese, Korean, Russian)
+* Download GitHub, GitLab and Bitbucket repos as zip with the in-app Zip Manager plugin.
+* Read source code in the Monaco editor with support for 100+ programming languages. Customizable with plugins.
+* In-app folder/file tree browser for managing extracted zip projects once enabled.
+* Read-only code editor with Monaco syntax highlighting (via WebView).
+* Instant Markdown preview for READMEs and .md files once enabled.
+* Rich Settings for managing file explorer and editor options (word wrap, minimap, line numbers, zoom) through the Plugins system.
+* Supports English and 13 other languages.
+* Optional AI assistant plugin, using user-supplied API keys for OpenAI, Anthropic, and Gemini.
 
-Privacy and Permissions:
-- The INTERNET permission is used to download repository archives and check for new versions
-- No tracking, no analytics
-- Free Software under the GNU 3.0 License
+The app uses the INTERNET permission to download repository archives and check for new versions on GitHub. No tracking or analytics.
 
-Planned but not yet implemented:
-- AI chat features (coming soon)
-- Git history browser
-- Integrated terminal
+The AI plugin is not implemented yet and will be added in upcoming versions.
