@@ -94,6 +94,10 @@ AI 插件尚未实现，将在后续版本中加入。
 
 本项目采用 [GNU 3.0 许可证](./LICENSE)。
 
+## 贡献
+
+想参与贡献？请参阅 [贡献指南](./CONTRIBUTING.md)，了解如何搭建项目、本地运行、添加或翻译字符串以及提交拉取请求。
+
 ## 致谢
 
 [flutter_monaco](https://github.com/omar-hanafy/flutter_monaco)，采用 MIT 许可证，是一个用于将 Monaco 编辑器（VS Code 的编辑器）通过 WebView 集成到 Flutter 应用程序中的 Flutter 插件。

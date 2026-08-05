@@ -97,6 +97,10 @@ The AI plugin is not implemented yet and will be added in upcoming versions.
 
 This project is licensed under the [GNU 3.0 License](./LICENSE).
 
+## Contributing
+
+Want to help? See the [Contributing Guide](./CONTRIBUTING.md) for how to set up the project, run it locally, add or translate strings, and open a pull request.
+
 ## Thanks
 
 [flutter_monaco](https://github.com/omar-hanafy/flutter_monaco), which is MIT licensed, a flutter plugin for integrating the Monaco Editor (VS Code's editor) into Flutter applications via WebView.
