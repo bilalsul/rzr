@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rzv/utils/app_version.dart';
-import 'package:rzv/utils/toast/common.dart';
+import 'package:rzr/utils/app_version.dart';
+import 'package:rzr/utils/toast/common.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:rzv/widgets/settings/about.dart';
+import 'package:rzr/widgets/settings/about.dart';
 
 // Providers
 import '../../providers/shared_preferences_provider.dart';
-import 'package:rzv/l10n/generated/L10n.dart';
-import 'package:rzv/data/plugin_definitions.dart' as plugin_defs;
+import 'package:rzr/l10n/generated/L10n.dart';
+import 'package:rzr/data/plugin_definitions.dart' as plugin_defs;
 
 // Models
-import 'package:rzv/models/plugin.dart';
+import 'package:rzr/models/plugin.dart';
 
 class AppDrawer extends ConsumerStatefulWidget {
   const AppDrawer({super.key});
@@ -551,12 +551,12 @@ class _AppDrawerState extends ConsumerState<AppDrawer> {
             ),
             onPressed: () async {
               final Uri feedbackUrl = Uri.parse(
-                'https://github.com/bilalsul/rzv/issues',
+                'https://github.com/bilalsul/rzr/issues',
               );
               if (await canLaunchUrl(feedbackUrl)) {
                 await launchUrl(feedbackUrl);
               } else {
-                RZVToast.show(L10n.of(context).drawerFeedbackComingSoon);
+                RZRToast.show(L10n.of(context).drawerFeedbackComingSoon);
               }
               Navigator.of(context).pop();
             },

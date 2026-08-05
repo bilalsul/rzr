@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' hide ChangeNotifierProvider;
-import 'package:rzv/app/app_shell_3.dart';
-import 'package:rzv/l10n/generated/L10n.dart';
-import 'package:rzv/providers/shared_preferences_provider.dart';
-import 'package:rzv/utils/get_path/get_base_path.dart';
-import 'package:rzv/utils/error/common.dart';
-import 'package:rzv/utils/log/common.dart';
+import 'package:rzr/app/app_shell_3.dart';
+import 'package:rzr/l10n/generated/L10n.dart';
+import 'package:rzr/providers/shared_preferences_provider.dart';
+import 'package:rzr/utils/get_path/get_base_path.dart';
+import 'package:rzr/utils/error/common.dart';
+import 'package:rzr/utils/log/common.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:provider/provider.dart';
 // import 'package:window_manager/window_manager.dart';
@@ -40,8 +40,8 @@ Future<void> main() async {
   // }
 
   initBasePath();
-  RZVLog.init();
-  RZVError.init();
+  RZRLog.init();
+  RZRError.init();
 
   SmartDialog.config.custom = SmartConfigCustom(
     // maskColor: Colors.black.withAlpha(35),
@@ -157,7 +157,7 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
       // theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: prefs.themeMode,
-      title: 'RZV',
+      title: 'RZR',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: prefs.accentColor),
         useMaterial3: true,

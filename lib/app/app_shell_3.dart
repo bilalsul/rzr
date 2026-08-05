@@ -3,23 +3,23 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rzv/enums/options/screen.dart';
+import 'package:rzr/enums/options/screen.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
 
 // Providers
-import 'package:rzv/l10n/generated/L10n.dart';
-import 'package:rzv/providers/shared_preferences_provider.dart';
+import 'package:rzr/l10n/generated/L10n.dart';
+import 'package:rzr/providers/shared_preferences_provider.dart';
 
 // Screens
-import 'package:rzv/screens/home_screen.dart';
-import 'package:rzv/screens/editor_screen_2.dart';
-import 'package:rzv/screens/zip_manager/zip_manager_screen.dart';
-import 'package:rzv/screens/ai_screen.dart';
-import 'package:rzv/screens/settings_screen.dart';
+import 'package:rzr/screens/home_screen.dart';
+import 'package:rzr/screens/editor_screen_2.dart';
+import 'package:rzr/screens/zip_manager/zip_manager_screen.dart';
+import 'package:rzr/screens/ai_screen.dart';
+import 'package:rzr/screens/settings_screen.dart';
 
 // Widgets
-import 'package:rzv/widgets/common/app_drawer.dart';
-import 'package:rzv/widgets/common/dynamic_app_bar.dart';
+import 'package:rzr/widgets/common/app_drawer.dart';
+import 'package:rzr/widgets/common/dynamic_app_bar.dart';
 import 'package:hidable/hidable.dart';
 
 class NavItem {
@@ -105,7 +105,7 @@ class _AppShellState extends ConsumerState<AppShell> {
       locale: prefs.getEffectiveLocale(prefs, L10n.supportedLocales),
       localizationsDelegates: L10n.localizationsDelegates,
       supportedLocales: L10n.supportedLocales,
-      title: 'RZV',
+      title: 'RZR',
       // theme: ThemeData.light(),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: prefs.accentColor),

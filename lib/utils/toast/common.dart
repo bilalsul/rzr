@@ -1,9 +1,9 @@
-import 'package:rzv/main.dart';
-import 'package:rzv/widgets/common/container/filled_container.dart';
+import 'package:rzr/main.dart';
+import 'package:rzr/widgets/common/container/filled_container.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class RZVToast {
+class RZRToast {
   static FToast fToast = FToast();
 
   static void init(BuildContext context) {

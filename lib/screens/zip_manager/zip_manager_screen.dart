@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rzv/l10n/generated/L10n.dart';
-import 'package:rzv/providers/shared_preferences_provider.dart';
-import 'package:rzv/utils/toast/common.dart';
+import 'package:rzr/l10n/generated/L10n.dart';
+import 'package:rzr/providers/shared_preferences_provider.dart';
+import 'package:rzr/utils/toast/common.dart';
 import 'zip_manager_controller.dart';
 import 'zip_download_controller.dart';
 import 'zip_download_state.dart';
@@ -237,7 +237,7 @@ class _ZipManagerScreenState extends ConsumerState<ZipManagerScreen> {
                           ),
                           onPressed: dlState.status == AsyncStatus.loading ? () {
                             downloadCtrlLocal.cancel();
-                            RZVToast.show(L10n.of(context).commonCanceled, duration: 2500);
+                            RZRToast.show(L10n.of(context).commonCanceled, duration: 2500);
                           } : null,
                           child: Text(L10n.of(context).commonCancel),
                         ),
@@ -337,24 +337,24 @@ class ZipList extends ConsumerWidget {
                         // Close dialog if still open
                         if (dialogContext != null && Navigator.of(dialogContext!).canPop()) Navigator.of(dialogContext!).pop();
                         // Refresh list after extraction completes
-                        RZVToast.show(L10n.of(context).zipManagerExtractedZip(e.filename), duration: 2500);
+                        RZRToast.show(L10n.of(context).zipManagerExtractedZip(e.filename), duration: 2500);
                         ref.read(zipEntriesProvider.notifier).reload();
                       }
                       if (act == 'delete') {
                         await ref.read(zipManagerControllerProvider).deleteZip(e.filename);
                         ref.read(zipEntriesProvider.notifier).reload();
-                        RZVToast.show(L10n.of(context).zipManagerDeleteExtractedZip(e.filename), duration: 2500);
+                        RZRToast.show(L10n.of(context).zipManagerDeleteExtractedZip(e.filename), duration: 2500);
                       }
                       if (act == 'deleteExtracted') {
                         await ref.read(zipManagerControllerProvider).deleteExtraction(e.filename);
                         ref.read(zipEntriesProvider.notifier).reload();
-                        RZVToast.show(L10n.of(context).zipManagerDeleteExtractedZip(e.filename), duration: 2500);
+                        RZRToast.show(L10n.of(context).zipManagerDeleteExtractedZip(e.filename), duration: 2500);
 
                       }
                       if (act == 'reExtract') {
                         await ref.read(zipManagerControllerProvider).reExtract(e.filename);
                         ref.read(zipEntriesProvider.notifier).reload();
-                        RZVToast.show(L10n.of(context).zipManagerReExtractedZip(e.filename), duration: 2500);
+                        RZRToast.show(L10n.of(context).zipManagerReExtractedZip(e.filename), duration: 2500);
                       }
                     },
                     itemBuilder: (c) => [

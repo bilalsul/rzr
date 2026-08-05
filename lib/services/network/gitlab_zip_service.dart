@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 import 'package:path/path.dart' as p;
-import 'package:rzv/utils/log/common.dart';
+import 'package:rzr/utils/log/common.dart';
 import '../filesystem/app_directories.dart';
 import '../state/side_effect_handler.dart';
 
@@ -26,9 +26,9 @@ class GitLabZipService {
           return defaultBranch;
         }
       } else if (resp.statusCode == 404) {
-        throw RZVLog.warning('Gitlab - Repository not found');
+        throw RZRLog.warning('Gitlab - Repository not found');
       }
-      throw RZVLog.warning('Gitlab - Failed to determine default branch');
+      throw RZRLog.warning('Gitlab - Failed to determine default branch');
     } finally {
       try {
         client.close(force: true);
@@ -37,13 +37,13 @@ class GitLabZipService {
   }
 
   void _validateRepoId(String input) {
-    if (input.trim().isEmpty) throw RZVLog.warning('Gitlab - Repository cannot be empty');
+    if (input.trim().isEmpty) throw RZRLog.warning('Gitlab - Repository cannot be empty');
     if (input.contains('http://') || input.contains('https://') || input.contains('/www.')) {
-      RZVLog.warning('Gitlab - Only owner/repo form is accepted, not URLs');
+      RZRLog.warning('Gitlab - Only owner/repo form is accepted, not URLs');
     }
     final parts = input.split('/');
     if (parts.length != 2 || parts[0].isEmpty || parts[1].isEmpty) {
-       RZVLog.warning('Gitlab - Input must be in owner/repo format');
+       RZRLog.warning('Gitlab - Input must be in owner/repo format');
     }
   }
 
@@ -74,8 +74,8 @@ class GitLabZipService {
       try {
         final req = await client.getUrl(url);
         final resp = await req.close();
-        if (resp.statusCode == 404) throw RZVLog.warning('Branch $branch not found (404)');
-        if (resp.statusCode >= 400) throw RZVLog.warning('HTTP ${resp.statusCode}');
+        if (resp.statusCode == 404) throw RZRLog.warning('Branch $branch not found (404)');
+        if (resp.statusCode >= 400) throw RZRLog.warning('HTTP ${resp.statusCode}');
 
         final contentLength = resp.contentLength == -1 ? null : resp.contentLength;
         if (await tempFile.exists()) await tempFile.delete();
@@ -92,7 +92,7 @@ class GitLabZipService {
           await sink.close();
         }, onError: (e) async {
           await sink.close();
-          throw RZVLog.warning('Gitlab - Network error: $e');
+          throw RZRLog.warning('Gitlab - Network error: $e');
         }, cancelOnError: true);
 
         final cancelSub = token.onCancel.listen((_) async {
@@ -108,7 +108,7 @@ class GitLabZipService {
         if (await outFile.exists()) await outFile.delete();
         await tempFile.rename(outFile.path);
         return outFile;
-      } on RZVLog {
+      } on RZRLog {
         if (await tempFile.exists()) await tempFile.delete();
         rethrow;
       } finally {

@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rzv/app/app_shell_3.dart';
-import 'package:rzv/enums/options/plugin.dart';
-import 'package:rzv/l10n/generated/L10n.dart';
-import 'package:rzv/providers/shared_preferences_provider.dart';
-import 'package:rzv/services/state/projects_update_notifier.dart';
+import 'package:rzr/app/app_shell_3.dart';
+import 'package:rzr/enums/options/plugin.dart';
+import 'package:rzr/l10n/generated/L10n.dart';
+import 'package:rzr/providers/shared_preferences_provider.dart';
+import 'package:rzr/services/state/projects_update_notifier.dart';
 import 'package:archive/archive.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:rzv/services/initialization/initialization_check.dart';
-import 'package:rzv/utils/load_default_font.dart';
-import 'package:rzv/utils/check_update.dart';
-import 'package:rzv/utils/toast/common.dart';
+import 'package:rzr/services/initialization/initialization_check.dart';
+import 'package:rzr/utils/load_default_font.dart';
+import 'package:rzr/utils/check_update.dart';
+import 'package:rzr/utils/toast/common.dart';
 import 'package:path/path.dart' as p;
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -71,7 +71,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Future<void> initGzipExp() async {
-    RZVToast.init(context);
+    RZRToast.init(context);
     checkUpdate(false);
     InitializationCheck.check();
     loadDefaultFont();
@@ -211,7 +211,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         // ScaffoldMessenger.of(context).showSnackBar(
         //   SnackBar(content: Text(L10n.of(context).homeCreatedNewProject)),
         // );
-      RZVToast.show(L10n.of(context).homeCreatedNewProject);
+      RZRToast.show(L10n.of(context).homeCreatedNewProject);
 
         return;
       } catch (_) {
@@ -233,7 +233,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     // ScaffoldMessenger.of(context).showSnackBar(
     //   SnackBar(content: Text(L10n.of(context).homeCreatedNewProject)),
     // );
-      RZVToast.show(L10n.of(context).homeCreatedNewProject);
+      RZRToast.show(L10n.of(context).homeCreatedNewProject);
 
   }
 
@@ -308,7 +308,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       // ScaffoldMessenger.of(context).showSnackBar(
       //   SnackBar(content: Text(L10n.of(context).homeImportedZipNotFound)),
       // );
-      RZVToast.show(L10n.of(context).homeImportedZipNotFound);
+      RZRToast.show(L10n.of(context).homeImportedZipNotFound);
 
       return;
     }
@@ -463,7 +463,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           //     content: Text(L10n.of(context).commonCanceled),
           //   ), // import canceled
           // );
-          RZVToast.show(L10n.of(context).commonCanceled);
+          RZRToast.show(L10n.of(context).commonCanceled);
 
           
         }
@@ -477,7 +477,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           //     content: Text(L10n.of(context).homeImportZipAsProject),
           //   ), // 'Project imported successfully'
           // );
-          RZVToast.show(L10n.of(context).homeImportZipAsProject);
+          RZRToast.show(L10n.of(context).homeImportZipAsProject);
         }
       }
     } catch (e) {
@@ -504,7 +504,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         // ScaffoldMessenger.of(context).showSnackBar(
         //   SnackBar(content: Text(L10n.of(context).importFailed(e.toString()))),
         // );
-          RZVToast.show(L10n.of(context).importFailed(e.toString()));
+          RZRToast.show(L10n.of(context).importFailed(e.toString()));
 
       }
     } finally {
@@ -641,9 +641,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       // ScaffoldMessenger.of(context).showSnackBar(
       //   SnackBar(content: Text(L10n.of(context).homeRefreshedProjects)),
       // ); // 'Projects refreshed'
-      RZVToast.show(L10n.of(context).homeRefreshedProjects);
+      RZRToast.show(L10n.of(context).homeRefreshedProjects);
     } catch (e) {
-      if (context.mounted) RZVToast.show('${L10n.of(context).homeRefreshProjectsFailed}: $e');
+      if (context.mounted) RZRToast.show('${L10n.of(context).homeRefreshProjectsFailed}: $e');
         // ScaffoldMessenger.of(context).showSnackBar(
         //   SnackBar(
         //     content: Text('${L10n.of(context).homeRefreshProjectsFailed}: $e'),
@@ -714,9 +714,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       // ScaffoldMessenger.of(context).showSnackBar(
       //   SnackBar(content: Text(L10n.of(context).homeDeletedAllProjects)),
       // ); // 'All projects are deleted'
-      RZVToast.show(L10n.of(context).homeDeletedAllProjects);
+      RZRToast.show(L10n.of(context).homeDeletedAllProjects);
     } catch (e) {
-      if (context.mounted) RZVToast.show('${L10n.of(context).homeDeleteAllProjectsFailed}: $e');
+      if (context.mounted) RZRToast.show('${L10n.of(context).homeDeleteAllProjectsFailed}: $e');
         // ScaffoldMessenger.of(context).showSnackBar(
         //   SnackBar(
         //     content: Text(
@@ -1265,7 +1265,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           // ScaffoldMessenger.of(context).showSnackBar(
           //   SnackBar(content: Text(L10n.of(context).homeProjectRemoved)),
           // );
-        RZVToast.show(L10n.of(context).homeProjectRemoved);
+        RZRToast.show(L10n.of(context).homeProjectRemoved);
 
           
         },

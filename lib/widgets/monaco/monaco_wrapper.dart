@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:rzv/enums/options/plugin.dart';
-import 'package:rzv/providers/shared_preferences_provider.dart';
+import 'package:rzr/enums/options/plugin.dart';
+import 'package:rzr/providers/shared_preferences_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_monaco/flutter_monaco.dart';
-import 'package:rzv/utils/extension/monaco_language_helper.dart';
+import 'package:rzr/utils/extension/monaco_language_helper.dart';
 
 /// A small wrapper that exposes Monaco-like options driven from Prefs.
 ///

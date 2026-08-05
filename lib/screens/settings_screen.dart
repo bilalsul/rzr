@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' hide Consumer;
-import 'package:rzv/enums/options/font_family.dart';
-import 'package:rzv/enums/options/plugin.dart';
-import 'package:rzv/utils/toast/common.dart';
-import 'package:rzv/widgets/settings/about.dart';
-import 'package:rzv/widgets/settings/settings_tile.dart';
-import 'package:rzv/widgets/settings/simple_dialog.dart';
-import 'package:rzv/widgets/settings/theme_mode.dart';
+import 'package:rzr/enums/options/font_family.dart';
+import 'package:rzr/enums/options/plugin.dart';
+import 'package:rzr/utils/toast/common.dart';
+import 'package:rzr/widgets/settings/about.dart';
+import 'package:rzr/widgets/settings/settings_tile.dart';
+import 'package:rzr/widgets/settings/simple_dialog.dart';
+import 'package:rzr/widgets/settings/theme_mode.dart';
 import 'package:http/http.dart' as http;
-import 'package:rzv/providers/shared_preferences_provider.dart';
-import 'package:rzv/widgets/settings/plugin_settings_panel.dart';
-import 'package:rzv/enums/options/supported_language.dart';
-import 'package:rzv/l10n/generated/L10n.dart';
+import 'package:rzr/providers/shared_preferences_provider.dart';
+import 'package:rzr/widgets/settings/plugin_settings_panel.dart';
+import 'package:rzr/enums/options/supported_language.dart';
+import 'package:rzr/l10n/generated/L10n.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -395,7 +395,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                 //     ),
                                 //   ),
                                 // );
-                                RZVToast.show(L10n.of(context).settingsThemeApplied);
+                                RZRToast.show(L10n.of(context).settingsThemeApplied);
                               },
                               child: Text(
                                 L10n.of(context).commonApply,
@@ -772,7 +772,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                 //     ),
                                 //   ),
                                 // );
-                                RZVToast.show(ok
+                                RZRToast.show(ok
                                           ? L10n.of(
                                               context,
                                             ).connectionSuccessful
@@ -866,7 +866,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                 //     ),
                                 //   ),
                                 // );
-                                RZVToast.show(L10n.of(context).settingsAiSettingsReset);
+                                RZRToast.show(L10n.of(context).settingsAiSettingsReset);
 
                               },
                               child: Text(
@@ -1239,7 +1239,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     //     ),
                     //   ),
                     // );
-                      RZVToast.show(L10n.of(context).settingsProviderSaved(label));
+                      RZRToast.show(L10n.of(context).settingsProviderSaved(label));
 
                   },
                   child: Text(L10n.of(context).commonSave),

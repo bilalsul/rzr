@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rzv/enums/options/screen.dart';
-import 'package:rzv/l10n/generated/L10n.dart';
+import 'package:rzr/enums/options/screen.dart';
+import 'package:rzr/l10n/generated/L10n.dart';
 
 class DynamicAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;

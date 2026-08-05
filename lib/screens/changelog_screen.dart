@@ -1,10 +1,10 @@
-import 'package:rzv/l10n/generated/L10n.dart';
-import 'package:rzv/providers/shared_preferences_provider.dart';
-import 'package:rzv/utils/get_current_language_code.dart';
-import 'package:rzv/widgets/markdown/styled_markdown.dart';
+import 'package:rzr/l10n/generated/L10n.dart';
+import 'package:rzr/providers/shared_preferences_provider.dart';
+import 'package:rzr/utils/get_current_language_code.dart';
+import 'package:rzr/widgets/markdown/styled_markdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:rzv/utils/log/common.dart';
+import 'package:rzr/utils/log/common.dart';
 
 /// Changelog screen for showing app updates
 /// Displays version history and new features
@@ -48,7 +48,7 @@ class _ChangelogScreenState extends State<ChangelogScreen> {
           await rootBundle.loadString('assets/changelog.md');
       _changelogContent = _extractVersionChangelog(fullChangelog);
     } catch (e) {
-      RZVLog.warning('Failed to load changelog from assets: $e');
+      RZRLog.warning('Failed to load changelog from assets: $e');
       _changelogContent = _getDefaultChangelog();
     } finally {
       _changelogContent = processChangelogContent(_changelogContent);
@@ -101,7 +101,7 @@ class _ChangelogScreenState extends State<ChangelogScreen> {
     final startIndex = lines.indexWhere((line) => line.trim() == versionHeader);
 
     if (startIndex == -1) {
-      RZVLog.warning('Version $version not found in changelog');
+      RZRLog.warning('Version $version not found in changelog');
       return _getDefaultChangelog();
     }
 

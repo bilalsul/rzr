@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rzv/enums/options/plugin.dart';
-import 'package:rzv/models/plugin.dart';
+import 'package:rzr/enums/options/plugin.dart';
+import 'package:rzr/models/plugin.dart';
 
 List<PluginDefinition> editorPlugins = [
   PluginDefinition(

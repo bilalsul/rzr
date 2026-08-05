@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 import 'package:path/path.dart' as p;
-import 'package:rzv/utils/log/common.dart';
+import 'package:rzr/utils/log/common.dart';
 import '../filesystem/app_directories.dart';
 import '../state/side_effect_handler.dart';
 
@@ -26,9 +26,9 @@ class BitbucketZipService {
           return defaultBranch;
         }
       } else if (resp.statusCode == 404) {
-        throw RZVLog.warning('BitBucket - Repository not found');
+        throw RZRLog.warning('BitBucket - Repository not found');
       }
-      throw RZVLog.warning('BitBucket - Failed to determine default branch');
+      throw RZRLog.warning('BitBucket - Failed to determine default branch');
     } finally {
       try {
         client.close(force: true);
@@ -37,13 +37,13 @@ class BitbucketZipService {
   }
 
   void _validateRepoId(String input) {
-    if (input.trim().isEmpty) throw RZVLog.warning('BitBucket - Repository cannot be empty');
+    if (input.trim().isEmpty) throw RZRLog.warning('BitBucket - Repository cannot be empty');
     if (input.contains('http://') || input.contains('https://') || input.contains('/www.')) {
-      throw RZVLog.warning('BitBucket - Only owner/repo form is accepted, not URLs');
+      throw RZRLog.warning('BitBucket - Only owner/repo form is accepted, not URLs');
     }
     final parts = input.split('/');
     if (parts.length != 2 || parts[0].isEmpty || parts[1].isEmpty) {
-      throw RZVLog.warning('BitBucket - Input must be in owner/repo format');
+      throw RZRLog.warning('BitBucket - Input must be in owner/repo format');
     }
   }
 
@@ -74,8 +74,8 @@ class BitbucketZipService {
       try {
         final req = await client.getUrl(url);
         final resp = await req.close();
-        if (resp.statusCode == 404) throw RZVLog.warning('Branch $branch not found (404)');
-        if (resp.statusCode >= 400) throw RZVLog.warning('HTTP ${resp.statusCode}');
+        if (resp.statusCode == 404) throw RZRLog.warning('Branch $branch not found (404)');
+        if (resp.statusCode >= 400) throw RZRLog.warning('HTTP ${resp.statusCode}');
 
         final contentLength = resp.contentLength == -1 ? null : resp.contentLength;
         if (await tempFile.exists()) await tempFile.delete();
@@ -92,7 +92,7 @@ class BitbucketZipService {
           await sink.close();
         }, onError: (e) async {
           await sink.close();
-          throw RZVLog.warning('Network error: $e');
+          throw RZRLog.warning('Network error: $e');
         }, cancelOnError: true);
 
         final cancelSub = token.onCancel.listen((_) async {
@@ -108,7 +108,7 @@ class BitbucketZipService {
         if (await outFile.exists()) await outFile.delete();
         await tempFile.rename(outFile.path);
         return outFile;
-      } on RZVLog {
+      } on RZRLog {
         if (await tempFile.exists()) await tempFile.delete();
         rethrow;
       } finally {

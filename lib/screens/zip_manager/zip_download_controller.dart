@@ -2,14 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rzv/services/network/github_zip_service.dart';
-import 'package:rzv/services/network/gitlab_zip_service.dart';
-import 'package:rzv/services/network/bitbucket_zip_service.dart';
-import 'package:rzv/services/state/async_status.dart';
-import 'package:rzv/services/state/side_effect_handler.dart';
-import 'package:rzv/utils/log/common.dart';
+import 'package:rzr/services/network/github_zip_service.dart';
+import 'package:rzr/services/network/gitlab_zip_service.dart';
+import 'package:rzr/services/network/bitbucket_zip_service.dart';
+import 'package:rzr/services/state/async_status.dart';
+import 'package:rzr/services/state/side_effect_handler.dart';
+import 'package:rzr/utils/log/common.dart';
 import 'zip_download_state.dart';
-import 'package:rzv/utils/toast/common.dart';
+import 'package:rzr/utils/toast/common.dart';
 
 enum ZipProvider { github, gitlab, bitbucket }
 
@@ -34,13 +34,13 @@ class ZipDownloadController extends ChangeNotifier {
 
   Future<void> download(String ownerRepo, {ZipProvider provider = ZipProvider.github, String? branch}) async {
     if (_state.status == AsyncStatus.loading) {
-      RZVLog.info('Zip Download: Ignored - already loading');
+      RZRLog.info('Zip Download: Ignored - already loading');
       return;
     }
     _token?.cancel();
     _token = CancellationToken();
 
-    RZVLog.info('Zip Download: Starting download for $ownerRepo (provider: $provider)');
+    RZRLog.info('Zip Download: Starting download for $ownerRepo (provider: $provider)');
     _setState(_state.copyWith(status: AsyncStatus.loading, progress: 0.0, downloadedBytes: 0, totalBytes: null, message: null));
     try {
       final token = _token!;
@@ -69,10 +69,10 @@ class ZipDownloadController extends ChangeNotifier {
       if (token.isCanceled) throw OperationCanceledException();
 
       final fileSize = await file.length();
-      RZVLog.info('Zip Download: Completed - $ownerRepo saved to ${file.path}');
+      RZRLog.info('Zip Download: Completed - $ownerRepo saved to ${file.path}');
       _setState(_state.copyWith(status: AsyncStatus.success, progress: 1.0, downloadedBytes: fileSize, totalBytes: fileSize, message: ownerRepo, savedPath: file.path));
 
-      RZVToast.show('Downloaded $ownerRepo', duration: 2500);
+      RZRToast.show('Downloaded $ownerRepo', duration: 2500);
       Future.delayed(const Duration(seconds: 3), () {
         if (_disposed) return;
         if (_state.status == AsyncStatus.success) {
@@ -80,21 +80,21 @@ class ZipDownloadController extends ChangeNotifier {
         }
       });
     } on OperationCanceledException {
-      RZVLog.info('Zip Download: Caught OperationCanceledException - download cancelled');
+      RZRLog.info('Zip Download: Caught OperationCanceledException - download cancelled');
       _setState(ZipDownloadState());
     } on StateError catch (e) {
       if (e.message.toLowerCase().contains('cancel')) {
-        RZVLog.info('Zip Download: Caught StateError (cancel) - download cancelled');
+        RZRLog.info('Zip Download: Caught StateError (cancel) - download cancelled');
         _setState(ZipDownloadState());
       } else {
-        RZVLog.severe('Zip Download: StateError - $e');
+        RZRLog.severe('Zip Download: StateError - $e');
         rethrow;
       }
-    } on RZVLog catch (e) {
-      RZVLog.warning('Zip Download: RZVLog error - ${e.message}');
+    } on RZRLog catch (e) {
+      RZRLog.warning('Zip Download: RZRLog error - ${e.message}');
       _setState(ZipDownloadState());
     } catch (e) {
-      RZVLog.severe('Zip Download: Unexpected error - $e');
+      RZRLog.severe('Zip Download: Unexpected error - $e');
       final msg = e is Exception ? e.toString() : 'Unknown error';
       _setState(_state.copyWith(status: AsyncStatus.error, message: msg));
     } finally {
@@ -104,10 +104,10 @@ class ZipDownloadController extends ChangeNotifier {
 
   void cancel() {
     if (_token?.isCanceled ?? true) {
-      RZVLog.info('Zip Download: cancel() called but token already cancelled or null');
+      RZRLog.info('Zip Download: cancel() called but token already cancelled or null');
       return;
     }
-    RZVLog.info('Zip Download: User requested cancel - resetting state immediately');
+    RZRLog.info('Zip Download: User requested cancel - resetting state immediately');
     _token?.cancel();
     _setState(ZipDownloadState());
   }

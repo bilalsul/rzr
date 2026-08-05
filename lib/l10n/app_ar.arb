@@ -1,6 +1,6 @@
 {
   "@@locale": "ar",
-  "appAboutTitle": "عن Repo Zip Viewer",
+  "appAboutTitle": "عن Repo Zip Reader",
   "appAbout": "فك ضغط قواعد الكود من git بصيغة .zip وعرض الملفات كـ Markdown وفي محرر أكواد بوضع القراءة فقط.",
   "appVersion": "الإصدار",
   "appChangelog": "سجل التغييرات",
@@ -11,10 +11,10 @@
   
   "appPrivacyPolicy": "سياسة الخصوصية",
   "appTerms": "شروط الاستخدام",
-  "onboardingWelcomeTitle": "Repo Zip Viewer - متصفح git",
+  "onboardingWelcomeTitle": "Repo Zip Reader - متصفح git",
   "onboardingWelcomeBody": "تصفح مستودعات git دون اتصال بالإنترنت عبر استيراد ملفات .zip. عرض في محرر الكود ومُقدم markdown في وضع القراءة فقط. مثالي للتعلم أو المراجعة أو استكشاف مشاريع git أثناء التنقل بسرعة دون إعداد git.",
   "onboardingAppearanceTitle": "اختر مظهرك",
-  "onboardingAppearanceBody": "اختر موضوعًا يناسب أسلوبك وجهازك. يدعم Repo Zip Viewer أوضاع فاتحة وداكنة ومتخصصة لأفضل تجربة قراءة.",
+  "onboardingAppearanceBody": "اختر موضوعًا يناسب أسلوبك وجهازك. يدعم Repo Zip Reader أوضاع فاتحة وداكنة ومتخصصة لأفضل تجربة قراءة.",
   "onboardingAppearanceTip": "يمكنك دائمًا تغيير الثيمات لاحقًا في الإعدادات.",
   "customizeYourExperience": "خصص تجربتك",
   "eInkMode": "وضع e-Ink",
@@ -253,7 +253,7 @@
   "drawerFolderNameHint": "اسم المجلد",
   "drawerEditorTheme": "سمة المحرر",
   "drawerEditorWordWrap": "التفاف النص",
-  "drawerFeedbackBody": "نود أن نسمع ملاحظاتك حول Repo Zip Viewer",
+  "drawerFeedbackBody": "نود أن نسمع ملاحظاتك حول Repo Zip Reader",
   "drawerSendFeedback": "إرسال ملاحظات",
   "drawerFirstInstalled": "أول تثبيت: {date}",
   "@drawerFirstInstalled": {

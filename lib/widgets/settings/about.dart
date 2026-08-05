@@ -1,16 +1,16 @@
 import 'dart:async';
 
-// import 'package:rzv/providers/shared_preferences_provider.dart';
-import 'package:rzv/l10n/generated/L10n.dart';
-// import 'package:rzv/main.dart';
-import 'package:rzv/providers/shared_preferences_provider.dart';
-// import 'package:rzv/page/settings_page/developer/developer_options_page.dart';
-import 'package:rzv/utils/env_var.dart';
-import 'package:rzv/utils/toast/common.dart';
-// import 'package:rzv/utils/toast/common.dart';
-import 'package:rzv/widgets/settings/link_icon.dart';
-import 'package:rzv/utils/check_update.dart';
-import 'package:rzv/widgets/settings/show_donate_dialog.dart';
+// import 'package:rzr/providers/shared_preferences_provider.dart';
+import 'package:rzr/l10n/generated/L10n.dart';
+// import 'package:rzr/main.dart';
+import 'package:rzr/providers/shared_preferences_provider.dart';
+// import 'package:rzr/page/settings_page/developer/developer_options_page.dart';
+import 'package:rzr/utils/env_var.dart';
+import 'package:rzr/utils/toast/common.dart';
+// import 'package:rzr/utils/toast/common.dart';
+import 'package:rzr/widgets/settings/link_icon.dart';
+import 'package:rzr/utils/check_update.dart';
+import 'package:rzr/widgets/settings/show_donate_dialog.dart';
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ import 'package:flutter/services.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:rzv/widgets/markdown/styled_markdown.dart';
+import 'package:rzr/widgets/markdown/styled_markdown.dart';
 
 class About extends StatefulWidget {
   const About({
@@ -70,7 +70,7 @@ class _AboutState extends State<About> {
 //   _developerUnlockTapCount = 0;
 //   if (!alreadyEnabled) {
 //     Prefs().developerOptionsEnabled = true;
-//     RZVToast.show('Developer options enabled');
+//     RZRToast.show('Developer options enabled');
 //   }
 
 //   final navigator = Navigator.of(context, rootNavigator: true);
@@ -130,7 +130,7 @@ Future<void> openAboutDialog(BuildContext context) async {
                   subtitle: Text(version + (kDebugMode ? ' (debug)' : '')),
                   onTap: () {
                     Clipboard.setData(ClipboardData(text: version));
-                    RZVToast.show(L10n.of(context).commonCopied);
+                    RZRToast.show(L10n.of(context).commonCopied);
                     // _handleDeveloperUnlockTap(context);
                   },
                 ),
@@ -194,7 +194,7 @@ Future<void> openAboutDialog(BuildContext context) async {
                   title: Text(L10n.of(context).appAuthor),
                   onTap: () {
                     launchUrl(
-                      Uri.parse('https://bilalsul.github.io/rzv'),
+                      Uri.parse('https://bilalsul.github.io/rzr'),
                       mode: LaunchMode.externalApplication,
                     );
                   },
@@ -203,7 +203,7 @@ Future<void> openAboutDialog(BuildContext context) async {
                   title: Text(L10n.of(context).appPrivacyPolicy),
                   onTap: () async {
                     launchUrl(
-                      Uri.parse('https://bilalsul.github.io/rzv/privacy'),
+                      Uri.parse('https://bilalsul.github.io/rzr/privacy'),
                       mode: LaunchMode.externalApplication,
                     );
                   },
@@ -212,7 +212,7 @@ Future<void> openAboutDialog(BuildContext context) async {
                   title: Text(L10n.of(context).appTerms),
                   onTap: () async {
                     launchUrl(
-                      Uri.parse('https://bilalsul.github.io/rzv/terms'),
+                      Uri.parse('https://bilalsul.github.io/rzr/terms'),
                       mode: LaunchMode.externalApplication,
                     );
                   },
@@ -236,14 +236,14 @@ Future<void> openAboutDialog(BuildContext context) async {
                           IonIcons.earth,
                           color: Theme.of(context).colorScheme.secondary,
                         ),
-                        url: 'https://bilalsul.github.io/rzv',
+                        url: 'https://bilalsul.github.io/rzr',
                         mode: LaunchMode.externalApplication),
                     linkIcon(
                         icon: Icon(
                           IonIcons.logo_github,
                           color: Theme.of(context).colorScheme.secondary,
                         ),
-                        url: 'https://github.com/bilalsul/rzv',
+                        url: 'https://github.com/bilalsul/rzr',
                         mode: LaunchMode.externalApplication),
                     if (EnvVar.showTelegramLink)
                       linkIcon(
@@ -251,7 +251,7 @@ Future<void> openAboutDialog(BuildContext context) async {
                             Icons.telegram,
                             color: Theme.of(context).colorScheme.secondary,
                           ),
-                          url: 'https://t.me/repozipviewer',
+                          url: 'https://t.me/rzreader',
                           mode: LaunchMode.externalApplication),
                     // linkIcon(
                     //     icon: Image.asset(

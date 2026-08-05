@@ -1,7 +1,7 @@
-import 'package:rzv/l10n/generated/L10n.dart';
+import 'package:rzr/l10n/generated/L10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:rzv/providers/shared_preferences_provider.dart';
+import 'package:rzr/providers/shared_preferences_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void showDonateDialog(BuildContext context) {
@@ -13,7 +13,7 @@ void showDonateDialog(BuildContext context) {
         TextButton(
           onPressed: () {
             launchUrl(
-              Uri.parse('https://bilalsul.github.io/rzv/donate'),
+              Uri.parse('https://bilalsul.github.io/rzr/donate'),
               mode: LaunchMode.externalApplication,
             );
           },

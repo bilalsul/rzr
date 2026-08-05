@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rzv/enums/options/plugin.dart';
-import 'package:rzv/enums/options/screen.dart';
-import 'package:rzv/l10n/generated/L10n.dart';
+import 'package:rzr/enums/options/plugin.dart';
+import 'package:rzr/enums/options/screen.dart';
+import 'package:rzr/l10n/generated/L10n.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 // Other providers removed; Prefs is now the central settings source.

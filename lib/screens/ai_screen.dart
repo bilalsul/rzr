@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rzv/screens/chat_screen.dart';
+import 'package:rzr/screens/chat_screen.dart';
 
 class AIScreen extends StatelessWidget {
   const AIScreen({super.key});

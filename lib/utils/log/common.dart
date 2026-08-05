@@ -1,21 +1,21 @@
 import 'dart:io';
 
-import 'package:rzv/providers/shared_preferences_provider.dart';
-import 'package:rzv/utils/log/string_to_level.dart';
-import 'package:rzv/utils/get_path/log_file.dart';
+import 'package:rzr/providers/shared_preferences_provider.dart';
+import 'package:rzr/utils/log/string_to_level.dart';
+import 'package:rzr/utils/get_path/log_file.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 
-class RZVLog {
-  static final log = Logger('RZVLog');
+class RZRLog {
+  static final log = Logger('RZRLog');
   static late File? logFile;
 
   Level level;
   DateTime time;
   String message;
 
-  RZVLog(this.level, this.time, this.message);
+  RZRLog(this.level, this.time, this.message);
 
   get color => level == Level.SEVERE
       ? Colors.red
@@ -23,15 +23,15 @@ class RZVLog {
           ? Colors.orange
           : Colors.grey;
 
-  static RZVLog parse(String log) {
+  static RZRLog parse(String log) {
     try {
       final logParts = log.split('^*^');
       final level = stringToLevel(logParts[0]);
       final time = DateTime.parse(logParts[1].trim());
       final message = logParts[2];
-      return RZVLog(level, time, message);
+      return RZRLog(level, time, message);
     } catch (e) {
-      return RZVLog(Level.SEVERE, DateTime.now(), 'Parse log error: $e');
+      return RZRLog(Level.SEVERE, DateTime.now(), 'Parse log error: $e');
     }
   }
 

@@ -5,7 +5,7 @@
     <application
     
         android:name="${applicationName}"
-        android:label="RZV"
+        android:label="RZR"
         android:icon="@mipmap/ic_launcher"
         android:allowBackup="false">
         <activity

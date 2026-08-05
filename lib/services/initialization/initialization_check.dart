@@ -1,12 +1,12 @@
-import 'package:rzv/enums/options/plugin.dart';
-import 'package:rzv/providers/shared_preferences_provider.dart';
-import 'package:rzv/enums/version_check_type.dart';
-import 'package:rzv/main.dart';
-import 'package:rzv/utils/app_version.dart';
+import 'package:rzr/enums/options/plugin.dart';
+import 'package:rzr/providers/shared_preferences_provider.dart';
+import 'package:rzr/enums/version_check_type.dart';
+import 'package:rzr/main.dart';
+import 'package:rzr/utils/app_version.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:rzv/screens/onboarding_screen.dart';
-import 'package:rzv/screens/changelog_screen.dart';
-import 'package:rzv/utils/log/common.dart';
+import 'package:rzr/screens/onboarding_screen.dart';
+import 'package:rzr/screens/changelog_screen.dart';
+import 'package:rzr/utils/log/common.dart';
 import 'package:flutter/material.dart';
 
 class InitializationCheck {
@@ -29,7 +29,7 @@ class InitializationCheck {
 
   static Future<void> check() async {
     final result = await _checkVersion();
-    RZVLog.info('Version check result: $result');
+    RZRLog.info('Version check result: $result');
     if (result == VersionCheckType.firstLaunch) {
       _handleFirstLaunch();
       _initDefaultPlugins();
@@ -56,7 +56,7 @@ class InitializationCheck {
   }
 
   static Future<void> _initDefaultPlugins() async {
-    RZVLog.info('init default Plugins: Set Enabled');
+    RZRLog.info('init default Plugins: Set Enabled');
     Prefs().setPluginEnabled(Plugin.previewMarkdown.id, true);
     Prefs().setPluginEnabled(Plugin.syntaxHighlighting.id, true);
     Prefs().setPluginEnabled(Plugin.editorWordWrap.id, true);
@@ -69,7 +69,7 @@ class InitializationCheck {
   }
 
   static Future<void> _handleFirstLaunch() async {
-    RZVLog.info('First launch detected, showing onboarding');
+    RZRLog.info('First launch detected, showing onboarding');
     final cv = await currentVersion;
     // wait 0.8 seconds to ensure the app is ready
     Future.delayed(const Duration(milliseconds: 800), () {
@@ -90,7 +90,7 @@ class InitializationCheck {
   static Future<void> _handleUpdateAvailable() async {
     final lv = await lastVersion;
     final cv = await currentVersion;
-    RZVLog.info('Version update detected: $lv -> $cv');
+    RZRLog.info('Version update detected: $lv -> $cv');
     Future.delayed(const Duration(milliseconds: 800), () {
       showCupertinoSheet(
         context: navigatorKey.currentContext!,
@@ -107,6 +107,6 @@ class InitializationCheck {
   }
 
   static void _handleNormalStartup() {
-    RZVLog.info('Normal startup, proceeding to main app');
+    RZRLog.info('Normal startup, proceeding to main app');
   }
 }

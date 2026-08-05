@@ -1,1 +1,1 @@
-Repo Zip Viewer (RZV)
+Repo Zip Reader (RZR)

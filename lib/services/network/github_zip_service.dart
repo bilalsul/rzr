@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:path/path.dart' as p;
-import 'package:rzv/utils/log/common.dart';
+import 'package:rzr/utils/log/common.dart';
 import '../filesystem/app_directories.dart';
 import '../state/side_effect_handler.dart';
 // import '../state/async_status.dart';
@@ -15,13 +15,13 @@ class GitHubZipService {
 
   /// Validate owner/repo input. Reject URLs.
   void _validateRepoId(String input) {
-    if (input.trim().isEmpty) RZVLog.warning('Github - Repository cannot be empty');
+    if (input.trim().isEmpty) RZRLog.warning('Github - Repository cannot be empty');
     if (input.contains('http://') || input.contains('https://') || input.contains('/www.')) {
-      RZVLog.warning('Github - Only owner/repo form is accepted, not URLs');
+      RZRLog.warning('Github - Only owner/repo form is accepted, not URLs');
     }
     final parts = input.split('/');
     if (parts.length != 2 || parts[0].isEmpty || parts[1].isEmpty) {
-      RZVLog.warning('Github - Input must be in owner/repo format');
+      RZRLog.warning('Github - Input must be in owner/repo format');
     }
   }
 
@@ -40,9 +40,9 @@ class GitHubZipService {
           return defaultBranch;
         }
       } else if (resp.statusCode == 404) {
-        throw RZVLog.warning('Github - Repository not found');
+        throw RZRLog.warning('Github - Repository not found');
       }
-      throw RZVLog.warning('Github - Failed to determine default branch');
+      throw RZRLog.warning('Github - Failed to determine default branch');
     } finally {
       try {
         client.close(force: true);
@@ -77,10 +77,10 @@ class GitHubZipService {
         final req = await client.getUrl(url);
         final resp = await req.close();
         if (resp.statusCode == 404) {
-          throw RZVLog.warning('Github - Branch $branchName not found (404)');
+          throw RZRLog.warning('Github - Branch $branchName not found (404)');
         }
         if (resp.statusCode >= 400) {
-          throw RZVLog.warning('Github - Download HTTP ${resp.statusCode}');
+          throw RZRLog.warning('Github - Download HTTP ${resp.statusCode}');
         }
 
         final contentLength = resp.contentLength == -1 ? null : resp.contentLength;
@@ -98,7 +98,7 @@ class GitHubZipService {
           await sink.close();
         }, onError: (e) async {
           await sink.close();
-          throw RZVLog.warning('Github - Network error: $e');
+          throw RZRLog.warning('Github - Network error: $e');
         }, cancelOnError: true);
 
         // If token triggers, close client and subscription
@@ -116,7 +116,7 @@ class GitHubZipService {
         if (await outFile.exists()) await outFile.delete();
         await tempFile.rename(outFile.path);
         return outFile;
-      } on RZVLog {
+      } on RZRLog {
         if (await tempFile.exists()) await tempFile.delete();
         rethrow;
       } finally {

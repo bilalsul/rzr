@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rzv/main.dart';
+import 'package:rzr/main.dart';
 
 Future<dynamic> showSimpleDialog(
     String title, Function saveToPrefs, List<Widget> children) {

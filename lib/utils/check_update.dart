@@ -1,12 +1,12 @@
-import 'package:rzv/providers/shared_preferences_provider.dart';
-import 'package:rzv/l10n/generated/L10n.dart';
-import 'package:rzv/main.dart';
-import 'package:rzv/utils/app_version.dart';
-import 'package:rzv/utils/env_var.dart';
-import 'package:rzv/utils/get_current_language_code.dart';
-import 'package:rzv/utils/log/common.dart';
-import 'package:rzv/utils/toast/common.dart';
-import 'package:rzv/widgets/markdown/styled_markdown.dart';
+import 'package:rzr/providers/shared_preferences_provider.dart';
+import 'package:rzr/l10n/generated/L10n.dart';
+import 'package:rzr/main.dart';
+import 'package:rzr/utils/app_version.dart';
+import 'package:rzr/utils/env_var.dart';
+import 'package:rzr/utils/get_current_language_code.dart';
+import 'package:rzr/utils/log/common.dart';
+import 'package:rzr/utils/toast/common.dart';
+import 'package:rzr/widgets/markdown/styled_markdown.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -30,7 +30,7 @@ Future<void> checkUpdate(bool manualCheck) async {
   try {
     // Fetch the changelog from GitHub raw URL
     response = await Dio().get<String>(
-      'https://raw.githubusercontent.com/bilalsul/rzv/refs/heads/production/assets/changelog.md',
+      'https://raw.githubusercontent.com/bilalsul/rzr/refs/heads/production/assets/changelog.md',
       options: Options(
         headers: {
           'Accept': 'text/markdown',
@@ -40,9 +40,9 @@ Future<void> checkUpdate(bool manualCheck) async {
     );
   } catch (e) {
     if (manualCheck) {
-      RZVToast.show(L10n.of(context).commonFailed);
+      RZRToast.show(L10n.of(context).commonFailed);
     }
-    RZVLog.severe('Update: Failed to fetch changelog: $e');
+    RZRLog.severe('Update: Failed to fetch changelog: $e');
     return;
   }
 
@@ -53,16 +53,16 @@ Future<void> checkUpdate(bool manualCheck) async {
   
   if (match == null) {
     if (manualCheck) {
-      RZVToast.show('Failed to parse changelog version');
+      RZRToast.show('Failed to parse changelog version');
     }
-    RZVLog.severe('Update: No version found in changelog');
+    RZRLog.severe('Update: No version found in changelog');
     return;
   }
 
   String newVersion = match.group(1)!;
   String currentVersion = (await getAppVersion()).split('+').first;
   
-  RZVLog.info('Update: Latest changelog version $newVersion, Current: $currentVersion');
+  RZRLog.info('Update: Latest changelog version $newVersion, Current: $currentVersion');
 
   // Extract the changelog content for the latest version
   String? latestVersionChangelog;
@@ -91,7 +91,7 @@ Future<void> checkUpdate(bool manualCheck) async {
       }
     }
   } catch (e) {
-    RZVLog.warning('Update: Failed to extract changelog content: $e');
+    RZRLog.warning('Update: Failed to extract changelog content: $e');
     latestVersionChangelog = '';
   }
 
@@ -152,7 +152,7 @@ $changelogBody''',
             TextButton(
               onPressed: () {
                 launchUrl(
-                  Uri.parse('https://github.com/bilalsul/rzv/releases/latest'),
+                  Uri.parse('https://github.com/bilalsul/rzr/releases/latest'),
                   mode: LaunchMode.externalApplication,
                 );
               },
@@ -164,7 +164,7 @@ $changelogBody''',
     );
   } else {
     if (manualCheck) {
-      RZVToast.show(L10n.of(context).commonNoNewVersion);
+      RZRToast.show(L10n.of(context).commonNoNewVersion);
     }
   }
 }

@@ -1,4 +1,4 @@
-import 'package:rzv/enums/options/plugin.dart';
+import 'package:rzr/enums/options/plugin.dart';
 
 enum Screen {
   home,

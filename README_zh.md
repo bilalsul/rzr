@@ -3,20 +3,20 @@
 <br>
 
 <p align="center">
-  <img src="./assets/icons/git-explorer-icon.png" alt="RZV" width="100" style="border: 2px ; border-radius: 25px; padding: 2px;" />
+  <img src="./assets/icons/git-explorer-icon.png" alt="RZR" width="100" style="border: 2px ; border-radius: 25px; padding: 2px;" />
 </p>
-<h1 align="center">Repo Zip Viewer (RZV)</h1>
+<h1 align="center">Repo Zip Reader (RZR)</h1>
 
 <p align="center">
-  <a href="https://github.com/bilalsul/rzv#platform-support"><img src="https://img.shields.io/badge/platform-%20%20Android-lightgrey" alt="Platforms"></a>
-  <a href="https://github.com/bilalsul/rzv/releases/latest"><img src="https://img.shields.io/github/v/release/bilalsul/rzv" alt="Latest Release"></a>
-  <a href="https://github.com/bilalsul/rzv/releases"><img src="https://img.shields.io/github/v/release/bilalsul/rzv?include_prereleases" alt="Pre-release"></a>
-  <a href="https://github.com/bilalsul/rzv/blob/main/LICENSE"><img src="https://img.shields.io/github/license/bilalsul/rzv" alt="License" ></a>
+  <a href="https://github.com/bilalsul/rzr#platform-support"><img src="https://img.shields.io/badge/platform-%20%20Android-lightgrey" alt="Platforms"></a>
+  <a href="https://github.com/bilalsul/rzr/releases/latest"><img src="https://img.shields.io/github/v/release/bilalsul/rzr" alt="Latest Release"></a>
+  <a href="https://github.com/bilalsul/rzr/releases"><img src="https://img.shields.io/github/v/release/bilalsul/rzr?include_prereleases" alt="Pre-release"></a>
+  <a href="https://github.com/bilalsul/rzr/blob/main/LICENSE"><img src="https://img.shields.io/github/license/bilalsul/rzr" alt="License" ></a>
 </p>
 
 提取 .zip Github/Gitlab/Bitbucket 仓库，并在移动设备上使用代码编辑器和 Markdown 查看器打开文件，适用于学生、代码阅读者和快速访问。
 
-![Repo Zip Viewer (RZV) 横幅](screens/export/zh/store_zh.png)  
+![Repo Zip Reader (RZR) 横幅](screens/export/zh/store_zh.png)  
 
 <table border="1">
   <tr>
@@ -26,9 +26,9 @@
   <tr>
     <td>Android</td>
     <td>
-    <a href="https://f-droid.org/packages/bilalsul.rzv">
+    <a href="https://f-droid.org/packages/bilalsul.rzr">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/%22Get_it_on_F-droid%22_Badge.png" alt="Get it on F-droid" height="45">
-      <a href="https://github.com/bilalsul/rzv/releases/latest">
+      <a href="https://github.com/bilalsul/rzr/releases/latest">
           <img src="screens/github-badge.png" alt="从 GitHub 下载" height="45">
         </a>
     </td>
@@ -80,23 +80,23 @@
 ## 如何使用
 
 1. 从 GitHub、GitLab 等下载任何仓库为 `.zip` 文件。
-2. 打开 **Repo Zip Viewer (RZV)**
+2. 打开 **Repo Zip Reader (RZR)**
 3. 点击 **导入项目** → 选择您的 `.zip` 文件
 4. 等待提取（大型项目显示进度）
 5. 离线浏览、搜索和阅读代码！
 
 ## 隐私与权限
 
-- 阅读我们的隐私政策，[查看这里](https://bilalsul.github.io/rzv/privacy)
-- 使用条款，[查看这里](https://bilalsul.github.io/rzv/terms)
+- 阅读我们的隐私政策，[查看这里](https://bilalsul.github.io/rzr/privacy)
+- 使用条款，[查看这里](https://bilalsul.github.io/rzr/terms)
 - 仅需存储权限来读取您的 `.zip` 文件
 - 无跟踪、无分析
 
 ---
 
-**Repo Zip Viewer (RZV)** – 随时随地查看代码。  
+**Repo Zip Reader (RZR)** – 随时随地查看代码。  
 
-📱 [获取最新 APK 版本](https://github.com/bilalsul/rzv/releases/latest)
+📱 [获取最新 APK 版本](https://github.com/bilalsul/rzr/releases/latest)
 
 ## 许可证
 
@@ -106,6 +106,6 @@
 
 [flutter_monaco](https://github.com/omar-hanafy/flutter_monaco)，采用 MIT 许可证，是一个用于将 Monaco 编辑器（VS Code 的编辑器）通过 WebView 集成到 Flutter 应用程序中的 Flutter 插件。
 
-[Anx Reader](https://github.com/Anxcye/anx-reader)，采用 MIT 许可证的电子书阅读器，感谢 UI 灵感和如此插件丰富的阅读应用。RZV 的 UI 是这个酷项目的反映。
+[Anx Reader](https://github.com/Anxcye/anx-reader)，采用 MIT 许可证的电子书阅读器，感谢 UI 灵感和如此插件丰富的阅读应用。RZR 的 UI 是这个酷项目的反映。
 
 以及许多 [其他开源项目](./pubspec.yaml)，感谢所有作者的贡献。

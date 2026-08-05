@@ -1,4 +1,4 @@
-import 'package:rzv/widgets/common/container/base_rounded_container.dart';
+import 'package:rzr/widgets/common/container/base_rounded_container.dart';
 import 'package:flutter/material.dart';
 
 class OutlinedContainer extends BaseRoundedContainer {
