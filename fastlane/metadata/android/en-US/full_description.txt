@@ -12,4 +12,4 @@ Features:
 
 The app uses the INTERNET permission to download repository archives and check for new versions on GitHub. No tracking or analytics.
 
-The AI plugin is not implemented yet and will be added in upcoming versions.
+The AI plugin is not implemented yet in 0.6.9 and will be added in upcoming versions.

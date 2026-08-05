@@ -1,1 +1,1 @@
-Read GitHub, GitLab & Bitbucket projects in a code editor
+Beautifully made mobile code and markdown reader.
