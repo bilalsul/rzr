@@ -26,7 +26,7 @@ Extract .zip Github/Gitlab/Bitbucket repositories and open files in code editor 
   <tr>
     <td>Android</td>
     <td>
-    <a href="https://f-droid.org/packages/rzv.bilsul.com">
+    <a href="https://f-droid.org/packages/bilalsul.rzv">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/%22Get_it_on_F-droid%22_Badge.png" alt="Get it on F-droid" height="45">
     <!-- <a href="https://codeberg.org/bws/rzv/releases/latest">
     <img src="https://codeberg.org/Codeberg/GetItOnCodeberg/raw/branch/main/get-it-on-blue-on-white.png" alt="Get it on Codeberg" height="45"> -->
@@ -90,8 +90,8 @@ No cloning. Read and browse files offline after import. Privacy-focused.
 
 ## Privacy & Permissions
 
-- Read our Privacy policy, [view here](https://rzv.bilsul.com/privacy)
-- Terms of Use, [view here](https://rzv.bilsul.com/terms)
+- Read our Privacy policy, [view here](https://bilalsul.github.io/rzv/privacy)
+- Terms of Use, [view here](https://bilalsul.github.io/rzv/terms)
 - Only requires storage permission to read your `.zip` files
 - No tracking, no analytics
 

@@ -26,7 +26,7 @@
   <tr>
     <td>Android</td>
     <td>
-    <a href="https://f-droid.org/packages/rzv.bilsul.com">
+    <a href="https://f-droid.org/packages/bilalsul.rzv">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/%22Get_it_on_F-droid%22_Badge.png" alt="Get it on F-droid" height="45">
       <a href="https://github.com/bilalsul/rzv/releases/latest">
           <img src="screens/github-badge.png" alt="从 GitHub 下载" height="45">
@@ -87,8 +87,8 @@
 
 ## 隐私与权限
 
-- 阅读我们的隐私政策，[查看这里](https://rzv.bilsul.com/privacy)
-- 使用条款，[查看这里](https://rzv.bilsul.com/terms)
+- 阅读我们的隐私政策，[查看这里](https://bilalsul.github.io/rzv/privacy)
+- 使用条款，[查看这里](https://bilalsul.github.io/rzv/terms)
 - 仅需存储权限来读取您的 `.zip` 文件
 - 无跟踪、无分析
 

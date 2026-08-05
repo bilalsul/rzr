@@ -194,7 +194,7 @@ Future<void> openAboutDialog(BuildContext context) async {
                   title: Text(L10n.of(context).appAuthor),
                   onTap: () {
                     launchUrl(
-                      Uri.parse('https://bilalsul.github.io'),
+                      Uri.parse('https://bilalsul.github.io/rzv'),
                       mode: LaunchMode.externalApplication,
                     );
                   },
@@ -203,7 +203,7 @@ Future<void> openAboutDialog(BuildContext context) async {
                   title: Text(L10n.of(context).appPrivacyPolicy),
                   onTap: () async {
                     launchUrl(
-                      Uri.parse('https://rzv.bilsul.com/privacy'),
+                      Uri.parse('https://bilalsul.github.io/rzv/privacy'),
                       mode: LaunchMode.externalApplication,
                     );
                   },
@@ -212,7 +212,7 @@ Future<void> openAboutDialog(BuildContext context) async {
                   title: Text(L10n.of(context).appTerms),
                   onTap: () async {
                     launchUrl(
-                      Uri.parse('https://rzv.bilsul.com/terms'),
+                      Uri.parse('https://bilalsul.github.io/rzv/terms'),
                       mode: LaunchMode.externalApplication,
                     );
                   },
@@ -236,7 +236,7 @@ Future<void> openAboutDialog(BuildContext context) async {
                           IonIcons.earth,
                           color: Theme.of(context).colorScheme.secondary,
                         ),
-                        url: 'https://rzv.bilsul.com',
+                        url: 'https://bilalsul.github.io/rzv',
                         mode: LaunchMode.externalApplication),
                     linkIcon(
                         icon: Icon(

@@ -13,7 +13,7 @@ void showDonateDialog(BuildContext context) {
         TextButton(
           onPressed: () {
             launchUrl(
-              Uri.parse('https://www.patreon.com/cw/mafianextdoor/membership'),
+              Uri.parse('https://bilalsul.github.io/rzv/donate'),
               mode: LaunchMode.externalApplication,
             );
           },
