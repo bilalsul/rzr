@@ -14,7 +14,7 @@
   <a href="https://github.com/bilalsul/rzr/blob/main/LICENSE"><img src="https://img.shields.io/github/license/bilalsul/rzr" alt="License" ></a>
 </p>
 
-Extract .zip Github/Gitlab/Bitbucket repositories and open files in code editor and markdown viewer on mobile — perfect for students, code readers and quick access.
+A mobile code reader for reading git projects in a code editor. Download source code from GitHub, GitLab or Bitbucket in "owner/repo" format and read it on the go.
 
 ![Repo Zip Reader (RZR) Banner](screens/export/store.png)  
 
@@ -41,28 +41,20 @@ Extract .zip Github/Gitlab/Bitbucket repositories and open files in code editor 
 
 Explore any Github, Gitlab or Bitbucket repository – just download it as a .zip and open it instantly in a beautiful, read-only code editor.
 
-Perfect for:
-
-- Studying open-source projects on the go
-- Reviewing code during travel or commutes
-- Quickly checking repos shared as zip downloads
-- Learning from famous projects without setting up git
-
-No cloning. Read and browse files offline after import. Privacy-focused.
-
 ## Features
 
-- Import any git repository as a `.zip` file (GitHub "Download ZIP", GitLab export, etc.)
-- Download a repository in Zip Manager, extract it and start viewing & reading code
-- Full folder/file tree browser
-- Syntax-highlighted read-only code editor [](https://github.com/omar-hanafy/flutter_monaco)
-- Instant Markdown preview for READMEs and `.md` files
-- Search across files and inside file contents
-- Customizable: font size, font family, zoom, light/dark theme
-- Toggleable File Explorer & advanced features via **Plugins** system
-- Supports huge projects (with progress indicator during extraction)
-- Multiple languages (English, Italian, French, German, Arabic, Spanish, Portuguese, Turkish, Chinese (Simplified & Traditional), Japanese, Korean, Russian)
-- Only the INTERNET permission (used to download repository archives and check for new versions); no unnecessary permissions
+- Download GitHub, GitLab and Bitbucket repos as zip with the in-app Zip Manager plugin.
+- Read source code in the Monaco editor with support for 100+ programming languages. Customizable with plugins.
+- In-app folder/file tree browser for managing extracted zip projects once enabled.
+- Read-only code editor with Monaco syntax highlighting (via WebView).
+- Instant Markdown preview for READMEs and `.md` files once enabled.
+- Rich Settings for managing file explorer and editor options (word wrap, minimap, line numbers, zoom) through the Plugins system.
+- Supports English and 13 other languages.
+- Optional AI assistant plugin, using user-supplied API keys for OpenAI, Anthropic, and Gemini.
+
+The app uses the INTERNET permission to download repository archives and check for new versions on GitHub. No tracking or analytics.
+
+The AI plugin is not implemented yet and will be added in upcoming versions.
 
 | Imported Projects          | Plugins Manager            |
 |----------------------------|----------------------------|
@@ -92,7 +84,7 @@ No cloning. Read and browse files offline after import. Privacy-focused.
 
 - Read our Privacy policy, [view here](https://bilalsul.github.io/rzr/privacy)
 - Terms of Use, [view here](https://bilalsul.github.io/rzr/terms)
-- Only requires storage permission to read your `.zip` files
+- The app uses the INTERNET permission to download repository archives and check for new versions on GitHub
 - No tracking, no analytics
 
 ---

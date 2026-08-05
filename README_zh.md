@@ -14,7 +14,7 @@
   <a href="https://github.com/bilalsul/rzr/blob/main/LICENSE"><img src="https://img.shields.io/github/license/bilalsul/rzr" alt="License" ></a>
 </p>
 
-提取 .zip Github/Gitlab/Bitbucket 仓库，并在移动设备上使用代码编辑器和 Markdown 查看器打开文件，适用于学生、代码阅读者和快速访问。
+一款在代码编辑器中阅读 git 项目的移动端代码阅读器。以 "owner/repo" 格式从 GitHub、GitLab 或 Bitbucket 下载源代码，随时随地进行阅读。
 
 ![Repo Zip Reader (RZR) 横幅](screens/export/zh/store_zh.png)  
 
@@ -38,28 +38,20 @@
 
 探索任何 Github、Gitlab 或 Bitbucket 仓库 – 只需将其下载为 .zip 文件，即可在精美的只读代码编辑器中立即打开。
 
-非常适合：
-
-- 在路上学习开源项目
-- 在旅行或通勤期间审阅代码
-- 快速检查作为 zip 下载共享的仓库
-- 无需设置 git 即可从著名项目中学习
-
-无需克隆。导入后无需互联网。注重隐私。
-
 ## 功能
 
-- 将任何 git 仓库导入为 `.zip` 文件（GitHub 的“Download ZIP”、GitLab 导出等）
-- 在 Zip 管理器中下载仓库，提取它并开始查看和阅读代码。
-- 完整的文件夹/文件树浏览器
-- 语法高亮的只读代码编辑器（[VSCode Monaco Editor](https://github.com/omar-hanafy/flutter_monaco)）
-- README 和 `.md` 文件的即时 Markdown 预览
-- 跨文件搜索和文件内容内搜索
-- 可自定义：字体大小、字体家族、缩放、亮/暗主题
-- 通过 **插件** 系统可切换文件浏览器和高级功能
-- 支持大型项目（提取过程中显示进度指示器）
-- 支持多种语言（英语、意大利语、法语、德语、阿拉伯语、西班牙语、葡萄牙语、土耳其语、简体中文、繁体中文、日语、韩语、俄语）
-- 无需多余权限 – 仅需存储访问权限来读取本地 .zip 文件
+- 通过内置的 Zip 管理器插件，将 GitHub、GitLab 和 Bitbucket 仓库下载为 zip。
+- 在 Monaco 编辑器中阅读源代码，支持 100 多种编程语言，可通过插件自定义。
+- 应用内文件夹/文件树浏览器，用于管理解压后的 zip 项目（启用后可用）。
+- 只读代码编辑器，支持 Monaco 语法高亮（通过 WebView）。
+- README 和 `.md` 文件的即时 Markdown 预览（启用后可用）。
+- 丰富设置，可通过插件系统管理文件浏览器和编辑器选项（自动换行、缩略图、行号、缩放）。
+- 支持英语及其他 13 种语言。
+- 可选的 AI 助手插件，需使用用户提供的 API 密钥（OpenAI、Anthropic 和 Gemini）。
+
+应用使用 INTERNET 权限来下载仓库压缩包并在 GitHub 上检查新版本。无跟踪、无分析。
+
+AI 插件尚未实现，将在后续版本中加入。
 
 | 已导入项目 | 插件管理器 |
 |--------------------------|-----------------|
@@ -89,7 +81,7 @@
 
 - 阅读我们的隐私政策，[查看这里](https://bilalsul.github.io/rzr/privacy)
 - 使用条款，[查看这里](https://bilalsul.github.io/rzr/terms)
-- 仅需存储权限来读取您的 `.zip` 文件
+- 应用使用 INTERNET 权限来下载仓库压缩包并在 GitHub 上检查新版本
 - 无跟踪、无分析
 
 ---
