@@ -115,7 +115,7 @@ Future<void> openAboutDialog(BuildContext context) async {
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
                   child: Center(
                     child: Text(
-                      'rzv',
+                      'r z r',
                       style: TextStyle(
                         fontSize: 50,
                         fontWeight: FontWeight.bold,
