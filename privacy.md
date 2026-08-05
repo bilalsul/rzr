@@ -6,4 +6,4 @@ RZR uses the INTERNET permission to download repository archives (`.zip` files) 
 
 All the imported repositories are processed in the App Sandbox on your device and can be read offline. The app does not send your files, your reading history, or any other data to remote servers.
 
-For any question, contact us at the [RZR support page](https://bilalsul.github.io/rzr).
+For any questions, contact me at [bilalsul@disroot.org](mailto:bilalsul@disroot.org)

@@ -37,4 +37,6 @@ Enabled plugins are reflected in the bottom navigation bar, so you only see the 
 
 ## 5.3 Interface Languages
 
-RZR supports 14 interface languages: English, Italian, French, German, Arabic, Spanish, Portuguese, Turkish, Chinese (Simplified & Traditional), Japanese, Korean and Russian. The app detects your device language and falls back to English when the language is not supported. Please update/support your language by creating [a pull request](https://github.com/bilalsul/rzr/pulls).
+RZR supports 14 interface languages: English, Italian, French, German, Arabic, Spanish, Portuguese, Turkish, Chinese (Simplified & Traditional), Japanese, Korean and Russian. The app detects your device language and falls back to English when the language is not supported. Please update/support your language [here](https://github.com/bilalsul/rzr/blob/develop-live/CONTRIBUTING.md#translations).
+
+For any questions, contact me at [bilalsul@disroot.org](mailto:bilalsul@disroot.org)

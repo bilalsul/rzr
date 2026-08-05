@@ -30,9 +30,11 @@ All plugins are disabled by default. RZR uses a plugins system: some features, l
 
 **Which languages are supported?**
 
-RZR is available in 14 languages, including English, Italian, French, German, Arabic, Spanish, Portuguese, Turkish, Chinese (Simplified & Traditional), Japanese, Korean and Russian. Please update/support your language by creating [a pull request](https://github.com/bilalsul/rzr/pulls).
+RZR is available in 14 languages, including English, Italian, French, German, Arabic, Spanish, Portuguese, Turkish, Chinese (Simplified & Traditional), Japanese, Korean and Russian. Please Update/Support your language [here](https://github.com/bilalsul/rzr/blob/develop-live/CONTRIBUTING.md#translations).
 <br/><br/>
 
 **Are there any AI features?**
 
-AI chat features are not fully implemented yet and will be added in a future versions.
+AI chat plugin is not fully implemented yet and will be added in a future versions.
+
+For any questions, contact me at [bilalsul@disroot.org](mailto:bilalsul@disroot.org)

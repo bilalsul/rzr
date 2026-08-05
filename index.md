@@ -25,3 +25,5 @@ Welcome to the RZR User Guide.
 - [6. FAQ](faq)
 - [7. Donate](donate)
 - [8. Privacy Policy](privacy)
+
+For any questions, contact me at [bilalsul@disroot.org](mailto:bilalsul@disroot.org)
