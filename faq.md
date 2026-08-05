@@ -5,12 +5,12 @@ Use the built-in Zip Manager to download a repository from GitHub, GitLab or Bit
 
 **Do I need Git or a GitHub account?**
 
-No. RZV does not clone repositories and does not require any Git setup. You only need a `.zip` archive of the repository, which you can download directly in the app or import from your device.
+No. RZR does not clone repositories and does not require any Git setup. You only need a `.zip` archive of the repository, which you can download directly in the app or import from your device.
 <br/><br/>
 
 **Can I edit the files?**
 
-No. RZV is a read-only viewer: you can browse, search and read code, but you cannot modify the repository files.
+No. RZR is a read-only viewer: you can browse, search and read code, but you cannot modify the repository files.
 <br/><br/>
 
 **Can I read a repository offline?**
@@ -25,12 +25,12 @@ Yes. The Zip Manager lets you select the branch (or tag) to download before star
 
 **Why do some features appear disabled?**
 
-All plugins are disabled by default. RZV uses a plugins system: some features, like the file explorer, markdown preview or the theme customizer, can be toggled on and off from the Settings screen. Enable the corresponding plugin to use the feature.
+All plugins are disabled by default. RZR uses a plugins system: some features, like the file explorer, markdown preview or the theme customizer, can be toggled on and off from the Settings screen. Enable the corresponding plugin to use the feature.
 <br/><br/>
 
 **Which languages are supported?**
 
-RZV is available in 14 languages, including English, Italian, French, German, Arabic, Spanish, Portuguese, Turkish, Chinese (Simplified & Traditional), Japanese, Korean and Russian. Please update/support your language by creating [a pull request](https://github.com/bilalsul/rzv/pulls).
+RZR is available in 14 languages, including English, Italian, French, German, Arabic, Spanish, Portuguese, Turkish, Chinese (Simplified & Traditional), Japanese, Korean and Russian. Please update/support your language by creating [a pull request](https://github.com/bilalsul/rzr/pulls).
 <br/><br/>
 
 **Are there any AI features?**

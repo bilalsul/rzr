@@ -1,4 +1,4 @@
-RZV renders Markdown files so you can read documentation and READMEs the way they are meant to be read.
+RZR renders Markdown files so you can read documentation and READMEs the way they are meant to be read.
 
 ## 4.1 Previewing README files
 

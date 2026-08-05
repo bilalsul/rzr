@@ -1,8 +1,8 @@
-<!-- TODO: replace "RZV" project name in the text below (and the sponsor link) -->
-RZV is a FOSS project brought to you free of charge. You can make a donation to foster future development via one of the methods below.
+<!-- TODO: replace "RZR" project name in the text below (and the sponsor link) -->
+RZR is a FOSS project brought to you free of charge. You can make a donation to foster future development via one of the methods below.
 
-<!-- TODO: replace the sponsor link with RZV's own sponsors section, e.g. https://github.com/bilalsul/rzv#sponsors -->
-If you are a business and find this app useful for your business, please consider becoming [an official sponsor of the project](https://github.com/bilalsul/rzv#sponsors).
+<!-- TODO: replace the sponsor link with RZR's own sponsors section, e.g. https://github.com/bilalsul/rzr#sponsors -->
+If you are a business and find this app useful for your business, please consider becoming [an official sponsor of the project](https://github.com/bilalsul/rzr#sponsors).
 
 ### Liberapay
 
@@ -11,16 +11,16 @@ If you are a business and find this app useful for your business, please conside
 
 <!-- ### Bitcoin -->
 
-<!-- TODO: replace the address and the QR image link with RZV's Bitcoin address / QR -->
-<!-- Address: [1BtxxxxxYourBitcoinAddress](bitcoin:1BtxxxxxYourBitcoinAddress?message=RZV) -->
+<!-- TODO: replace the address and the QR image link with RZR's Bitcoin address / QR -->
+<!-- Address: [1BtxxxxxYourBitcoinAddress](bitcoin:1BtxxxxxYourBitcoinAddress?message=RZR) -->
 
 <!-- ![rzv_bitcoin](https://user-images.githubusercontent.com/5488003/112125885-2f660c80-8bc4-11eb-8c72-7a413e3efabd.png) -->
 
 <!-- ### Monero -->
 
-<!-- TODO: replace the address and the QR image link with RZV's Monero address / QR -->
+<!-- TODO: replace the address and the QR image link with RZR's Monero address / QR -->
 <!-- Address: [48aaPXkYHBPF5fvbCNq3rHX1XGg2uGB6
 s8XYATtoBp1VgRKH3w9a49BasFzQTHEh7m41Lg9xn
-U21oVfnD8GJW82xJrNJY5g](monero:48aaPXkYHBPF5fvbCNq3rHX1XGg2uGB6s8XYATtoBp1VgRKH3w9a49BasFzQTHEh7m41Lg9xnU21oVfnD8GJW82xJrNJY5g?tx_description=RZV) -->
+U21oVfnD8GJW82xJrNJY5g](monero:48aaPXkYHBPF5fvbCNq3rHX1XGg2uGB6s8XYATtoBp1VgRKH3w9a49BasFzQTHEh7m41Lg9xnU21oVfnD8GJW82xJrNJY5g?tx_description=RZR) -->
 
 <!-- ![rzv_monero](https://user-images.githubusercontent.com/5488003/120921978-e142ae80-c6c6-11eb-9765-fd6ff5e71fdb.png) -->

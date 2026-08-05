@@ -2,17 +2,17 @@ The Zip Manager is a built-in downloader which lets you fetch a repository archi
 
 ## 2.1 Downloading a Repository
 
-From the Zip Manager Tab, select the provider (GitHub, GitLab or Bitbucket), enter the repository URL or `owner/name`, and start the download. RZV downloads the repository as a `.zip` archive and extracts it automatically.
+From the Zip Manager Tab, select the provider (GitHub, GitLab or Bitbucket), enter the repository URL or `owner/name`, and start the download. RZR downloads the repository as a `.zip` archive and extracts it automatically.
 
 <p align="center">
 <img src="./images/zip_manager.png" width="250" />
 </p>
 
-Downloads can be cancelled at any time. After a cancellation, RZV allows you to start another download right away.
+Downloads can be cancelled at any time. After a cancellation, RZR allows you to start another download right away.
 
 ## 2.2 Branch Selection
 
-Before downloading, you can select the branch to download. RZV uses the repository default branch when none is selected, but you can pick a specific branch from the available ones. We will soon support tags.
+Before downloading, you can select the branch to download. RZR uses the repository default branch when none is selected, but you can pick a specific branch from the available ones. We will soon support tags.
 
 ## 2.3 Extract Projects
 

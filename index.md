@@ -1,9 +1,9 @@
-Welcome to the RZV User Guide.
+Welcome to the RZR User Guide.
 
 # Contents
 
 - [1. Quick Start](quick_start)
-    - [1.1 What is RZV](quick_start#11-what-is-rzv)
+    - [1.1 What is RZR](quick_start#11-what-is-rzr)
     - [1.2 Basic Usage](quick_start#12-basic-usage)
     - [1.3 Opening a Repository](quick_start#13-opening-a-repository)
     - [1.4 Browsing Files](quick_start#14-browsing-files)

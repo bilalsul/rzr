@@ -1,8 +1,8 @@
-RZV embeds a read-only code editor based on the [Monaco Editor](https://github.com/omar-hanafy/flutter_monaco), the same editor used by Visual Studio Code.
+RZR embeds a read-only code editor based on the [Monaco Editor](https://github.com/omar-hanafy/flutter_monaco), the same editor used by Visual Studio Code.
 
 ## 3.1 Syntax Highlighting
 
-When you open a source file, RZV automatically detects the programming language and applies syntax highlighting. Many common languages are supported out of the box.
+When you open a source file, RZR automatically detects the programming language and applies syntax highlighting. Many common languages are supported out of the box.
 
 <p align="center">
 <img src="./images/code_editor.jpg" width="250" />
