@@ -22,10 +22,38 @@ on:
 jobs:
   build-android:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: android-arm
+            abi: armeabi-v7a
+            out_file: app-armeabi-v7a-release.apk
+            flags: --split-per-abi --target-platform=android-arm
+          - target: android-arm64
+            abi: arm64-v8a
+            out_file: app-arm64-v8a-release.apk
+            flags: --split-per-abi --target-platform=android-arm64
+          - target: android-x64
+            abi: x86_64
+            out_file: app-x86_64-release.apk
+            flags: --split-per-abi --target-platform=android-x64
+          - target: universal
+            abi: universal
+            out_file: app-release.apk
+            flags: ""
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+          check-latest: true
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -38,14 +66,6 @@ jobs:
           flutter --version
           flutter pub get
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-          cache: 'gradle'
-          check-latest: true
-
       - name: Setup Android signing
         shell: bash
         run: |
@@ -57,7 +77,7 @@ jobs:
             echo "storeFile=release-keystore.jks" >> android/key.properties
           fi
 
-      - name: Build for Android
+      - name: Build for Android (${{ matrix.abi }})
         working-directory: ${{ github.workspace }}
         env:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
@@ -69,22 +89,28 @@ jobs:
           if grep -q "build_runner" pubspec.yaml; then
             dart run build_runner build --delete-conflicting-outputs
           fi
-          flutter build apk --release
-          flutter build apk --split-per-abi
+          flutter build apk --release ${{ matrix.flags }}
 
-      - name: Rename builds
+      - name: Rename build
         shell: bash
         working-directory: ${{ github.workspace }}
         run: |
           cd build/app/outputs/flutter-apk
-          mv app-armeabi-v7a-release.apk RZR-android-${{ inputs.version }}-armeabi-v7a.apk
-          mv app-arm64-v8a-release.apk RZR-android-${{ inputs.version }}-arm64-v8a.apk
-          mv app-x86_64-release.apk RZR-android-${{ inputs.version }}-x86_64.apk
-          mv app-release.apk RZR-android-${{ inputs.version }}-universal.apk
+          mv ${{ matrix.out_file }} RZR-android-${{ inputs.version }}-${{ matrix.abi }}.apk
 
-      - name: Upload artifacts
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: android-artifacts
-          path: ${{ github.workspace }}/build/app/outputs/flutter-apk/*.apk
+          name: android-artifact-${{ matrix.abi }}
+          path: ${{ github.workspace }}/build/app/outputs/flutter-apk/RZR-android-${{ inputs.version }}-${{ matrix.abi }}.apk
           if-no-files-found: error
+
+  merge-android:
+    needs: build-android
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge Android artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: android-artifacts
+          pattern: android-artifact-*
