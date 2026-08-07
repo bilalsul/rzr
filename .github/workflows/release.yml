@@ -57,6 +57,11 @@ jobs:
   create-release:
     if: inputs.is_alpha != 'true'
     runs-on: ubuntu-latest
+    env:
+      TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+      MASTODON_TOKEN: ${{ secrets.MASTODON_TOKEN }}
+      MASTODON_INSTANCE: ${{ secrets.MASTODON_INSTANCE }}
     steps:
       - name: Checkout tagged source
         uses: actions/checkout@v4
@@ -82,7 +87,7 @@ jobs:
           prerelease: ${{ inputs.is_beta == 'true' }}
 
       - name: Format changelog for Telegram
-        if: ${{ secrets.TELEGRAM_TOKEN != '' && secrets.TELEGRAM_TO != '' }}
+        if: ${{ env.TELEGRAM_TOKEN != '' && env.TELEGRAM_TO != '' }}
         id: format_changelog
         shell: bash
         run: |
@@ -101,11 +106,11 @@ jobs:
           } >> $GITHUB_OUTPUT
 
       - name: Send beta message to Telegram
-        if: ${{ inputs.is_beta == 'true' && secrets.TELEGRAM_TOKEN != '' && secrets.TELEGRAM_TO != '' }}
+        if: ${{ inputs.is_beta == 'true' && env.TELEGRAM_TOKEN != '' && env.TELEGRAM_TO != '' }}
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
+          to: ${{ env.TELEGRAM_TO }}
+          token: ${{ env.TELEGRAM_TOKEN }}
           format: markdown
           message: |
             🧪 *Beta Version Released!*
@@ -120,11 +125,11 @@ jobs:
             📥 **Download:** https://github.com/${{ github.repository }}/releases/tag/${{ inputs.tag }}
 
       - name: Send release message to Telegram
-        if: ${{ inputs.is_beta != 'true' && inputs.is_alpha != 'true' && secrets.TELEGRAM_TOKEN != '' && secrets.TELEGRAM_TO != '' }}
+        if: ${{ inputs.is_beta != 'true' && inputs.is_alpha != 'true' && env.TELEGRAM_TOKEN != '' && env.TELEGRAM_TO != '' }}
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
+          to: ${{ env.TELEGRAM_TO }}
+          token: ${{ env.TELEGRAM_TOKEN }}
           format: markdown
           message: |
             🎉 *New Release Available!*
@@ -137,7 +142,7 @@ jobs:
             📥 **Download:** https://github.com/${{ github.repository }}/releases/tag/${{ inputs.tag }}
 
       - name: Format changelog for Mastodon
-        if: ${{ secrets.MASTODON_TOKEN != '' }}
+        if: ${{ env.MASTODON_TOKEN != '' }}
         id: format_mastodon
         shell: bash
         run: |
@@ -150,9 +155,9 @@ jobs:
           } >> $GITHUB_OUTPUT
 
       - name: Post release to Mastodon
-        if: ${{ secrets.MASTODON_TOKEN != '' }}
+        if: ${{ env.MASTODON_TOKEN != '' }}
         uses: cbrgm/mastodon-github-action@v2
         with:
-          access-token: ${{ secrets.MASTODON_TOKEN }}
-          url: ${{ secrets.MASTODON_INSTANCE }}
+          access-token: ${{ env.MASTODON_TOKEN }}
+          url: ${{ env.MASTODON_INSTANCE || 'https://fe.disroot.org' }}
           message: ${{ steps.format_mastodon.outputs.mastodon_message }}
