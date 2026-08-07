@@ -23,6 +23,10 @@ on:
         required: false
       TELEGRAM_TOKEN:
         required: false
+      MASTODON_TOKEN:
+        required: false
+      MASTODON_INSTANCE:
+        required: false
 
 permissions:
   contents: write
@@ -131,3 +135,24 @@ jobs:
             ${{ steps.format_changelog.outputs.formatted_notes }}
 
             📥 **Download:** https://github.com/${{ github.repository }}/releases/tag/${{ inputs.tag }}
+
+      - name: Format changelog for Mastodon
+        if: ${{ secrets.MASTODON_TOKEN != '' }}
+        id: format_mastodon
+        shell: bash
+        run: |
+          MASTODON_TEXT=$(node scripts/format_mastodon_message.js assets/changelog.md "${{ inputs.version }}" "${{ inputs.is_beta }}" "${{ github.repository }}" "${{ inputs.tag }}")
+
+          {
+            echo "mastodon_message<<EOF"
+            echo "$MASTODON_TEXT"
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
+
+      - name: Post release to Mastodon
+        if: ${{ secrets.MASTODON_TOKEN != '' }}
+        uses: cbrgm/mastodon-github-action@v2
+        with:
+          access-token: ${{ secrets.MASTODON_TOKEN }}
+          url: ${{ secrets.MASTODON_INSTANCE }}
+          message: ${{ steps.format_mastodon.outputs.mastodon_message }}
