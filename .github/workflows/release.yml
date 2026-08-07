@@ -31,6 +31,9 @@ on:
 permissions:
   contents: write
 
+# F-Droid parses the Flutter SDK version from the `.github/flutter-version` file.
+# Keep that file in sync with pubspec.yaml / mise.toml.
+
 jobs:
   create-release:
     runs-on: ubuntu-latest

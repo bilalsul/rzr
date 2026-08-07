@@ -43,7 +43,7 @@ jobs:
         run: |
           FLUTTER_VERSION=$(grep 'flutter:' pubspec.yaml | head -n 1 | awk '{print $2}')
           if [[ -z "$FLUTTER_VERSION" ]]; then
-            FLUTTER_VERSION="3.35.6"
+            FLUTTER_VERSION=$(cat .github/flutter-version)
           fi
           echo "flutter_version=${FLUTTER_VERSION}" >> $GITHUB_OUTPUT
 
