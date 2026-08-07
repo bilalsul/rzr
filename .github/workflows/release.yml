@@ -153,59 +153,61 @@ jobs:
       run: flutter pub get
       working-directory: code
 
-    # all
     - name: Parse the release tag
       id: parse-release-tag
-      run: | # remove the leading "v"
+      run: |
         VERSION=${{ github.event.release.tag_name }}
-        echo "::set-output name=version::${VERSION#v}"
+        echo "version=${VERSION#v}" >> $GITHUB_OUTPUT
       working-directory: code
 
-    # apk
     - name: Decode Keystore
       run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/release-keystore.jks
       working-directory: code
 
-    # apk
+    - name: Set build path
+      run: |
+        sudo mkdir -p /home/vagrant/build
+        sudo rm -rf /home/vagrant/build/bilalsul.rzr
+        sudo cp -a "$GITHUB_WORKSPACE/code" /home/vagrant/build/bilalsul.rzr
+        sudo chown -R "$USER:$USER" /home/vagrant/build
+
     - name: Generate code
+      working-directory: /home/vagrant/build/bilalsul.rzr
       run: |
         flutter gen-l10n
         dart run build_runner build --delete-conflicting-outputs
-      working-directory: code
 
     - name: Build Split APKs
+      working-directory: /home/vagrant/build/bilalsul.rzr
       env:
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEYSTORE_PATH: release-keystore.jks
+        KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        KEYSTORE_PATH: release-keystore.jks
       run: flutter build apk --release --split-per-abi
-      working-directory: code
 
-    - name: Rename file and update path
-      if: matrix.file == 'apk'
+    - name: Rename split APKs
+      working-directory: /home/vagrant/build/bilalsul.rzr
       run: |
-        mv build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk ../RZR-android-armeabi-v7a-${{steps.parse-release-tag.outputs.version}}.apk
-        mv build/app/outputs/flutter-apk/app-arm64-v8a-release.apk ../RZR-android-arm64-v8a-${{steps.parse-release-tag.outputs.version}}.apk
-        mv build/app/outputs/flutter-apk/app-x86_64-release.apk ../RZR-android-x86_64-${{steps.parse-release-tag.outputs.version}}.apk
-        mv build/app/outputs/mapping/release/mapping.txt ../apk-mapping.txt
-      working-directory: code
+        VERSION=${{ steps.parse-release-tag.outputs.version }}
+        mv build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk "$GITHUB_WORKSPACE/RZR-android-armeabi-v7a-${VERSION}.apk"
+        mv build/app/outputs/flutter-apk/app-arm64-v8a-release.apk "$GITHUB_WORKSPACE/RZR-android-arm64-v8a-${VERSION}.apk"
+        mv build/app/outputs/flutter-apk/app-x86_64-release.apk "$GITHUB_WORKSPACE/RZR-android-x86_64-${VERSION}.apk"
 
-    - name: Build a universal APK
-      if: matrix.file == 'apk'
+    - name: Build universal APK
+      working-directory: /home/vagrant/build/bilalsul.rzr
       env:
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEYSTORE_PATH: release-keystore.jks
+        KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        KEYSTORE_PATH: release-keystore.jks
       run: flutter build apk --release
-      working-directory: code
 
     - name: Rename universal APK
-      if: matrix.file == 'apk'
+      working-directory: /home/vagrant/build/bilalsul.rzr
       run: |
-        mv build/app/outputs/flutter-apk/app-release.apk ../RZR-android-${{steps.parse-release-tag.outputs.version}}-universal.apk
-      working-directory: code
+        VERSION=${{ steps.parse-release-tag.outputs.version }}
+        mv build/app/outputs/flutter-apk/app-release.apk "$GITHUB_WORKSPACE/RZR-android-${VERSION}-universal.apk"
     # # aab
     # - name: Build an Android App Bundle file
     #   if: matrix.file == 'aab'
