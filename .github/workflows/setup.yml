@@ -93,7 +93,7 @@ jobs:
         run: |
           VERSION=${{ steps.get_version.outputs.version }}
           MAIN_VERSION=${VERSION%%-*}
-          CHANGELOG_FILE="assets/changelog.md"
+          CHANGELOG_FILE="assets/CHANGELOG.md"
           CHANGELOG_CONTENT=""
           if [[ -f "$CHANGELOG_FILE" ]]; then
             CHANGELOG_CONTENT=$(sed -n "/## $MAIN_VERSION/,/## /p" "$CHANGELOG_FILE" | sed '$d')

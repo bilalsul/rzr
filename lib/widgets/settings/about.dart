@@ -138,7 +138,7 @@ Future<void> openAboutDialog(BuildContext context) async {
                   title: Text(L10n.of(context).appChangelog),
                   onTap: () async {
                     var content =
-                        await rootBundle.loadString('assets/changelog.md');
+                        await rootBundle.loadString('assets/CHANGELOG.md');
                     // Remove the first line (file title) because dialog shows its own title
                     final lines = content.split('\n');
                     if (lines.isNotEmpty) {

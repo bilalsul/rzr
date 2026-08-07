@@ -71,7 +71,7 @@ jobs:
           VERSION="${{ inputs.version }}"
           MAIN_VERSION=${VERSION%%-*}
 
-          FORMATTED_NOTES=$(node scripts/format_telegram_message.js assets/changelog.md "$MAIN_VERSION" 2>&1) || {
+          FORMATTED_NOTES=$(node scripts/format_telegram_message.js assets/CHANGELOG.md "$MAIN_VERSION" 2>&1) || {
             echo "::warning::Format script failed, using original notes"
             FORMATTED_NOTES='${{ inputs.release_notes }}'
           }
@@ -104,7 +104,7 @@ jobs:
         id: format_mastodon
         shell: bash
         run: |
-          MASTODON_TEXT=$(node scripts/format_mastodon_message.js assets/changelog.md "${{ inputs.version }}" "${{ inputs.is_beta }}" "${{ github.repository }}" "${{ inputs.tag }}")
+          MASTODON_TEXT=$(node scripts/format_mastodon_message.js assets/CHANGELOG.md "${{ inputs.version }}" "${{ inputs.is_beta }}" "${{ github.repository }}" "${{ inputs.tag }}")
 
           {
             echo "mastodon_message<<EOF"

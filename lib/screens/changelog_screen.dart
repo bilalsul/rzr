@@ -45,7 +45,7 @@ class _ChangelogScreenState extends State<ChangelogScreen> {
     try {
       // Load changelog from assets
       final String fullChangelog =
-          await rootBundle.loadString('assets/changelog.md');
+          await rootBundle.loadString('assets/CHANGELOG.md');
       _changelogContent = _extractVersionChangelog(fullChangelog);
     } catch (e) {
       RZRLog.warning('Failed to load changelog from assets: $e');
