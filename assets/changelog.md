@@ -1,11 +1,9 @@
 # Changelog
 
 ## 0.6.9
-- Fix: Fix crash on launch on Android
-- Clean: Remove Google Play links; use F-Droid and GitHub
+- Chore: First F-droid Release
 
-- Fix: 修复 Android 启动崩溃问题
-- Clean: 移除 Google Play 链接；使用 F-Droid 和 GitHub
+- Chore: F-droid 首发版本
 
 ## 0.6.7
 - Fix: Fix broken theme for different dialogs in Zip Manager and About
