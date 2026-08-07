@@ -32,30 +32,7 @@ permissions:
   contents: write
 
 jobs:
-  upload-artifacts:
-    if: inputs.is_alpha == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout tagged source
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.tag }}
-          fetch-depth: 0
-
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: artifacts
-
-      - name: Upload Alpha Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: alpha-release-${{ inputs.version }}
-          path: artifacts/
-          if-no-files-found: warn
-
   create-release:
-    if: inputs.is_alpha != 'true'
     runs-on: ubuntu-latest
     env:
       TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
@@ -84,7 +61,7 @@ jobs:
             artifacts/ios-artifacts/*.zip
           body: ${{ inputs.release_notes }}
           generate_release_notes: false
-          prerelease: ${{ inputs.is_beta == 'true' }}
+          prerelease: ${{ inputs.is_beta == 'true' || inputs.is_alpha == 'true' }}
 
       - name: Format changelog for Telegram
         if: ${{ env.TELEGRAM_TOKEN != '' && env.TELEGRAM_TO != '' }}
@@ -105,25 +82,6 @@ jobs:
             echo "EOF"
           } >> $GITHUB_OUTPUT
 
-      - name: Send beta message to Telegram
-        if: ${{ inputs.is_beta == 'true' && env.TELEGRAM_TOKEN != '' && env.TELEGRAM_TO != '' }}
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ env.TELEGRAM_TO }}
-          token: ${{ env.TELEGRAM_TOKEN }}
-          format: markdown
-          message: |
-            🧪 *Beta Version Released!*
-
-            🧪 **Testing Version:** `${{ inputs.version }}`
-
-            ⚠️ *This is a beta release for testing purposes. Please report any issues you encounter.*
-
-            **What's New:**
-            ${{ steps.format_changelog.outputs.formatted_notes }}
-
-            📥 **Download:** https://github.com/${{ github.repository }}/releases/tag/${{ inputs.tag }}
-
       - name: Send release message to Telegram
         if: ${{ inputs.is_beta != 'true' && inputs.is_alpha != 'true' && env.TELEGRAM_TOKEN != '' && env.TELEGRAM_TO != '' }}
         uses: appleboy/telegram-action@master
@@ -142,7 +100,7 @@ jobs:
             📥 **Download:** https://github.com/${{ github.repository }}/releases/tag/${{ inputs.tag }}
 
       - name: Format changelog for Mastodon
-        if: ${{ env.MASTODON_TOKEN != '' }}
+        if: ${{ inputs.is_beta != 'true' && inputs.is_alpha != 'true' && env.MASTODON_TOKEN != '' }}
         id: format_mastodon
         shell: bash
         run: |
@@ -155,7 +113,7 @@ jobs:
           } >> $GITHUB_OUTPUT
 
       - name: Post release to Mastodon
-        if: ${{ env.MASTODON_TOKEN != '' }}
+        if: ${{ inputs.is_beta != 'true' && inputs.is_alpha != 'true' && env.MASTODON_TOKEN != '' }}
         uses: cbrgm/mastodon-github-action@v2
         with:
           access-token: ${{ env.MASTODON_TOKEN }}
