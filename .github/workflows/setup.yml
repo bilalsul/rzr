@@ -1,0 +1,109 @@
+name: Setup Environment
+
+on:
+  workflow_call:
+    outputs:
+      tag:
+        description: "Git tag"
+        value: ${{ jobs.setup.outputs.tag }}
+      version:
+        description: "Version string"
+        value: ${{ jobs.setup.outputs.version }}
+      is_alpha:
+        description: "Is alpha release"
+        value: ${{ jobs.setup.outputs.is_alpha }}
+      is_beta:
+        description: "Is beta release"
+        value: ${{ jobs.setup.outputs.is_beta }}
+      release_notes:
+        description: "Release notes"
+        value: ${{ jobs.setup.outputs.release_notes }}
+      flutter_version:
+        description: "Flutter SDK version"
+        value: ${{ jobs.setup.outputs.flutter_version }}
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.get_version.outputs.tag }}
+      version: ${{ steps.get_version.outputs.version }}
+      is_alpha: ${{ steps.get_version.outputs.is_alpha }}
+      is_beta: ${{ steps.get_version.outputs.is_beta }}
+      release_notes: ${{ steps.extract_release_notes.outputs.release_notes }}
+      flutter_version: ${{ steps.get_flutter_version.outputs.flutter_version }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Read Flutter version
+        id: get_flutter_version
+        shell: bash
+        run: |
+          FLUTTER_VERSION=$(grep 'flutter:' pubspec.yaml | head -n 1 | awk '{print $2}')
+          if [[ -z "$FLUTTER_VERSION" ]]; then
+            FLUTTER_VERSION="3.35.6"
+          fi
+          echo "flutter_version=${FLUTTER_VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Get version from tag and determine release type
+        id: get_version
+        shell: bash
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          if [[ "$TAG" == "refs/heads/"* || "$TAG" == "$GITHUB_REF" ]]; then
+            TAG="v0.0.0-dev"
+          fi
+          echo "tag=${TAG}" >> $GITHUB_OUTPUT
+
+          PUBSPEC_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1)
+
+          if [[ "$TAG" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)-alpha\.([0-9]+)$ ]]; then
+            BASE_VERSION="${BASH_REMATCH[1]}"
+            PRE_BUILD="${BASH_REMATCH[2]}"
+            echo "is_alpha=true" >> $GITHUB_OUTPUT
+            echo "is_beta=false" >> $GITHUB_OUTPUT
+            echo "version=${BASE_VERSION}-alpha.${PRE_BUILD}" >> $GITHUB_OUTPUT
+          elif [[ "$TAG" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)-beta\.([0-9]+)$ ]]; then
+            BASE_VERSION="${BASH_REMATCH[1]}"
+            PRE_BUILD="${BASH_REMATCH[2]}"
+            echo "is_alpha=false" >> $GITHUB_OUTPUT
+            echo "is_beta=true" >> $GITHUB_OUTPUT
+            echo "version=${BASE_VERSION}-beta.${PRE_BUILD}" >> $GITHUB_OUTPUT
+          elif [[ "$TAG" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            BASE_VERSION="${BASH_REMATCH[1]}"
+            echo "is_alpha=false" >> $GITHUB_OUTPUT
+            echo "is_beta=false" >> $GITHUB_OUTPUT
+            echo "version=${BASE_VERSION}" >> $GITHUB_OUTPUT
+          else
+            CLEAN_TAG="${TAG#v}"
+            echo "is_alpha=false" >> $GITHUB_OUTPUT
+            echo "is_beta=false" >> $GITHUB_OUTPUT
+            echo "version=${CLEAN_TAG}" >> $GITHUB_OUTPUT
+          fi
+
+          if [[ -n "$BASE_VERSION" && "${BASE_VERSION}" != "${PUBSPEC_VERSION}" ]]; then
+            echo "::warning::Tag version ${BASE_VERSION} does not match pubspec version ${PUBSPEC_VERSION}" >&2
+          fi
+
+      - name: Extract release notes
+        id: extract_release_notes
+        shell: bash
+        run: |
+          VERSION=${{ steps.get_version.outputs.version }}
+          MAIN_VERSION=${VERSION%%-*}
+          CHANGELOG_FILE="assets/changelog.md"
+          CHANGELOG_CONTENT=""
+          if [[ -f "$CHANGELOG_FILE" ]]; then
+            CHANGELOG_CONTENT=$(sed -n "/## $MAIN_VERSION/,/## /p" "$CHANGELOG_FILE" | sed '$d')
+            if [[ -z "$CHANGELOG_CONTENT" ]]; then
+              CHANGELOG_CONTENT=$(sed -n "/# $MAIN_VERSION/,/# /p" "$CHANGELOG_FILE" | sed '$d')
+            fi
+          fi
+          if [[ -z "$CHANGELOG_CONTENT" ]]; then
+            CHANGELOG_CONTENT="Release ${VERSION}"
+          fi
+          echo "release_notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG_CONTENT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT

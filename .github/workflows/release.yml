@@ -1,346 +1,133 @@
 name: Release
 
 on:
-  release:
-    types: [ published ]
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+      is_alpha:
+        required: true
+        type: string
+      is_beta:
+        required: true
+        type: string
+      release_notes:
+        required: true
+        type: string
+    secrets:
+      TELEGRAM_TO:
+        required: false
+      TELEGRAM_TOKEN:
+        required: false
+
+permissions:
+  contents: write
 
 jobs:
-  security_hardening:
-    name: Check security hardening
+  upload-artifacts:
+    if: inputs.is_alpha == 'true'
     runs-on: ubuntu-latest
     steps:
-    - name: Clone the repository
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-    - name: Ensure SHA pinned actions
-      uses: zgosalvez/github-actions-ensure-sha-pinned-actions@3db98c0363e2fa5df3e1c4c471777a7c10b24cc9
+      - name: Checkout tagged source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+          fetch-depth: 0
 
-  verify_clean_release:
-    name: Verify a clean release
-    needs: security_hardening
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Upload Alpha Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: alpha-release-${{ inputs.version }}
+          path: artifacts/
+          if-no-files-found: warn
+
+  create-release:
+    if: inputs.is_alpha != 'true'
     runs-on: ubuntu-latest
     steps:
-    - name: The release should not have any existing assets
-      if: join(github.event.release.assets, '') != ''
-      run: |
-        echo "::error::The "${{ github.event.release.name }}" release has preexisting assets. This workflow will not be able to upload build files as release assets."
-        exit 1
+      - name: Checkout tagged source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+          fetch-depth: 0
 
-  # testing:
-  #   name: Run ${{ matrix.category }} testing
-  #   needs: verify_clean_release
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       category: [static, unit, widget]
-  #     fail-fast: false
-  #   steps:
-  #   - name: Clone the repository
-  #     uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-  #     with:
-  #       path: code
-  
-  #   - name: Cache Flutter
-  #     id: flutter-cache
-  #     uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
-  #     with:
-  #       path: flutter
-  #       key: ${{ env.cache-name }}-ubuntu-latest-${{ steps.get-flutter-version.outputs.version }}-${{ hashFiles('code/pubspec.lock') }}
-  #       restore-keys: |
-  #         ${{ env.cache-name }}-ubuntu-latest-${{ steps.get-flutter-version.outputs.version }}-
-  #         ${{ env.cache-name }}-ubuntu-latest-
-  #         ${{ env.cache-name }}-
-  #     env:
-  #       cache-name: flutter-cache
-  #   - name: Clone the Flutter repository
-  #     if: steps.flutter-cache.outputs.cache-hit != 'true'
-  #     uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-  #     with:
-  #       repository: flutter/flutter
-  #       ref: ${{ steps.get-flutter-version.outputs.version }}
-  #       path: flutter
-  #   - name: Add the flutter tool to the path
-  #     run: |
-  #       echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
-  #       echo "$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin" >> $GITHUB_PATH
-  #   - name: Populate the Flutter tool's cache of binary artifacts
-  #     if: steps.flutter-cache.outputs.cache-hit != 'true'
-  #     run: |
-  #       flutter config --no-analytics
-  #       flutter precache
-  #   - name: Get Flutter packages
-  #     run: flutter pub get
-  #     working-directory: code
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
 
-  #   # static testing
-  #   - name: Analyze Flutter
-  #     if: matrix.category == 'static'
-  #     uses: zgosalvez/github-actions-analyze-dart@92375956021937d35938504eefb62b18bfebb154
-  #     with:
-  #       fail-on-warnings: true
-  #       working-directory: code
-    
-  #   # unit testing
-  #   - name: Run Flutter ${{ matrix.category }} tests
-  #     if: matrix.category != 'static'
-  #     run: flutter test --no-pub test/${{ matrix.category }}s
-  #     working-directory: code
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.tag }}
+          files: |
+            artifacts/android-artifacts/*.apk
+            artifacts/ios-artifacts/*.ipa
+            artifacts/ios-artifacts/*.zip
+          body: ${{ inputs.release_notes }}
+          generate_release_notes: false
+          prerelease: ${{ inputs.is_beta == 'true' }}
 
-  build:
-    name: Build the ${{ matrix.file }} file
-    # needs: testing
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-latest
-            file: apk
-            asset-content-type: application/java-archive
-          # - os: ubuntu-latest
-          #   file: aab
-          #   asset-content-type: application/zip
-          # - os: macos-latest
-          #   file: ipa
-          #   asset-content-type: application/octet-stream
-      fail-fast: false
-    env:
-      FLUTTER_DEBUG_INFO_PATH: build/app/outputs/symbols
-    steps:
-    - name: Check matrix
-      if: ${{ !(matrix.file == 'apk' && github.event.release.prerelease) || ((matrix.file == 'aab' || matrix.file == 'ipa') && !github.event.release.prerelease) }}
-      run: exit
-    - name: Clone the repository
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-      with:
-        path: code
-    - name: Remove unrelated folders
-      run: |
-        rm -rf code/screens code/.github
-        # Add other unrelated folders here if needed, e.g., rm -rf code/other_folder
-    - name: Get Flutter version
-      id: get-flutter-version
-      uses: zgosalvez/github-actions-get-flutter-version-env@34a86de9beede9d0771465c702d530c2aea2b1ee
-      with:
-        pubspec-file-path: code/pubspec.yaml
-    - name: Cache Flutter
-      id: flutter-cache
-      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
-      with:
-        path: flutter
-        key: ${{ env.cache-name }}-${{ matrix.os }}-${{ steps.get-flutter-version.outputs.version }}-${{ hashFiles('code/pubspec.lock') }}
-        restore-keys: |
-          ${{ env.cache-name }}-${{ matrix.os }}-${{ steps.get-flutter-version.outputs.version }}-
-          ${{ env.cache-name }}-${{ matrix.os }}-
-          ${{ env.cache-name }}-
-      env:
-        cache-name: flutter-cache
-    - name: Clone the Flutter repository
-      if: steps.flutter-cache.outputs.cache-hit != 'true'
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-      with:
-        repository: flutter/flutter
-        ref: ${{ steps.get-flutter-version.outputs.version }}
-        path: flutter
-    - name: Add the flutter tool to the path
-      run: |
-        echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
-        echo "$GITHUB_WORKSPACE/flutter/bin/cache/dart-sdk/bin" >> $GITHUB_PATH
-    - name: Populate the Flutter tool's cache of binary artifacts
-      if: steps.flutter-cache.outputs.cache-hit != 'true'
-      run: |
-        flutter config --no-analytics
-        flutter precache
-    - name: Get Flutter packages
-      run: flutter pub get
-      working-directory: code
+      - name: Format changelog for Telegram
+        if: ${{ secrets.TELEGRAM_TOKEN != '' && secrets.TELEGRAM_TO != '' }}
+        id: format_changelog
+        shell: bash
+        run: |
+          VERSION="${{ inputs.version }}"
+          MAIN_VERSION=${VERSION%%-*}
 
-    - name: Parse the release tag
-      id: parse-release-tag
-      run: |
-        VERSION=${{ github.event.release.tag_name }}
-        echo "version=${VERSION#v}" >> $GITHUB_OUTPUT
-      working-directory: code
+          FORMATTED_NOTES=$(node scripts/format_telegram_message.js assets/changelog.md "$MAIN_VERSION" 2>&1) || {
+            echo "::warning::Format script failed, using original notes"
+            FORMATTED_NOTES='${{ inputs.release_notes }}'
+          }
 
-    - name: Decode Keystore
-      run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/release-keystore.jks
-      working-directory: code
+          {
+            echo "formatted_notes<<EOF"
+            echo "$FORMATTED_NOTES"
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
 
-    - name: Set build path
-      run: |
-        sudo mkdir -p /home/vagrant/build
-        sudo rm -rf /home/vagrant/build/bilalsul.rzr
-        sudo cp -a "$GITHUB_WORKSPACE/code" /home/vagrant/build/bilalsul.rzr
-        sudo chown -R "$USER:$USER" /home/vagrant/build
+      - name: Send beta message to Telegram
+        if: ${{ inputs.is_beta == 'true' && secrets.TELEGRAM_TOKEN != '' && secrets.TELEGRAM_TO != '' }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          message: |
+            🧪 *Beta Version Released!*
 
-    - name: Generate code
-      working-directory: /home/vagrant/build/bilalsul.rzr
-      run: |
-        flutter gen-l10n
-        dart run build_runner build --delete-conflicting-outputs
+            🧪 **Testing Version:** `${{ inputs.version }}`
 
-    - name: Build Split APKs
-      working-directory: /home/vagrant/build/bilalsul.rzr
-      env:
-        KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-        KEYSTORE_PATH: release-keystore.jks
-      run: flutter build apk --release --split-per-abi
+            ⚠️ *This is a beta release for testing purposes. Please report any issues you encounter.*
 
-    - name: Rename split APKs
-      working-directory: /home/vagrant/build/bilalsul.rzr
-      run: |
-        VERSION=${{ steps.parse-release-tag.outputs.version }}
-        mv build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk "$GITHUB_WORKSPACE/RZR-android-armeabi-v7a-${VERSION}.apk"
-        mv build/app/outputs/flutter-apk/app-arm64-v8a-release.apk "$GITHUB_WORKSPACE/RZR-android-arm64-v8a-${VERSION}.apk"
-        mv build/app/outputs/flutter-apk/app-x86_64-release.apk "$GITHUB_WORKSPACE/RZR-android-x86_64-${VERSION}.apk"
+            **What's New:**
+            ${{ steps.format_changelog.outputs.formatted_notes }}
 
-    - name: Build universal APK
-      working-directory: /home/vagrant/build/bilalsul.rzr
-      env:
-        KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-        KEYSTORE_PATH: release-keystore.jks
-      run: flutter build apk --release
+            📥 **Download:** https://github.com/${{ github.repository }}/releases/tag/${{ inputs.tag }}
 
-    - name: Rename universal APK
-      working-directory: /home/vagrant/build/bilalsul.rzr
-      run: |
-        VERSION=${{ steps.parse-release-tag.outputs.version }}
-        mv build/app/outputs/flutter-apk/app-release.apk "$GITHUB_WORKSPACE/RZR-android-${VERSION}-universal.apk"
-    # # aab
-    # - name: Build an Android App Bundle file
-    #   if: matrix.file == 'aab'
-    #   run: |
-    #     flutter build appbundle --obfuscate --split-debug-info=$FLUTTER_DEBUG_INFO_PATH
-    #     mv build/app/outputs/bundle/release/app-release.aab ../app.aab
-    #     mv build/app/outputs/mapping/release/mapping.txt ../aab-mapping.txt
-    #   working-directory: code
+      - name: Send release message to Telegram
+        if: ${{ inputs.is_beta != 'true' && inputs.is_alpha != 'true' && secrets.TELEGRAM_TOKEN != '' && secrets.TELEGRAM_TO != '' }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          message: |
+            🎉 *New Release Available!*
 
-    # apk/aab
-    # - name: Upload the artifacts — ${{ matrix.file }}-mapping.txt file
-    #   if: matrix.file == 'apk' || matrix.file == 'aab'
-    #   uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-    #   with:
-    #     name: ${{ matrix.file }}-mapping.txt
-    #     path: ${{ matrix.file }}-mapping.txt
-    # - name: Upload the release assets — ${{ matrix.file }}-mapping.txt file
-    #   if: matrix.file == 'apk' || matrix.file == 'aab'
-    #   uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
-    #   with:
-    #     upload_url: ${{ github.event.release.upload_url }}
-    #     asset_path: ${{ matrix.file }}-mapping.txt
-    #     asset_name: ${{ matrix.file }}-mapping.txt
-    #     asset_content_type: text/plain
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            🚀 **Version:** `${{ inputs.version }}`
 
-    # ipa
-    # - name: Build an iOS App Store Package file
-    #   if: matrix.file == 'ipa'
-    #   run: |
-    #     flutter build ios --no-codesign --obfuscate --split-debug-info=$FLUTTER_DEBUG_INFO_PATH
-    #     echo "::warning::TODO: fastlane export_ipa"
-    #     echo "TODO: mv code/build/app/outputs/ipa/app.ipa ../app.ipa"
-    #   working-directory: code
+            **What's New:**
+            ${{ steps.format_changelog.outputs.formatted_notes }}
 
-    # all
-    # - name: Archive Flutter ${{ matrix.file }} symbols
-    #   run: zip --recurse-paths ${{ github.workspace }}/code/${{ matrix.file }}-symbols.zip .
-    #   working-directory: code/${{ env.FLUTTER_DEBUG_INFO_PATH }}
-    # - name: Upload the artifacts — ${{ matrix.file }}-symbols.zip file
-    #   uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-    #   with:
-    #     name: ${{ matrix.file }}-symbols.zip
-    #     path: code/${{ matrix.file }}-symbols.zip
-    # - name: Upload the release assets — ${{ matrix.file }}-symbols.zip file
-    #   uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
-    #   with:
-    #     upload_url: ${{ github.event.release.upload_url }}
-    #     asset_path: code/${{ matrix.file }}-symbols.zip
-    #     asset_name: ${{ matrix.file }}-symbols.zip
-    #     asset_content_type: application/zip
-    #   env:
-    #     GITHUB_TOKEN: ${{ github.token }}
-    # - name: Upload the artifacts — ${{ matrix.file }} file
-    #   uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-    #   with:
-    #     name: RZR-android-${{steps.parse-release-tag.outputs.version}}.${{ matrix.file }}
-    #     path: RZR-android-${{steps.parse-release-tag.outputs.version}}.${{ matrix.file }}
-    #     if-no-files-found: error
-    # - name: Upload the release assets — ${{ matrix.file }} file
-    #   uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
-    #   with:
-    #     upload_url: ${{ github.event.release.upload_url }}
-    #     asset_path: RZR-android-${{steps.parse-release-tag.outputs.version}}.${{ matrix.file }}
-    #     asset_name: RZR-android-${{steps.parse-release-tag.outputs.version}}.${{ matrix.file }}
-    #     asset_content_type: ${{ matrix.asset-content-type }}
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
-    - name: Upload the artifacts — armeabi-v7a Apk file
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-      with:
-        name: RZR-android-armeabi-v7a-${{steps.parse-release-tag.outputs.version}}.apk
-        path: RZR-android-armeabi-v7a-${{steps.parse-release-tag.outputs.version}}.apk
-        if-no-files-found: error
-    - name: Upload the release asset — armeabi-v7a Apk file
-      uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: RZR-android-armeabi-v7a-${{steps.parse-release-tag.outputs.version}}.apk
-        asset_name: RZR-android-armeabi-v7a-${{steps.parse-release-tag.outputs.version}}.apk
-        asset_content_type: application/java-archive
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Upload the artifacts — arm64-v8a Apk file
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-      with:
-        name: RZR-android-arm64-v8a-${{steps.parse-release-tag.outputs.version}}.apk
-        path: RZR-android-arm64-v8a-${{steps.parse-release-tag.outputs.version}}.apk
-        if-no-files-found: error
-    - name: Upload the release asset — arm64-v8a Apk file
-      uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: RZR-android-arm64-v8a-${{steps.parse-release-tag.outputs.version}}.apk
-        asset_name: RZR-android-arm64-v8a-${{steps.parse-release-tag.outputs.version}}.apk
-        asset_content_type: application/java-archive
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Upload the artifacts — x86_64 Apk file
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-      with:
-        name: RZR-android-x86_64-${{steps.parse-release-tag.outputs.version}}.apk
-        path: RZR-android-x86_64-${{steps.parse-release-tag.outputs.version}}.apk
-        if-no-files-found: error
-    - name: Upload the release asset — x86_64 Apk file
-      uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: RZR-android-x86_64-${{steps.parse-release-tag.outputs.version}}.apk
-        asset_name: RZR-android-x86_64-${{steps.parse-release-tag.outputs.version}}.apk
-        asset_content_type: application/java-archive
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Upload the artifacts — universal Apk file
-      if: matrix.file == 'apk'
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-      with:
-        name: RZR-android-${{steps.parse-release-tag.outputs.version}}-universal.apk
-        path: RZR-android-${{steps.parse-release-tag.outputs.version}}-universal.apk
-        if-no-files-found: error
-
-    - name: Upload the release asset — universal Apk file
-      if: matrix.file == 'apk'
-      uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: RZR-android-${{steps.parse-release-tag.outputs.version}}-universal.apk
-        asset_name: RZR-android-${{steps.parse-release-tag.outputs.version}}-universal.apk
-        asset_content_type: application/java-archive
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            📥 **Download:** https://github.com/${{ github.repository }}/releases/tag/${{ inputs.tag }}
