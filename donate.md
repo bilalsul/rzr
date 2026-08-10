@@ -15,7 +15,9 @@ Address: [BC1QJGP4PC67DH2PG4QN0ERDJS0484SXMPMEPGZ0A3](bitcoin:BC1QJGP4PC67DH2PG4
 
 ### Monero
 
-Address: [49MYJLtX1HqNxsccoAyksAKGSJ5RRqLwPEDVKojjEiKBYo9RwP1MnzkV6UjqupUV7ceNZPcCf4rHxBV6gynMivWUCqU4g4o](monero:49MYJLtX1HqNxsccoAyksAKGSJ5RRqLwPEDVKojjEiKBYo9RwP1MnzkV6UjqupUV7ceNZPcCf4rHxBV6gynMivWUCqU4g4o)
+Address: [49MYJLtX1HqNxsccoAyksAKGSJ5RRqL
+wPEDVKojjEiKBYo9RwP1MnzkV6UjqupUV7c
+eNZPcCf4rHxBV6gynMivWUCqU4g4o](monero:49MYJLtX1HqNxsccoAyksAKGSJ5RRqLwPEDVKojjEiKBYo9RwP1MnzkV6UjqupUV7ceNZPcCf4rHxBV6gynMivWUCqU4g4o)
 
 <a href="monero:49MYJLtX1HqNxsccoAyksAKGSJ5RRqLwPEDVKojjEiKBYo9RwP1MnzkV6UjqupUV7ceNZPcCf4rHxBV6gynMivWUCqU4g4o"> <img width="540" height="540" alt="monero" src="https://github.com/user-attachments/assets/2ff724e0-be0a-43e3-8366-bbc8b1df0820" />
 </a>
