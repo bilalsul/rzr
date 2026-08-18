@@ -5,7 +5,7 @@
   "appVersion": "バージョン",
   "appChangelog": "変更履歴",
   "appLicense": "ライセンス",
-  "appAuthor": "作者",
+  "appWebsite": "ウェブサイト",
   "appDonate": "寄付する",
   "appDonateTips": "Repo Zip Reader は無料のオープンソースソフトウェアです。お役に立った場合は、継続的な開発のために寄付で応援していただけると嬉しいです。",
   "appPrivacyPolicy": "プライバシーポリシー",

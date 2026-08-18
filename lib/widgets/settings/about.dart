@@ -126,7 +126,9 @@ Future<void> openAboutDialog(BuildContext context) async {
                 const Divider(),
                 ListTile(
                   title: Text(L10n.of(context).appVersion),
-                  subtitle: Text(version + (kDebugMode ? ' (debug)' : '')),
+                  subtitle: Text(
+                    '${version + (kDebugMode ? ' (debug)' : '')} · ${EnvVar.buildSource}',
+                  ),
                   onTap: () {
                     Clipboard.setData(ClipboardData(text: version));
                     RZRToast.show(L10n.of(context).commonCopied);
@@ -141,13 +143,12 @@ Future<void> openAboutDialog(BuildContext context) async {
                     ),
                   ),
                 ),
-                if (EnvVar.enableDonation)
-                  ListTile(
-                    title: Text(L10n.of(context).appDonate),
-                    onTap: () {
-                      showDonateDialog(context);
-                    },
-                  ),
+                ListTile(
+                  title: Text(L10n.of(context).appDonate),
+                  onTap: () {
+                    showDonateDialog(context);
+                  },
+                ),
                 ListTile(
                   title: Text(L10n.of(context).appLicense),
                   onTap: () {
@@ -159,7 +160,7 @@ Future<void> openAboutDialog(BuildContext context) async {
                   },
                 ),
                 ListTile(
-                  title: Text(L10n.of(context).appAuthor),
+                  title: Text(L10n.of(context).appWebsite),
                   onTap: () {
                     launchUrl(
                       Uri.parse('https://bilalsul.github.io/rzr'),
@@ -186,16 +187,6 @@ Future<void> openAboutDialog(BuildContext context) async {
                   },
                 ),
                 const Divider(),
-                // if (EnvVar.showBeian) ...[
-                //   GestureDetector(
-                //     onTap: () {
-                //       launchUrl(Uri.parse('https://beian.miit.gov.cn/'),
-                //           mode: LaunchMode.externalApplication);
-                //     },
-                //     child: const Text('闽ICP备2025091402号-1A'),
-                //   ),
-                //   const Divider(),
-                // ],
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -213,34 +204,6 @@ Future<void> openAboutDialog(BuildContext context) async {
                         ),
                         url: 'https://github.com/bilalsul/rzr',
                         mode: LaunchMode.externalApplication),
-                    if (EnvVar.showTelegramLink)
-                      linkIcon(
-                          icon: Icon(
-                            Icons.telegram,
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                          url: 'https://t.me/rzreader',
-                          mode: LaunchMode.externalApplication),
-                    // linkIcon(
-                    //     icon: Image.asset(
-                    //       'assets/images/xiaohongshu.png',
-                    //       color: Theme.of(context).colorScheme.secondary,
-                    //     ),
-                    //     url:
-                    //         'https://www.xiaohongshu.com/user/profile/5d403f3e00000000100151ff',
-                    //     mode: LaunchMode.externalApplication),
-                    // linkIcon(
-                    //     icon: Padding(
-                    //       padding: const EdgeInsets.all(4.0),
-                    //       child: Image.asset(
-                    //         'assets/images/qq.png',
-                    //         color: Theme.of(context).colorScheme.secondary,
-                    //       ),
-                    //     ),
-                    //     // qq group url is so crazy
-                    //     url:
-                    //         'http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=8BYItJOMz4RCQJoHAAei7FV-nGB0iT8O&authKey=MD6a7gI%2FENiMr32rQRTLx2BpzTaa1wO9Qfmhx9ETcaLS%2FdcOFeptvVH9FWfvUpL2&noverify=0&group_code=1042905699',
-                    //     mode: LaunchMode.externalApplication),
                   ],
                 ),
               ],

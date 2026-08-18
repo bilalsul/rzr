@@ -5,7 +5,7 @@
   "appVersion": "版本",
   "appChangelog": "更新日志",
   "appLicense": "许可证",
-  "appAuthor": "作者",
+  "appWebsite": "网站",
   "appDonate": "捐赠",
   "appDonateTips": "Repo Zip Reader 是一款免费的开源软件。如果您觉得它好用，欢迎捐赠支持我们持续改进。",
   "appPrivacyPolicy": "隐私政策",

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class EnvVar {
   static const bool isAppStore =
       String.fromEnvironment('isAppStore', defaultValue: 'false') == 'true';
@@ -10,15 +8,10 @@ class EnvVar {
   static const bool isFdroid =
       String.fromEnvironment('isFdroid', defaultValue: 'false') == 'true';
 
-  static bool get _isChineseMainlandLocale =>
-      Platform.localeName == 'zh_Hans_CN';
-
-  static bool get isStoreBuild => isAppStore || isPlayStore;
-
-  static bool get enableDonation => !isStoreBuild;
-  static bool get enableInAppPurchase => isStoreBuild;
-
-  static bool get showBeian => isAppStore && _isChineseMainlandLocale;
- 
-  static bool get showTelegramLink => !showBeian;
+    static String get buildSource {
+        if (isFdroid) return 'F-Droid';
+        if (isPlayStore) return 'Google Play';
+        if (isAppStore) return 'App Store';
+        return 'Source build';
+    }
 }

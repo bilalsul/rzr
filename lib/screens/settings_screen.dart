@@ -44,16 +44,49 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         : supportedLanguages
               .firstWhere(
                 (element) =>
+                    element.values.first ==
+                    prefs.locale!.languageCode +
+                        (prefs.locale!.countryCode != null
+                            ? "-${prefs.locale!.countryCode}"
+                            : ""),
+                orElse: () => supportedLanguages[0],
+              )
+              .keys
+              .first;
+
+    return Scaffold(
+      body: SafeArea(
+        child: ListView(
+          controller: widget.controller,
+          padding: const EdgeInsets.all(12),
+          children: [
+            const SizedBox(height: 20),
+            Text(
+              L10n.of(context).settingsAppearance,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 15),
+            ChangeThemeMode(),
+            const SizedBox(height: 15),
+            themeCustomizerEnabled
+                ? PluginSettingsPanel(
+                    title: L10n.of(context).settingsAppearanceTheme,
+                    visible: true,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                         Text(L10n.of(context).settingsAppearanceAccentColor),
                         const SizedBox(height: 8),
                         Consumer<Prefs>(
-                          builder: (context,prefs,child) {
+                          builder: (context, prefs, child) {
                             return Wrap(
                               spacing: 8,
                               children: Colors.accents.take(16).map((c) {
                                 // final col = c.shade400;
                                 final col = c;
-                                final selected = _tempAccentColor.toARGB32() == col.toARGB32();
+                                final selected =
+                                    _tempAccentColor.toARGB32() ==
+                                    col.toARGB32();
                                 return GestureDetector(
                                   onTap: () => setState(() {
                                     _tempAccentColor = col;
@@ -126,7 +159,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                               //   );
                               // }),
                             );
-                          }
+                          },
                         ),
                         const SizedBox(height: 15),
                         Row(
@@ -146,7 +179,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                 //     ),
                                 //   ),
                                 // );
-                                RZRToast.show(L10n.of(context).settingsThemeApplied);
+                                RZRToast.show(
+                                  L10n.of(context).settingsThemeApplied,
+                                );
                               },
                               child: Text(
                                 L10n.of(context).commonApply,
@@ -473,32 +508,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final children = supportedLanguages.map((e) {
       final key = e.keys.first;
       // final dialogOptionLabel = key.substring(0,1).toUpperCase() + key.substring(1);
-        (Prefs().getPluginConfig('ai', '${providerId}_api_url') as String?);
-    try {
-      if (providerId == 'gpt') {
-        // OpenAI: try listing models (allow custom URL if configured)
-        final url = (effectiveUrl?.isNotEmpty == true
-            ? effectiveUrl!
-            : 'https://api.openai.com/v1/models');
-        final resp = await http
-            .get(Uri.parse(url), headers: {'Authorization': 'Bearer $key'})
-            .timeout(const Duration(seconds: 6));
-        return resp.statusCode == 200;
-      } else if (providerId == 'claude') {
-        // Anthropic: try listing models endpoint (allow custom URL)
-        final url = (effectiveUrl?.isNotEmpty == true
-            ? effectiveUrl!
-            : 'https://api.anthropic.com/v1/models');
-        final resp = await http
-            .get(Uri.parse(url), headers: {'x-api-key': key})
-            .timeout(const Duration(seconds: 6));
-        return resp.statusCode == 200;
-      } else {
-        // For other providers (grok/gemini) we do a simple non-network check: key presence
-        return key.isNotEmpty;
-      }
-    } catch (e) {
-      return false;
-    }
+      final value = e[key]!;
+      return dialogOption(key, value, saveToPrefs);
+    }).toList();
+    showSimpleDialog(title, saveToPrefs, children);
+  }
+
+  void showFontPickerDialog(BuildContext context) {
+    final title = L10n.of(context).settingsEditorFontFamily;
+    final saveToPrefs = Prefs().saveEditorFontFamily;
+
+    final children = fontFamily.map((e) {
+      final value = e.values.first;
+      return dialogOption(value, value, saveToPrefs);
+    }).toList();
+    showSimpleDialog(title, saveToPrefs, children);
   }
 }
