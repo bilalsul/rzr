@@ -438,57 +438,6 @@ Widget _buildEditorSheet(BuildContext context, Prefs prefs) {
   //   }
   // }
 
-  // List<BottomNavigationBarItem> getVisibleNavigationItems() {
-  //   // Define the full list of navigation items
-  //   const allItems = [
-  //     BottomNavigationBarItem(
-  //       icon: Icon(Icons.folder_shared),
-  //       activeIcon: Icon(Icons.folder_shared),
-  //       label: 'Projects',
-  //     ),
-  //     BottomNavigationBarItem(
-  //       icon: Icon(Icons.edit_outlined),
-  //       activeIcon: Icon(Icons.edit),
-  //       label: 'Editor',
-  //     ),
-  //     BottomNavigationBarItem(
-  //       icon: Icon(Icons.chat_rounded),
-  //       activeIcon: Icon(Icons.chat_rounded),
-  //       label: 'AI',
-  //     ),
-  //     BottomNavigationBarItem(
-  //       icon: Icon(Icons.history_outlined),
-  //       activeIcon: Icon(Icons.history),
-  //       label: 'Git History',
-  //     ),
-  //     BottomNavigationBarItem(
-  //       icon: Icon(Icons.terminal_outlined),
-  //       activeIcon: Icon(Icons.terminal),
-  //       label: 'Terminal',
-  //     ),
-  //     BottomNavigationBarItem(
-  //       icon: Icon(Icons.settings_rounded),
-  //       activeIcon: Icon(Icons.settings),
-  //       label: 'Settings',
-  //     ),
-  //   ];
-  //   final flagMap = {
-  //     'AI': 'ai_assist',
-  //     'Git History': 'git_history',
-  //     'Terminal': 'terminal',
-  //   };
-
-  //   // Filter items based on their flag status
-  //   return allItems.where((item) {
-  //     final flagKey = flagMap[item.label];
-  //     if (flagKey == null) {
-  //       // No flag associated (e.g., Projects, Editor, Settings), always visible
-  //       return true;
-  //     }
-  //     // Check if the plugin flag is enabled (defaults from previous plugin getters)
-  //     return Prefs().getValueExistInList('plugins_enabled',flagKey);
-  //   }).toList();
-  // }
   Widget _buildFloatingNavigationBar(
     List<String> plugins,
     Screen currentScreen,
@@ -653,24 +602,6 @@ Widget _buildEditorSheet(BuildContext context, Prefs prefs) {
         ),
         activeIcon: Icon(Icons.edit, color: prefs.secondaryColor),
         pluginKey: null,
-      ),
-      NavItem(
-        screen: Screen.gitHistory,
-        label: L10n.of(context).navBarGitHistory,
-        icon: Icon(Icons.history_outlined,
-        color: Prefs().lastKnownScreen == Screen.editor ? Colors.grey[400] : null,
-        ),
-        activeIcon: Icon(Icons.history, color: prefs.secondaryColor),
-        pluginKey: 'git_history',
-      ),
-      NavItem(
-        screen: Screen.terminal,
-        label: L10n.of(context).navBarTerminal,
-        icon: Icon(Icons.terminal_outlined,
-        color: Prefs().lastKnownScreen == Screen.editor ? Colors.grey[400] : null,
-        ),
-        activeIcon: Icon(Icons.terminal, color: prefs.secondaryColor),
-        pluginKey: 'terminal',
       ),
         NavItem(
         screen: Screen.zipManager,

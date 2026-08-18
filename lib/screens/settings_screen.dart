@@ -355,54 +355,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 : SizedBox.shrink(),
             const SizedBox(height: 15),
 
-            // Git settings
-            // prefs.featureSupported("git_history") ?
-            // PluginSettingsPanel(
-            //   title: L10n.of(context).settingsGitSettings,
-            //   visible: gitEnabled,
-            //   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            //     Row(children: [
-            //       Expanded(child: Text(L10n.of(context).settingsGitAutoFetch)),
-            //       Switch(value: (gitCfg['autoFetch'] ?? true) as bool, onChanged: (v) async => await prefs.setPluginConfig('git', 'autoFetch', v), activeColor: prefs.secondaryColor),
-            //     ]),
-            //     const SizedBox(height: 8),
-            //     Text(L10n.of(context).settingsGitDefaultBranch),
-            //     const SizedBox(height: 4),
-            //     TextField(
-            //       controller: TextEditingController(text: (gitCfg['defaultBranch'] ?? 'main') as String),
-            //       decoration: const InputDecoration(hintText: 'main'),
-            //       onSubmitted: (v) async => await prefs.setPluginConfig('git', 'defaultBranch', v.trim()),
-            //     ),
-            //   ]),
-            // ) : SizedBox.shrink(),
-
-            // Terminal settings
-            // prefs.featureSupported("terminal") ?
-            // PluginSettingsPanel(
-            //   title: L10n.of(context).settingsTerminalSettings,
-            //   visible: terminalEnabled,
-            //   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            //     Text(L10n.of(context).settingsTerminalShellExecutable),
-            //     const SizedBox(height: 8),
-            //     TextField(
-            //       controller: TextEditingController(text: (terminalCfg['shellPath'] ?? '/bin/bash') as String),
-            //       decoration: const InputDecoration(hintText: '/bin/bash'),
-            //       onSubmitted: (v) async => await prefs.setPluginConfig('terminal', 'shellPath', v.trim()),
-            //     ),
-            //     const SizedBox(height: 8),
-            //     Row(children: [
-            //       Expanded(child: Text(L10n.of(context).settingsTerminalFontSize)),
-            //       Slider(value: (terminalCfg['fontSize'] ?? 14).toDouble(), min: 10, max: 24, divisions: 14, onChanged: (v) async => await prefs.setPluginConfig('terminal', 'fontSize', v.toInt()),
-            //       activeColor: prefs.accentColor,
-            //       ),
-            //     ]),
-            //     Row(children: [
-            //       Expanded(child: Text(L10n.of(context).settingsTerminalAudibleBell)),
-            //       Switch(value: (terminalCfg['bell'] ?? true) as bool, onChanged: (v) async => await prefs.setPluginConfig('terminal', 'bell', v), activeColor: prefs.secondaryColor),
-            //     ]),
-            //   ]),
-            // ) : SizedBox.shrink(),
-
             // File Explorer settings
             prefs.featureSupported(Plugin.fileExplorer.id)
                 ? PluginSettingsPanel(
@@ -450,13 +402,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 // await prefs.setPluginEnabled('editor', false);
                 await prefs.setPluginEnabled(Plugin.fileExplorer.id, false);
                 await prefs.setPluginEnabled(Plugin.themeCustomizer.id, false);
-                // await prefs.setPluginEnabled('git_history', false);
-                // await prefs.setPluginEnabled('terminal', false);
                 // remove a few plugin config keys
                 // await prefs.setPluginConfig('editor', 'tabSize', null);
                 // await prefs.setPluginConfig('editor', 'showLineNumbers', null);
-                // await prefs.setPluginConfig('git', 'autoFetch', null);
-                // await prefs.setPluginConfig('git', 'defaultBranch', null);
                 // await prefs.setPluginConfig('file_explorer', 'show_hidden', null);
                 // await prefs.setPluginConfig('file_explorer', 'preview_markdown', null);
                 prefs.resetThemeCustomizerColors();

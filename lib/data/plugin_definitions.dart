@@ -26,9 +26,6 @@ List<PluginDefinition> editorPlugins = [
   ),
 ];
 
-const List<PluginDefinition> gitPlugins = [
-];
-
 List<PluginDefinition> utilityPlugins = [
   PluginDefinition(
     id: Plugin.fileExplorer.id,

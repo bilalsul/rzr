@@ -578,14 +578,10 @@ class _AppDrawerState extends ConsumerState<AppDrawer> {
         return l.readonlyModeName;
       case 'syntax_highlighting':
         return l.syntaxHighlightingName;
-      case 'code_folding':
-        return l.codeFoldingName;
       case 'advanced_editor_options':
         return l.advancedEditorName;
       case 'file_explorer':
         return l.fileExplorerName;
-      case 'terminal':
-        return l.terminalName;
       case 'theme_customizer':
         return l.themeCustomizerName;
       case 'zip_manager':
@@ -602,14 +598,10 @@ class _AppDrawerState extends ConsumerState<AppDrawer> {
         return l.readonlyModeDescription;
       case 'syntax_highlighting':
         return l.syntaxHighlightingDescription;
-      case 'code_folding':
-        return l.codeFoldingDescription;
       case 'advanced_editor_options':
         return l.advancedEditorDescription;
       case 'file_explorer':
         return l.fileExplorerDescription;
-      case 'terminal':
-        return l.terminalDescription;
       case 'theme_customizer':
         return l.themeCustomizerDescription;
       case 'zip_manager':
@@ -627,8 +619,6 @@ String _localizedPluginCategory(PluginCategory category, BuildContext context) {
       return l.drawerEditorPlugins;
     case PluginCategory.utility:
       return l.drawerUtilityPlugins;
-    case PluginCategory.git:
-      return l.drawerGitIntegration;
     case PluginCategory.experimental:
       return l.drawerExperimental;
   }

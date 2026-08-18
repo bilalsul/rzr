@@ -2,8 +2,6 @@ enum Screen {
   home,
   editor,
   fileExplorer,
-  gitHistory,
-  terminal,
   settings,
   zipManager
 }
@@ -17,10 +15,6 @@ String screenToString(Screen screen) {
       return 'editor';
     case Screen.fileExplorer:
       return 'file_explorer';
-    case Screen.gitHistory:
-      return 'git_history';
-    case Screen.terminal:
-      return 'terminal';
     case Screen.settings:
       return 'settings';
     case Screen.zipManager:

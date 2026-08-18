@@ -161,10 +161,6 @@ class Prefs extends ChangeNotifier {
         return Screen.settings;
       case '/zip_manager':
         return Screen.zipManager;
-      case '/terminal':
-        return Screen.terminal;
-      case '/git_history':
-        return Screen.gitHistory;
       case '/file_explorer':
         return Screen.fileExplorer;
     }
@@ -792,77 +788,10 @@ class Prefs extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  // Plugins pref
-  // Getter and setter for Read-Only Mode plugin (editor)
-  // bool get readonlyModeEnabled {
-  //   // return isPluginEnabled('readonly_mode');
-  //   return true;
-  // }
-
   bool disabledByDefault(String feature) {
     List<String> features = [Plugin.readOnlyMode.id];
     return features.contains(feature);
   }
-
-  // Getter and setter for Syntax Highlighting plugin (editor)
-  // bool get syntaxHighlightingEnabled {
-  //   return isPluginEnabled('syntax_highlighting');
-  // }
-
-  // Getter and setter for Code Folding plugin (editor)
-  // bool get codeFoldingEnabled {
-  //   return isPluginEnabled('code_folding');
-  // }
-
-  // Getter and setter for Bracket Matching plugin (editor)
-  // bool get bracketMatchingEnabled {
-  //   return isPluginEnabled('bracket_matching');
-  // }
-
-  // Getter and setter for Git History plugin (git)
-  // bool get gitHistoryEnabled {
-  //   return isPluginEnabled('git_history');
-  // }
-
-  // Getter and setter for GitLens plugin (git)
-  // bool get gitLensEnabled {
-  //   return isPluginEnabled('git_lens');
-  // }
-
-  // Getter and setter for Branch Manager plugin (git)
-  // bool get branchManagerEnabled {
-  //   return isPluginEnabled('branch_manager');
-  // }
-
-  // Getter and setter for File Explorer plugin (utility)
-  // bool get fileExplorerEnabled {
-  //   return isPluginEnabled('file_explorer');
-  // }
-
-  // Getter and setter for Search & Replace plugin (utility)
-  // bool get searchReplaceEnabled {
-  //   return isPluginEnabled('search_replace');
-  // }
-
-  // Getter and setter for Integrated Terminal plugin (utility)
-  // bool get terminalEnabled {
-  //   return isPluginEnabled('terminal');
-  // }
-
-  // Getter and setter for Theme Customizer plugin (utility)
-  // bool get themeCustomizerEnabled {
-  //   return isPluginEnabled('theme_customizer');
-  // }
-
-  // Getter and setter for Real-time Collaboration plugin (experimental)
-  // bool get realTimeCollabEnabled {
-  //   return isPluginEnabled("real_time_collab");
-  // }
-
-  // Getter and setter for Performance Monitor plugin (experimental)
-  // bool get performanceMonitorEnabled {
-  //   return isPluginEnabled('performance_monitor');
-  // }
 
   // Generic plugin helpers -------------------------------------------------
   /// Returns the list of enabled plugins stored under 'plugins_enabled'.
@@ -899,10 +828,6 @@ class Prefs extends ChangeNotifier {
     List<String> features = [
       Plugin.themeCustomizer.id,
       Plugin.fileExplorer.id,
-      // uncomment a feature below when it is supported
-      // "ai",
-      // "git_history",
-      // "terminal",
     ];
     return features.contains(pluginId);
   }

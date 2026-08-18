@@ -3,8 +3,6 @@ enum Plugin {
 
   readOnlyMode('readonly_mode'),
   syntaxHighlighting('syntax_highlighting'),
-  codeFolding('code_folding'),
-
   advancedEditorOptions('advanced_editor_options'),
   editorZoomInOut('editor_zoom_in_out'),
   editorLineNumbers('editor_line_numbers'),
