@@ -30,7 +30,7 @@ Future<void> main() async {
   //     Prefs().windowInfo.y,
   //   );
 
-  //   WindowManager.instance.setTitle('Git Explorer');
+  //   WindowManager.instance.setTitle('RZR');
   //   if (size.width > 0 && size.height > 0) {
   //     await WindowManager.instance.setPosition(offset);
   //     await WindowManager.instance.setSize(size);

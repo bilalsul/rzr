@@ -19,12 +19,7 @@ import 'package:rzr/utils/toast/common.dart';
 import 'package:path/path.dart' as p;
 
 class HomeScreen extends ConsumerStatefulWidget {
-  const HomeScreen({
-    super.key,
-    // required this.controller
-  });
-
-  // final ScrollController controller;
+  const HomeScreen({super.key});
 
   @override
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
@@ -41,36 +36,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
-
-    // Wait for SharedPreferences to be ready and react to plugin toggles.
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // await ref.read(sharedPreferencesProvider.future);
-
-      // If file explorer is enabled at startup, ensure projects root and load projects.
-      // if (Prefs().isPluginEnabled(Plugin.fileExplorer.id)) {
       await _prepareProjectsDir();
       if (Prefs().tutorialProject) await _ensureTutorialProjectExists();
       await _loadProjectsFromDisk();
       setState(() {
         _diskLoaded = true;
       });
-      // }
-      //  else {
-      //   // Not enabled: show in-memory samples so the UI is not empty.
-      //   _projects.clear();
       setState(() {});
-      // }
-
-      // ADD THIS LINE - Show what's new dialog if needed
-    initGzipExp();
+    initRZR();
     });
-
-    // Listen for changes to prefs so we can react to toggles (e.g., enabling File Explorer)
-    // NOTE: Do not provide an `async` callback to `ref.listen` because it must be
-    // synchronous; schedule any async work via Future.microtask instead.
   }
 
-  Future<void> initGzipExp() async {
+  Future<void> initRZR() async {
     RZRToast.init(context);
     checkUpdate(false);
     InitializationCheck.check();
@@ -121,7 +99,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
       );
     }
-    // Replace the current list atomically to avoid duplicates and keep order
     _projects.clear();
     found.sort(
       (a, b) => (b.lastModified ?? DateTime(0)).compareTo(
@@ -131,8 +108,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     _projects.addAll(found);
   }
 
-  /// Recursively build a Map<String,dynamic> representation of [dir].
-  /// Files are loaded as Strings (utf8) where possible; directories as nested maps.
   Future<Map<String, dynamic>> _buildFsMapFromDir(Directory dir) async {
     final map = <String, dynamic>{};
     final entities = dir.list(recursive: false, followLinks: false);
@@ -141,7 +116,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       if (e is File) {
         try {
           final bytes = await e.readAsBytes();
-          // Attempt to decode as utf8; if fails, store placeholder
           try {
             map[name] = utf8.decode(bytes);
           } catch (_) {
@@ -184,7 +158,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     if (confirmed != true) return;
     final name = nameTc.text.trim();
     if (name.isEmpty) return;
-    // If file explorer (disk-based projects) is enabled, create a real folder under projects root.
     if (Prefs().isPluginEnabled(Plugin.fileExplorer.id)) {
       try {
         final base = await Prefs().projectsRoot();
@@ -202,20 +175,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         final readme = File('${dir.path}/README.md');
         final title = L10n.of(
           context,
-        ).tutorialProjectReadmeTitle.replaceAll('Git Explorer', name);
+        ).tutorialProjectReadmeTitle.replaceAll('RZR', name);
         final body = L10n.of(context).tutorialProjectReadmeBody;
         await readme.writeAsString('$title\n\n$body');
         await _loadProjectsFromDisk();
         if (!mounted) return;
         setState(() {});
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //   SnackBar(content: Text(L10n.of(context).homeCreatedNewProject)),
-        // );
       RZRToast.show(L10n.of(context).homeCreatedNewProject);
 
         return;
       } catch (_) {
-        // fall back to in-memory
       }
     }
 
@@ -230,71 +199,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       );
       _projects.insert(0, p);
     });
-    // ScaffoldMessenger.of(context).showSnackBar(
-    //   SnackBar(content: Text(L10n.of(context).homeCreatedNewProject)),
-    // );
       RZRToast.show(L10n.of(context).homeCreatedNewProject);
 
   }
 
-  // Future<void> _importZipProject() async {
-  // // Let user pick a zip file using the native picker, then extract into projects dir
-  // final result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['zip']);
-  // if (result == null || result.files.isEmpty) return;
-  // final path = result.files.single.path;
-  // if (path == null) return;
-  // final f = File(path);
-  // if (!await f.exists()) {
-  // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(L10n.of(context).homeImportedZipNotFound)));
-  // return;
-  // }
-  // try {
-  // final bytes = await f.readAsBytes();
-  // final archive = ZipDecoder().decodeBytes(bytes);
-  // final projRoot = await Prefs().projectsRoot();
-  // final pickedPath = path;
-  // final baseName = p.basenameWithoutExtension(pickedPath);
-  // // Create a safe slug for the project directory
-  // var slug = baseName.replaceAll(RegExp(r'[^A-Za-z0-9 _-]'), '').replaceAll(' ', '_');
-  // var id = slug;
-  // final candidate = Directory('${projRoot.path}/$id');
-  // if (await candidate.exists()) {
-  // id = '${slug}_${DateTime.now().millisecondsSinceEpoch}';
-  // }
-  // final dir = Directory('${projRoot.path}/$id');
-  // await dir.create(recursive: true);
-  // // fileCount was intentionally omitted (not used) but kept for future use
-  // for (final file in archive) {
-  // final name = file.name;
-  // final outPath = '${dir.path}/$name';
-  // if (file.isFile) {
-  // final outFile = File(outPath);
-  // await outFile.create(recursive: true);
-  // if (file.content is List<int>) {
-  // await outFile.writeAsBytes(file.content as List<int>);
-  // } else {
-  // // Fallback to text
-  // await outFile.writeAsString(utf8.decode(file.content as List<int>));
-  // }
-  // } else {
-  // final d = Directory(outPath);
-  // if (!await d.exists()) await d.create(recursive: true);
-  // }
-  // }
-  // // Reload disk projects and refresh UI so the imported project appears immediately
-  // await _loadProjectsFromDisk();
-  // if (!mounted) return;
-  // setState(() {});
-  // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(L10n.of(context).homeImportZipAsProject)));
-  // } catch (e) {
-  // final msg = L10n.of(context).importFailed(e.toString());
-  // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
-  // }
-  // }
-
-  // _insertIntoFsMap was removed because the function wasn't referenced anywhere.
   Future<void> _importZipProject(BuildContext context) async {
-    // Let user pick a zip file using the native picker, then extract into projects dir
     final result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['zip'],
@@ -305,9 +214,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final f = File(path);
     if (!await f.exists()) {
       if (!context.mounted) return;
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(content: Text(L10n.of(context).homeImportedZipNotFound)),
-      // );
       RZRToast.show(L10n.of(context).homeImportedZipNotFound);
 
       return;
@@ -575,24 +481,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   VoidCallback? _projectsListener;
 
-  // Future<void> _refreshProjects(BuildContext context) async {
-  //   try {
-  //     await _loadProjectsFromDisk();
-  //     if (!mounted) return;
-  //     setState(() {});
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(content: Text(L10n.of(context).homeRefreshedProjects)),
-  //     ); // 'Projects refreshed'
-  //   } catch (e) {
-  //     if (context.mounted)
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         SnackBar(
-  //           content: Text('${L10n.of(context).homeRefreshProjectsFailed}: $e'),
-  //         ), // 'Failed to refresh projects'
-  //       );
-  //   }
-  // }
-
   Future<void> _refreshProjectsWithWarning(BuildContext context) async {
     final confirm = await showDialog<bool>(
       context: context,
@@ -634,21 +522,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     });
     try {
       await _loadProjectsFromDisk();
-      // if (!mounted) return;
       setState(() {
         _diskLoaded = true;
       });
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(content: Text(L10n.of(context).homeRefreshedProjects)),
-      // ); // 'Projects refreshed'
+      
       RZRToast.show(L10n.of(context).homeRefreshedProjects);
     } catch (e) {
       if (context.mounted) RZRToast.show('${L10n.of(context).homeRefreshProjectsFailed}: $e');
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //   SnackBar(
-        //     content: Text('${L10n.of(context).homeRefreshProjectsFailed}: $e'),
-        //   ), // 'Failed to refresh projects'
-        // );
     }
   }
 
@@ -731,28 +611,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final prefs = ref.watch(prefsProvider);
-    // ref.listen<Prefs>(prefsProvider, (previous, next) {
-    //   final prevEnabled = previous?.isPluginEnabled(Plugin.fileExplorer.id) ?? false;
-    //   final nowEnabled = next.isPluginEnabled(Plugin.fileExplorer.id);
-    //   if (!prevEnabled && nowEnabled) {
-    //     // Just enabled: schedule async work to prepare and load projects
-    //     Future.microtask(() async {
-    //       await _prepareProjectsDir();
-    //       if (Prefs().tutorialProject) await _ensureTutorialProjectExists();
-    //       await _loadProjectsFromDisk();
-    //       if (!mounted) return;
-    //       setState(() {
-    //         _diskLoaded = true;
-    //       });
-    //     });
-    //   } else if (prevEnabled && !nowEnabled) {
-    //     // Disabled: fall back to samples (synchronous)
-    //     if (!mounted) return;
-    //     setState(() {
-    //       _diskLoaded = false;
-    //     });
-    //   }
-    // });
     return prefs.isPluginEnabled(Plugin.fileExplorer.id)
         ? Scaffold(
             appBar: _openedProject == null
@@ -779,20 +637,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       _openedProject?.name ??
                           L10n.of(context).homeDefaultProjectName,
                     ),
-                    // actions: [
-                    //   IconButton(
-                    // enableFeedback: false,
-                    //     tooltip: L10n.of(context).homeRefreshProjects,
-                    //     icon: const Icon(Icons.refresh),
-                    //     onPressed: () async => await _refreshProjects(context),
-                    //   ),
-                    //   IconButton(
-                    // enableFeedback: false,
-                    //     tooltip: L10n.of(context).homeDeleteAllProjects,
-                    //     icon: const Icon(Icons.delete_forever),
-                    //     onPressed: () => _deleteAllProjects(context),
-                    //   ),
-                    // ],
                     leading: IconButton(
                       enableFeedback: false,
                       icon: const Icon(Icons.arrow_back),
@@ -823,9 +667,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 child: Builder(
                   builder: (context) {
                     try {
-                      // Only show empty state after we've finished loading projects from disk.
-                      // This avoids a flash where the UI shows "no projects" before the background
-                      // disk scan completes and populates `_projects`.
                       if (!_diskLoaded) {
                         return Center(child: Container(
                           height: 25,
@@ -845,7 +686,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       // If a project is opened, show ProjectBrowser inside HomeScreen
                       if (_openedProject != null) {
                         return _ProjectBrowser(
-                          // controller: widget.controller,
                           project: _openedProject!,
                           pathStack: _pathStack,
                           selectedFileContent: _selectedFileContent,
@@ -860,7 +700,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   node.length == 1) {
                                 _selectedFileContent = _findReadmeInNode(node);
                                 _selectedFilePath = null;
-                                // compute path async
                                 Future.microtask(() async {
                                   final readmeName = 'README.md';
                                   try {
@@ -883,8 +722,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           },
                         );
                       }
-
-                      // Responsive: show Grid on wide screens, List on narrow screens
                       return LayoutBuilder(
                         builder: (context, constraints) {
                           final isWide = constraints.maxWidth > 700;
@@ -907,7 +744,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             );
                           } else {
                             return ListView.separated(
-                              // controller: widget.controller,
                               itemCount: _projects.length,
                               separatorBuilder: (_, __) =>
                                   const SizedBox(height: 8),
@@ -920,7 +756,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         },
                       );
                     } catch (e) {
-                      // Defensive: if something in the build fails, show a recoverable error UI instead of letting the app crash.
                       return Center(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -962,7 +797,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             width: 80,
                             child: FittedBox(
                               child: FloatingActionButton.extended(
-                                // heroTag: 'open_in_editor',
                                 icon: Icon(
                                   Icons.open_in_new,
                                   color: prefs.accentColor,
@@ -1121,13 +955,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           );
                         }
                         return SizedBox.shrink();
-                        // return FloatingActionButton.extended(
-                        //   // heroTag: 'create_file',
-                        //   icon: Icon(Icons.note_add, color: prefs.accentColor),
-                        //   backgroundColor: prefs.secondaryColor,
-                        //   label: Text(L10n.of(context).commonCreate),
-                        //   onPressed: _createFileInCurrentFolder,
-                        // );
                       },
                     ),
                   )
@@ -1137,13 +964,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const SizedBox(height: 8),
-                        // FloatingActionButton.small(
-                        //   // heroTag: 'create_details',
-                        //   onPressed: _createProjectWithDetails,
-                        //   tooltip: L10n.of(context).homeTooltipCreateDetails,
-                        //   backgroundColor: prefs.secondaryColor,
-                        //   child: Icon(Icons.add, color: prefs.accentColor),
-                        // ),
                         const SizedBox(height: 8),
                         FloatingActionButton(
                           // heroTag: 'sample_zip',
@@ -1159,56 +979,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         : FeatureDisabledScreen(feature: L10n.of(context).fileExplorerName);
   }
 
-  // Future<void> _createFileInCurrentFolder() async {
-  //   if (_openedProject == null) return;
-  //   final nameTc = TextEditingController();
-  //   final confirmed = await showDialog<bool>(
-  //     context: context,
-  //     builder: (ctx) => AlertDialog(
-  //       title: Text(L10n.of(context).commonCreate),
-  //       content: TextField(
-  //         controller: nameTc,
-  //         decoration: InputDecoration(
-  //           hintText: L10n.of(context).drawerFolderNameHint,
-  //         ),
-  //       ),
-  //       actions: [
-  //         TextButton(
-  //           onPressed: () => Navigator.of(ctx).pop(false),
-  //           child: Text(L10n.of(context).commonCancel),
-  //         ),
-  //         TextButton(
-  //           onPressed: () => Navigator.of(ctx).pop(true),
-  //           child: Text(L10n.of(context).commonCreate),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  //   if (confirmed != true) return;
-  //   final filename = nameTc.text.trim();
-  //   if (filename.isEmpty) return;
-  //   try {
-  //     final base = await Prefs().projectsRoot();
-  //     final folderPath = (_pathStack.isEmpty)
-  //         ? '${base.path}/${_openedProject!.id}'
-  //         : '${base.path}/${_openedProject!.id}/${_pathStack.join('/')}';
-  //     final f = File('$folderPath/$filename');
-  //     await f.create(recursive: true);
-  //     await f.writeAsString('');
-  //     // reload disk projects and re-open this project
-  //     await _loadProjectsFromDisk();
-  //     setState(() {
-  //       _openedProject = _projects.firstWhere(
-  //         (p) => p.id == _openedProject!.id,
-  //         orElse: () => _openedProject!,
-  //       );
-  //     });
-  //   } catch (e) {
-  //     ScaffoldMessenger.of(
-  //       context,
-  //     ).showSnackBar(SnackBar(content: Text(L10n.of(context).commonFailed)));
-  //   }
-  // }
 
   Widget _safeProjectCard(_Project p) {
     final prefs = ref.watch(prefsProvider);
@@ -1262,16 +1032,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             }
           } catch (_) {}
           if (!mounted) return;
-          // ScaffoldMessenger.of(context).showSnackBar(
-          //   SnackBar(content: Text(L10n.of(context).homeProjectRemoved)),
-          // );
         RZRToast.show(L10n.of(context).homeProjectRemoved);
 
           
         },
       );
     } catch (_) {
-      // If building the card fails for some reason, return a minimal placeholder so the list/grid stays stable.
       return Card(
         child: ListTile(
           leading: const Icon(Icons.folder),
@@ -1284,23 +1050,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 }
 
-/* 
-Maintain the currentopenedfilePath, currentProject, exact absolute locations in pref flags.
-Replace the entirely in-file model for temporary/demo usage, I am implementing for REAL WORLD
-create in Application root dir, projects directory path if doesnt exist.
-then if pref.tutorialProject == true, create tutorial project
-where the folder name, is the project name(similar to other imported/created projects)
-then add a README.md file containing title and body from L10n.of(context).
-if the project(folder) contains only a README file view it inside a markdown view.
-if the project(folder) contains 2 or more files, then view the project(folder) files
-in tree view. everything about the project(folder) you get from files.
-Inside a folder dir, add a floating button that allow me to create a file, add a name to it
-and then add it to the tree view. when the file is opened, open it inside the editor screen.
-I want to import,add,create and delete projects and files to the current directory.
-when a zip file is imported, extract the zip in the projects root directory and save the extracted folders and tree.
-Make it accessable to the user like other existing projects that are created/imported.
-*/
-// Small in-file model for temporary/demo usage.
 class _Project {
   final String id;
   final String? name;
@@ -1433,15 +1182,6 @@ class EmptyState extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // ElevatedButton.icon(
-              //   onPressed: onCreate,
-              //   icon: Icon(Icons.add, color: Prefs().accentColor),
-              //   label: Text(
-              //     L10n.of(context).homeCreateProject,
-              //     style: TextStyle(color: Prefs().accentColor),
-              //   ),
-              // ),
-              // const SizedBox(width: 8),
               ElevatedButton.icon(
                 onPressed: () async {
                   await onImport();
@@ -1460,18 +1200,14 @@ class EmptyState extends StatelessWidget {
   }
 }
 
-// ---------------- Project Browser ----------------
-
 class _ProjectBrowser extends StatelessWidget {
   final _Project project;
   final List<String> pathStack;
   final String? selectedFileContent;
   final void Function(String name) onEnterDirectory;
   final void Function(String content, String absPath) onOpenFile;
-  // final ScrollController controller;
 
   const _ProjectBrowser({
-    // required this.controller,
     required this.project,
     required this.pathStack,
     required this.onEnterDirectory,
@@ -1494,21 +1230,6 @@ class _ProjectBrowser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final node = _nodeAtPath();
-    // by default show the tutorial readme
-    // if (selectedFileContent != null) {
-    //   return Column(
-    //     children: [
-    //       Expanded(
-    //         child: Markdown(
-    //           data: L10n.of(context).tutorialProjectReadmeBody,
-    //           selectable: true,
-    //         ),
-    //       ),
-    //     ],
-    //   );
-    // }
-    // If a file's content was selected and either this is the tutorial
-    // project or the user enabled markdown preview, render it as Markdown.
     if (selectedFileContent != null &&
         (project.id == 'tutorial_project' ||
             Prefs().isPluginEnabled(Plugin.previewMarkdown.id))) {
@@ -1527,12 +1248,10 @@ class _ProjectBrowser extends StatelessWidget {
             
     }
 
-    // If node is a file (string) but not selected (non-md), show placeholder
     if (node is String) {
       return Center(child: Text(L10n.of(context).homeFilePreviewUnavailable));
     }
 
-    // Expecting a directory map here
     final Map<String, dynamic> dir = (node is Map<String, dynamic>)
         ? node
         : <String, dynamic>{};
@@ -1552,7 +1271,6 @@ class _ProjectBrowser extends StatelessWidget {
 
     return ListView.builder(
       padding: EdgeInsetsDirectional.only(bottom: 80),
-      // controller: controller,
       itemCount: dirs.length + files.length,
       itemBuilder: (context, index) {
         if (index < dirs.length) {
@@ -1572,7 +1290,6 @@ class _ProjectBrowser extends StatelessWidget {
           title: Text(fileName),
           subtitle: isMarkdown ? Text(L10n.of(context).homeMarkdownFile) : null,
           onTap: () async {
-            // Compute absolute path and read file content (prefer disk, fallback to in-memory map)
             try {
               final base = await Prefs().projectsRoot();
               final projRoot = base;
@@ -1589,13 +1306,10 @@ class _ProjectBrowser extends StatelessWidget {
                   content = '(binary)';
                 }
               } else {
-                // Fall back to in-memory map if present
                 final node = _getNodeAtPath(project, [...pathStack, fileName]);
                 if (node is String) content = node;
               }
 
-              // If this is a markdown file and preview is enabled (or it's the tutorial project),
-              // show the content in-place via the provided callback. Otherwise, open in editor.
               if (isMarkdown &&
                   (project.id == 'tutorial_project' ||
                       Prefs().isPluginEnabled(Plugin.previewMarkdown.id))) {
@@ -1603,16 +1317,13 @@ class _ProjectBrowser extends StatelessWidget {
                 return;
               }
 
-              // Fallback: persist current open file and route to editor
               await Prefs().saveCurrentOpenFile(project.id, abs, content);
-              // Also save current project absolute path
               await Prefs().saveCurrentProject(
                 id: project.id,
                 name: project.name ?? project.id,
                 path: projRoot.path + '/${project.id}',
               );
               await Prefs().saveLastKnownRoute('editor');
-              // Navigator.of(context).push(MaterialPageRoute(builder: (_) => const EditorScreen()));
             } catch (_) {}
           },
         );
@@ -1620,8 +1331,6 @@ class _ProjectBrowser extends StatelessWidget {
     );
   }
 }
-
-// ---------------- Helpers ----------------
 
 dynamic _getNodeAtPath(_Project p, List<String> path) {
   dynamic node = p.fs;
