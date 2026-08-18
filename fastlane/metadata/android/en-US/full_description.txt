@@ -12,4 +12,4 @@ The app uses the <i>INTERNET</i> permission only to download repository archives
 
 Read RZR User guide <a href="bilalsul.github.io/rzr">here</a>
 
-Help us translate us the app to your languague and check strings <a href="https://github.com/bilalsul/rzr/blob/develop-live/CONTRIBUTING.md#translations">here</a>
+Help us translate the app to your languague and check strings <a href="https://github.com/bilalsul/rzr/blob/develop-live/CONTRIBUTING.md#translations">here</a>

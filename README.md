@@ -1,4 +1,3 @@
-**English** | [简体中文](README_zh.md)
 
 <br>
 
@@ -9,6 +8,7 @@
 
 <p align="center">
   <a href="https://github.com/bilalsul/rzr#platform-support"><img src="https://img.shields.io/badge/platform-%20%20Android-lightgrey" alt="Platforms"></a>
+  <a href="https://github.com/bilalsul/rzr#platform-support"><img src="https://img.shields.io/badge/platform-%20%20iOS-lightgrey" alt="Platforms"></a>
   <a href="https://github.com/bilalsul/rzr/releases/latest"><img src="https://img.shields.io/github/v/release/bilalsul/rzr" alt="Latest Release"></a>
   <a href="https://github.com/bilalsul/rzr/releases"><img src="https://img.shields.io/github/v/release/bilalsul/rzr?include_prereleases" alt="Pre-release"></a>
   <a href="https://github.com/bilalsul/rzr/blob/main/LICENSE"><img src="https://img.shields.io/github/license/bilalsul/rzr" alt="License" ></a>
@@ -28,13 +28,19 @@ A mobile code reader for reading git projects in a code editor. Download source 
     <td>
     <a href="https://f-droid.org/packages/bilalsul.rzr">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/%22Get_it_on_F-droid%22_Badge.png" alt="Get it on F-droid" height="45">
-    <!-- <a href="https://codeberg.org/bws/rzv/releases/latest">
-    <img src="https://codeberg.org/Codeberg/GetItOnCodeberg/raw/branch/main/get-it-on-blue-on-white.png" alt="Get it on Codeberg" height="45"> -->
+    </a>
       <a href="https://github.com/bilalsul/rzr/releases/latest">
     <img src="screens/github-badge.png" alt="Download from GitHub" height="45">
     </a>
-  </a>
     </td>
+  </tr>
+  <tr>
+  <td>iOS (unsigned)</td>
+  <td>
+  <a href="https://github.com/bilalsul/rzr/releases/latest">
+    <img src="screens/github-badge.png" alt="Download from GitHub" height="45">
+    </a>
+  </td>
   </tr>
 </table>
 <br>
@@ -50,11 +56,12 @@ Explore any Github, Gitlab or Bitbucket repository – just download it as a .zi
 - Preview READMEs and `.md` files instantly.
 - Customize file explorer and editor options such as word wrap, minimap, line numbers, and zoom.
 - Supports English and 13 other languages.
+
 The app uses the INTERNET permission only to download repository archives. No tracking or analytics.
 
-| Imported Projects          | Markdown Previewer         |
+| Imported Projects          | Zip Manager         |
 |----------------------------|----------------------------|
-| ![Home Screen](screens/export/projects%20dir.png) | ![Markdown Previewer](screens/export/md_preview.png) |
+| ![Home Screen](screens/export/projects%20dir.png) | ![Zip Manager](screens/export/zip%20manager.png) |
 
 | Markdown Previewer         | Code Editor                |
 |----------------------------|----------------------------|
@@ -64,9 +71,6 @@ The app uses the INTERNET permission only to download repository archives. No tr
 |----------------------------|----------------------------|
 | ![Advanced Editor Options](screens/export/advanced%20editor.png) | ![Customizable Theme](screens/export/theme.png) |
 
-| ZIP Manager                |
-|----------------------------|
-| ![ZIP Manager](screens/export/zip%20manager.png) |
 
 ## How to Use
 
