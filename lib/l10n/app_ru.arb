@@ -55,7 +55,6 @@
   "navBarHome": "Проекты",
   "navBarFileExplorer": "Проводник",
   "navBarEditor": "Редактор",
-  "navBarAI": "ИИ",
   "navBarGitHistory": "История Git",
   "navBarTerminal": "Терминал",
   "navBarSettings": "Настройки",
@@ -87,35 +86,7 @@
   "settingsEditorFontFamily": "Семейство шрифтов",
   "settingsEditorZoomInOut": "Включить масштабирование (In/Out)",
   "settingsEditorRenderUnsupportedCharacters": "Отображать неподдерживаемые символы с предупреждением 🔔",
-  "settingsAiSettings": "Настройки ИИ",
-  "settingsAiModelProvider": "Провайдер модели",
-  "settingsAiMaxTokens": "Максимум токенов",
-  "settingsApiKeySecure": "Ключ API (защищён)",
-  "settingsApplyAiSettings": "Применить настройки ИИ",
   "settingsConfigure": "Настроить",
-  "settingsConfigureProvider": "Настроить {provider}",
-  "@settingsConfigureProvider": {
-    "description": "Dialog title when configuring a provider",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsProviderSaved": "Настройки {provider} сохранены",
-  "@settingsProviderSaved": {
-    "description": "Snackbar after saving provider configuration",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsResetAiSettings": "Сбросить настройки ИИ",
-  "settingsResetAiConfirm": "Вы уверены, что хотите навсегда удалить URL и ключи API ИИ?",
-  "settingsAiSettingsReset": "Настройки ИИ сброшены",
-  "settingsModelLabel": "Модель",
-  "settingsApiUrlOptional": "URL API (необязательно)",
-  "settingsApiKey": "Ключ API",
-  "settingsApiKeySet": "Ключ установлен",
-  "settingsApiKeyNotSet": "Ключ не задан",
-  "settingsSetApiKey": "Задать ключ API",
   "connectionFailed": "Соединение не удалось",
   "connectionSuccessful": "Соединение установлено",
   "settingsFileExplorerSettings": "Настройки проводника",
@@ -357,7 +328,5 @@
   "terminalName": "Встроенный терминал",
   "terminalDescription": "Запуск команд без выхода из редактора",
   "themeCustomizerName": "Настройка темы",
-  "themeCustomizerDescription": "Кастомизация внешнего вида редактора и приложения",
-  "aiAssistName": "ИИ-помощник кода",
-  "aiAssistDescription": "Подсказки кода на основе искусственного интеллекта"
+  "themeCustomizerDescription": "Кастомизация внешнего вида редактора и приложения",,
 }

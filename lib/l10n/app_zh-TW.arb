@@ -55,7 +55,6 @@
   "navBarHome": "專案",
   "navBarFileExplorer": "檔案總管",
   "navBarEditor": "編輯器",
-  "navBarAI": "AI",
   "navBarGitHistory": "Git 歷史",
   "navBarTerminal": "終端機",
   "navBarSettings": "設定",
@@ -81,35 +80,7 @@
   "settingsEditorFontFamily": "字型系列",
   "settingsEditorZoomInOut": "啟用放大/縮小",
   "settingsEditorRenderUnsupportedCharacters": "以警告形式顯示不支援的字元 🔔",
-  "settingsAiSettings": "AI 設定",
-  "settingsAiModelProvider": "模型提供者",
-  "settingsAiMaxTokens": "最大 Token 數",
-  "settingsApiKeySecure": "API 金鑰（安全儲存）",
-  "settingsApplyAiSettings": "套用 AI 設定",
   "settingsConfigure": "設定",
-  "settingsConfigureProvider": "設定 {provider}",
-  "@settingsConfigureProvider": {
-    "description": "Dialog title when configuring a provider",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsProviderSaved": "{provider} 設定已儲存",
-  "@settingsProviderSaved": {
-    "description": "Snackbar after saving provider configuration",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsResetAiSettings": "重設 AI 設定",
-  "settingsResetAiConfirm": "確定要永久刪除所有 AI URL 與 API 金鑰嗎？",
-  "settingsAiSettingsReset": "AI 設定已重設",
-  "settingsModelLabel": "模型",
-  "settingsApiUrlOptional": "API 網址（選填）",
-  "settingsApiKey": "API 金鑰",
-  "settingsApiKeySet": "已設定金鑰",
-  "settingsApiKeyNotSet": "未設定金鑰",
-  "settingsSetApiKey": "設定 API 金鑰",
   "connectionFailed": "連線失敗",
   "connectionSuccessful": "連線成功",
   "settingsFileExplorerSettings": "檔案總管設定",
@@ -351,7 +322,5 @@
   "terminalName": "內建終端機",
   "terminalDescription": "不離開編輯器即可執行指令",
   "themeCustomizerName": "主題自訂器",
-  "themeCustomizerDescription": "自由調整編輯器與應用外觀",
-  "aiAssistName": "AI 程式碼助手",
-  "aiAssistDescription": "取得 AI 驅動的程式碼建議"
+  "themeCustomizerDescription": "自由調整編輯器與應用外觀",,
 }

@@ -47,15 +47,11 @@
 - README 和 `.md` 文件的即时 Markdown 预览（启用后可用）。
 - 丰富设置，可通过插件系统管理文件浏览器和编辑器选项（自动换行、缩略图、行号、缩放）。
 - 支持英语及其他 13 种语言。
-- 可选的 AI 助手插件，需使用用户提供的 API 密钥（OpenAI、Anthropic 和 Gemini）。
-
-应用使用 INTERNET 权限来下载仓库压缩包并在 GitHub 上检查新版本。无跟踪、无分析。
-
-AI 插件尚未实现，将在后续版本中加入。
+应用仅使用 INTERNET 权限下载仓库压缩包。无跟踪、无分析。
 
 | 已导入项目 | 插件管理器 |
 |--------------------------|-----------------|
-| ![主屏幕](screens/export/zh/projects_dir_zh.png) | ![插件管理器](screens/export/zh/plugin_manager_zh.png) |
+| ![主屏幕](screens/export/zh/projects_dir_zh.png) | ![Markdown 预览器](screens/export/zh/md_preview_zh.png) |
 
 | Markdown 预览器 | 代码编辑器 |
 |---------------------|------------------|

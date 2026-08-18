@@ -1,9 +1,6 @@
-import 'package:rzr/enums/options/plugin.dart';
-
 enum Screen {
   home,
   editor,
-  ai,
   fileExplorer,
   gitHistory,
   terminal,
@@ -18,10 +15,8 @@ String screenToString(Screen screen) {
       return 'home';
     case Screen.editor:
       return 'editor';
-    case Screen.ai:
-      return Plugin.ai.id;
     case Screen.fileExplorer:
-      return Plugin.fileExplorer.id;
+      return 'file_explorer';
     case Screen.gitHistory:
       return 'git_history';
     case Screen.terminal:
@@ -29,6 +24,6 @@ String screenToString(Screen screen) {
     case Screen.settings:
       return 'settings';
     case Screen.zipManager:
-      return Plugin.zipManager.id;
+      return 'zip_manager';
   }
 }

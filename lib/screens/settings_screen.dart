@@ -7,7 +7,6 @@ import 'package:rzr/widgets/settings/about.dart';
 import 'package:rzr/widgets/settings/settings_tile.dart';
 import 'package:rzr/widgets/settings/simple_dialog.dart';
 import 'package:rzr/widgets/settings/theme_mode.dart';
-import 'package:http/http.dart' as http;
 import 'package:rzr/providers/shared_preferences_provider.dart';
 import 'package:rzr/widgets/settings/plugin_settings_panel.dart';
 import 'package:rzr/enums/options/supported_language.dart';
@@ -28,16 +27,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   late Color _tempSecondaryColor;
   late Color _tempAccentColor;
   // other temporary theme values (removed UI for now)
-  // AI temporary state before apply
-  int _selectedAiMaxTokens = 512;
-  // Temporary storage for provider configurations before Apply
-  final Map<String, String> _tempApiUrls =
-      {}; // key: '<provider>_<model>' -> url
-  final Map<String, String> _tempApiKeys =
-      {}; // key: 'ai_<provider>_<model>' -> apiKey (empty = remove)
-  final Map<String, String> _tempLastModel = {}; // provider -> model
-  String? _tempActiveProvider;
-  String? _tempActiveModel;
   @override
   Widget build(BuildContext context) {
     // single source: watch Prefs
@@ -49,250 +38,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final themeCustomizerEnabled = prefs.isPluginEnabled(
       Plugin.themeCustomizer.id,
     );
-    final aiEnabled = prefs.isPluginEnabled(Plugin.ai.id);
 
     final languageSubtitle = prefs.locale == null
         ? supportedLanguages[0].values.first
         : supportedLanguages
               .firstWhere(
                 (element) =>
-                    element.values.first ==
-                    prefs.locale!.languageCode +
-                        (prefs.locale!.countryCode != null
-                            ? "-${prefs.locale!.countryCode}"
-                            : ""),
-                orElse: () => supportedLanguages[0],
-              )
-              .keys
-              .first;
-    // final gitEnabled = prefs.isPluginEnabled('git_history');
-    // final terminalEnabled = prefs.isPluginEnabled('terminal');
-
-    // plugin configs read via Prefs.getPluginConfig(pluginName, key)
-    // final editorCfg = {
-    //   'tabSize': prefs.getPluginConfig('editor', 'tabSize') ?? 2,
-    //   'showLineNumbers': prefs.getPluginConfig('editor', 'showLineNumbers') ?? true,
-    // };
-    // final gitCfg = {
-    //   'autoFetch': prefs.getPluginConfig('git', 'autoFetch') ?? true,
-    //   'defaultBranch': prefs.getPluginConfig('git', 'defaultBranch') ?? 'main',
-    // };
-    // AI config is read into local state in initState(); persisted values
-    // are accessed via Prefs when Apply is pressed.
-    // final feCfg = {
-    //   'show_hidden': prefs.getPluginConfig('file_explorer', 'show_hidden') ?? false,
-    //   'previewMarkdown': prefs.getPluginConfig('file_explorer', 'previewMarkdown') ?? true,
-    // };
-    // final terminalCfg = {
-    //   'shellPath': prefs.getPluginConfig('terminal', 'shellPath') ?? '/bin/bash',
-    //   'fontSize': prefs.getPluginConfig('terminal', 'fontSize') ?? 14,
-    //   'bell': prefs.getPluginConfig('terminal', 'bell') ?? true,
-    // };
-
-    return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          controller: widget.controller,
-          padding: const EdgeInsets.all(12),
-          children: [
-            const SizedBox(height: 20),
-
-            // const Text('Application Settings', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            Text(
-              L10n.of(context).settingsAppearance,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 15),
-            ChangeThemeMode(),
-
-            // Appearance / Theme
-            // const SizedBox(height: 8),
-            // Builder(builder: (context) {
-            //   final currentTheme = prefs.themeMode;
-            //   return Column(children: [
-            //         RadioListTile<ThemeMode>(
-            //       title: Text(L10n.of(context).settingsSystemMode),
-            //       value: ThemeMode.system,
-            //       activeColor: prefs.accentColor,
-            //       groupValue: currentTheme,
-            //       onChanged: (v) {
-            //           Prefs().resetThemeCustomizerColors();
-            //           Prefs().saveThemeMode('system');
-            //             if (Theme.of(context).brightness == Brightness.dark) {
-            //           Prefs().saveSecondaryColor(Colors.white);
-            //           Prefs().saveAccentColor(Colors.white70);
-            //               } else {
-            //               Prefs().saveSecondaryColor(Colors.black87);
-            //               Prefs().saveAccentColor(Colors.black54);
-            //                 }
-            //       },
-            //     ),
-            //     RadioListTile<ThemeMode>(
-            //       title: Text(L10n.of(context).settingsLightMode),
-            //       value: ThemeMode.light,
-            //       activeColor: prefs.accentColor,
-            //       groupValue: currentTheme,
-            //       onChanged: (v) {
-            //       Prefs().resetThemeCustomizerColors();
-            //       Prefs().saveThemeMode('light');
-            //       Prefs().saveSecondaryColor(Colors.black87);
-            //       Prefs().saveAccentColor(Colors.black54);
-            //        },
-            //     ),
-            //     RadioListTile<ThemeMode>(
-            //       title: Text(L10n.of(context).settingsDarkMode),
-            //       value: ThemeMode.dark,
-            //       activeColor: prefs.accentColor,
-            //       groupValue: currentTheme,
-            //       onChanged: (v) {
-            //         Prefs().resetThemeCustomizerColors();
-            //         Prefs().saveThemeMode('dark');
-            //         Prefs().saveSecondaryColor(Colors.white);
-            //         Prefs().saveAccentColor(Colors.white70);
-            //          },
-            //     ),
-            //     const SizedBox(height: 12),
-            //   ]);
-            // }),
-
-            // Language selection
-            const SizedBox(height: 15),
-            // Text(L10n.of(context).settingsAppearanceLanguage, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-            // const SizedBox(height: 8),
-            SettingsTile.navigation(
-              title: Text(L10n.of(context).settingsAppearanceLanguage),
-              value: Text(languageSubtitle),
-              leading: const Icon(Icons.language),
-              onPressed: (context) {
-                showLanguagePickerDialog(context);
-              },
-            ),
-            const SizedBox(height: 15),
-            const About(),
-            // DropdownButtonFormField<String>(
-            //   // current stored locale code or 'System'
-            //   value: prefs.locale == null ? 'System' : (prefs.locale?.countryCode != null ? '${prefs.locale!.languageCode}-${prefs.locale!.countryCode}' : prefs.locale!.languageCode),
-            //   items: supportedLanguages.map((m) {
-            //     final entry = m.entries.first;
-            //     final label = entry.key;
-            //     final code = entry.value;
-            //     final displayLabel = label[0].toUpperCase() + label.substring(1);
-            //     return DropdownMenuItem<String>(value: code == 'System' ? 'System' : code, child: Text(displayLabel));
-            //   }).toList(),
-            //   onChanged: (selectedCode) async {
-            //     if (selectedCode == null) return;
-            //     // Persist the language code (e.g., 'en', 'zh-CN' or 'System') to prefs
-            //     await Prefs().saveLocaleToPrefs(selectedCode);
-            //   },
-            // ),
-            const SizedBox(height: 15),
-
-            // Theme Customizer (plugin)
-            prefs.featureSupported(Plugin.themeCustomizer.id)
-                ? PluginSettingsPanel(
-                    title: L10n.of(context).settingsAppearanceTheme,
-                    visible: themeCustomizerEnabled,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Text(L10n.of(context).settingsAppearancePrimaryColor),
-                        // const SizedBox(height: 8),
-                        // // clickable color circle palette
-                        // Wrap(
-                        //   spacing: 8,
-                        //   runSpacing: 8,
-                        //   children: Colors.primaries.take(18).map((c) {
-                        //     // final col = c.shade700;
-                        //     final col = c;
-                        //     final selected = _tempPrimaryColor == col;
-                        //     return GestureDetector(
-                        //       onTap: () => setState(() { _tempPrimaryColor = col; }),
-                        //       child: Container(
-                        //         padding: const EdgeInsets.all(4),
-                        //         decoration: BoxDecoration(
-                        //           shape: BoxShape.circle,
-                        //           border: selected ? Border.all(color: Colors.black87, width: 2) : null,
-                        //         ),
-                        //         child: CircleAvatar(backgroundColor: col, radius: 18),
-                        //       ),
-                        //     );
-                        //   }).toList(),
-                        // ),
-                        const SizedBox(height: 10),
-                        Text(L10n.of(context).settingsAppearanceSecondaryColor),
-                        const SizedBox(height: 8),
-                        Consumer<Prefs>(
-                          builder: (context,prefs,child) {
-                            return Wrap(
-                              spacing: 8,
-                              runSpacing: 4,
-                              children: Colors.primaries.take(18).map((c) {
-                                // final col = c.shade400;
-                                final col = c;
-                                final selected = _tempSecondaryColor.toARGB32() == col.toARGB32();
-                                return GestureDetector(
-                                  onTap: () => setState(() {
-                                    _tempSecondaryColor = col;
-                                  }),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(3),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: selected
-                                          ? Border.all(
-                                              color: prefs.secondaryColor,
-                                              width: 2,
-                                            )
-                                          : null,
-                                    ),
-                                    child: CircleAvatar(
-                                      backgroundColor: col,
-                                      radius: 14,
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
-                              //             if (Theme.of(context).brightness == Brightness.light) ...[
-                              //   GestureDetector(
-                              //     onTap: () {
-                              //       setState(() {
-                              //         // if (prefs.secondaryColor != _tempSecondaryColor){
-                              //         _tempSecondaryColor = Colors.black87;
-                              //         // }
-                              //         // _tempAccentColor = Colors.white70; // Set accent color to white if black is selected
-                              //       });
-                              //     },
-                              //     child: Container(
-                              //       padding: const EdgeInsets.all(3),
-                              //       decoration: BoxDecoration(
-                              //         shape: BoxShape.circle,
-                              //         border: _tempSecondaryColor == Colors.black87 ? Border.all(color: prefs.secondaryColor, width: 2) : null,
-                              //       ),
-                              //       child: CircleAvatar(backgroundColor: Colors.black87, radius: 14),
-                              //     ),
-                              //   ),
-                              // ],
-                              // if (Theme.of(context).brightness == Brightness.dark) ...[
-                              //   GestureDetector(
-                              //     onTap: () {
-                              //       setState(() {
-                              //         _tempSecondaryColor = Colors.white;
-                              //       });
-                              //     },
-                              //     child: Container(
-                              //       padding: const EdgeInsets.all(3),
-                              //       decoration: BoxDecoration(
-                              //         shape: BoxShape.circle,
-                              //         border: _tempSecondaryColor == Colors.white ? Border.all(color: prefs.secondaryColor, width: 2) : null,
-                              //       ),
-                              //       child: CircleAvatar(backgroundColor: Colors.white, radius: 14),
-                              //     ),
-                              //   ),
-                              // ],
-                            );
-                          }
-                        ),
-                        const SizedBox(height: 25),
                         Text(L10n.of(context).settingsAppearanceAccentColor),
                         const SizedBox(height: 8),
                         Consumer<Prefs>(
@@ -956,7 +707,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 // await prefs.setPluginEnabled('editor', false);
                 await prefs.setPluginEnabled(Plugin.fileExplorer.id, false);
                 await prefs.setPluginEnabled(Plugin.themeCustomizer.id, false);
-                await prefs.setPluginEnabled(Plugin.ai.id, false);
                 // await prefs.setPluginEnabled('git_history', false);
                 // await prefs.setPluginEnabled('terminal', false);
                 // remove a few plugin config keys
@@ -966,8 +716,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 // await prefs.setPluginConfig('git', 'defaultBranch', null);
                 // await prefs.setPluginConfig('file_explorer', 'show_hidden', null);
                 // await prefs.setPluginConfig('file_explorer', 'preview_markdown', null);
-                // await prefs.setPluginConfig('ai', 'model', null);
-                // await prefs.setPluginConfig('ai', 'maxTokens', null);
                 prefs.resetThemeCustomizerColors();
               },
               icon: Icon(Icons.restore, color: prefs.accentColor),
@@ -1015,8 +763,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     _tempSecondaryColor = p.secondaryColor;
     _tempAccentColor = p.accentColor;
 
-    // AI defaults
-    // _selectedAiMaxTokens = prefs.getPluginConfig('ai', 'maxTokens') ?? 512;
     setState(() {});
   }
 
@@ -1029,46 +775,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     super.dispose();
   }
 
-  Widget _providerTile(
-    BuildContext context,
-    String id, {
-    required String label,
-    required String assetName,
-  }) {
-    final prefs = ref.watch(prefsProvider);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        CircleAvatar(
-          radius: 24,
-          backgroundColor: Colors.white,
-          child: ClipOval(
-            child: Image.asset(
-              'assets/images/ai/$assetName',
-              width: 36,
-              height: 36,
-              errorBuilder: (c, e, st) => const Icon(Icons.cloud, size: 28),
-            ),
-          ),
-        ),
-        const SizedBox(height: 6),
-        Text(label, style: const TextStyle(fontSize: 12)),
-        const SizedBox(height: 6),
-        SizedBox(
-          width: 110,
-          height: 20,
-          child: OutlinedButton(
-            onPressed: () => _showProviderConfigDialog(context, id, label),
-            child: Text(
-              L10n.of(context).settingsConfigure,
-              style: TextStyle(fontSize: 9, color: prefs.secondaryColor),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   void showLanguagePickerDialog(BuildContext context) {
     final title = L10n.of(context).settingsAppearanceLanguage;
     final saveToPrefs = Prefs().saveLocaleToPrefs;
@@ -1076,200 +782,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final children = supportedLanguages.map((e) {
       final key = e.keys.first;
       // final dialogOptionLabel = key.substring(0,1).toUpperCase() + key.substring(1);
-      final value = e[key]!;
-      return dialogOption(key, value, saveToPrefs);
-    }).toList();
-    showSimpleDialog(title, saveToPrefs, children);
-  }
-
-  void showFontPickerDialog(BuildContext context) {
-    final title = L10n.of(context).settingsEditorFontFamily;
-    final saveToPrefs = Prefs().saveEditorFontFamily;
-
-    final children = fontFamily.map((e) {
-      final key = e.keys.first;
-      final value = e[key]!;
-      return dialogOption(value, value, saveToPrefs);
-    }).toList();
-    showSimpleDialog(title, saveToPrefs, children);
-  }
-
-  void _showProviderConfigDialog(
-    BuildContext context,
-    String providerId,
-    String label,
-  ) {
-    final prefs = ref.watch(prefsProvider);
-    // Simple synchronous dialog: initialize fields synchronously from Prefs (no futures)
-    // Models per provider
-    final Map<String, List<String>> providerModels = {
-      'gpt': ['gpt-4o', 'gpt-4o-mini', 'gpt-4', 'gpt-3.5-turbo'],
-      'claude': ['claude-2', 'claude-instant'],
-      'grok': ['grok-1'],
-      'gemini': ['gemini-1'],
-      // 'commonai': ['common-v1'],
-      'openrouter': ['openrouter-default'],
-      'xiaohongshu': ['xiaohongshu-v1'],
-    };
-    final models = providerModels[providerId] ?? ['default'];
-    final lastModel =
-        Prefs().getPluginConfig('ai', '${providerId}_last_model') as String?;
-    String selectedModel =
-        lastModel ??
-        (Prefs().getPluginConfig('ai', 'model') as String?) ??
-        models.first;
-    // Load any previously entered temp values or persisted ones synchronously
-    final tempUrlKey = '${providerId}_$selectedModel';
-    final initialUrl =
-        _tempApiUrls[tempUrlKey] ??
-        (Prefs().getPluginConfig('ai', '${providerId}_${selectedModel}_api_url')
-            as String?) ??
-        '';
-    final hasExistingKey = Prefs().hasPluginApiKey(
-      'ai_${providerId}_$selectedModel',
-    );
-    final urlController = TextEditingController(text: initialUrl);
-    final keyController = TextEditingController(
-      text: _tempApiKeys['ai_${providerId}_$selectedModel'] ?? '',
-    );
-
-    showDialog<void>(
-      context: context,
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setStateDialog) {
-            return AlertDialog(
-              title: Text(L10n.of(context).settingsConfigureProvider(label)),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  DropdownButtonFormField<String>(
-                    value: selectedModel,
-                    items: models
-                        .map((m) => DropdownMenuItem(value: m, child: Text(m)))
-                        .toList(),
-                    onChanged: (v) {
-                      if (v == null) return;
-                      setStateDialog(() {
-                        selectedModel = v;
-                        // update url/key controllers for new model
-                        final key = '${providerId}_$selectedModel';
-                        urlController.text =
-                            _tempApiUrls[key] ??
-                            (Prefs().getPluginConfig(
-                                  'ai',
-                                  '${providerId}_${selectedModel}_api_url',
-                                )
-                                as String?) ??
-                            '';
-                        keyController.text =
-                            _tempApiKeys['ai_${providerId}_$selectedModel'] ??
-                            '';
-                      });
-                    },
-                    decoration: InputDecoration(
-                      labelText: L10n.of(context).settingsModelLabel,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  TextField(
-                    controller: urlController,
-                    decoration: InputDecoration(
-                      labelText: L10n.of(context).settingsApiUrlOptional,
-                    ),
-                    keyboardType: TextInputType.url,
-                  ),
-                  const SizedBox(height: 8),
-                  TextField(
-                    controller: keyController,
-                    decoration: InputDecoration(
-                      labelText: L10n.of(context).settingsApiKey,
-                    ),
-                    obscureText: true,
-                  ),
-                  const SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      hasExistingKey
-                          ? L10n.of(context).settingsApiKeySet
-                          : L10n.of(context).settingsApiKeyNotSet,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text(
-                    L10n.of(context).commonCancel,
-                    style: TextStyle(color: prefs.secondaryColor),
-                  ),
-                ),
-                FilledButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(
-                      prefs.secondaryColor,
-                    ),
-                  ),
-                  onPressed: () async {
-                    final url = urlController.text.trim();
-                    final key = keyController.text.trim();
-                    // store temporarily; Apply will persist
-                    final urlKey = '${providerId}_$selectedModel';
-                    if (url.isNotEmpty)
-                      _tempApiUrls[urlKey] = url;
-                    else
-                      _tempApiUrls.remove(urlKey);
-                    final securePluginId = 'ai_${providerId}_$selectedModel';
-                    if (key.isNotEmpty)
-                      _tempApiKeys[securePluginId] = key;
-                    else
-                      _tempApiKeys[securePluginId] = '';
-                    _tempLastModel[providerId] = selectedModel;
-                    _tempActiveProvider = providerId;
-                    _tempActiveModel = selectedModel;
-                    Navigator.of(context).pop();
-                    setState(() {});
-                    // ScaffoldMessenger.of(context).showSnackBar(
-                    //   SnackBar(
-                    //     content: Text(
-                    //       L10n.of(context).settingsProviderSaved(label),
-                    //     ),
-                    //   ),
-                    // );
-                      RZRToast.show(L10n.of(context).settingsProviderSaved(label));
-
-                  },
-                  child: Text(L10n.of(context).commonSave),
-                ),
-              ],
-            );
-          },
-        );
-      },
-    );
-  }
-
-  Future<bool> _checkApiKey(String providerId) async {
-    // Basic provider-specific connectivity check. This is intentionally lightweight
-    // and does not exhaustively validate all provider API semantics.
-    // prefer the active model (persisted) for per-model keys and URLs
-    final model =
-        (Prefs().getPluginConfig('ai', 'model') as String?) ??
-        (Prefs().getPluginConfig('ai', '${providerId}_last_model') as String?);
-    final pluginId = model != null
-        ? 'ai_${providerId}_$model'
-        : 'ai_${providerId}';
-    final key = await Prefs().getPluginApiKey(pluginId);
-    if (key == null || key.isEmpty) return false;
-    final modelUrl = model != null
-        ? (Prefs().getPluginConfig('ai', '${providerId}_' + model + '_api_url')
-              as String?)
-        : null;
-    final effectiveUrl =
-        modelUrl ??
         (Prefs().getPluginConfig('ai', '${providerId}_api_url') as String?);
     try {
       if (providerId == 'gpt') {

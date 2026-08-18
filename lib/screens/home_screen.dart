@@ -50,7 +50,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Future<void> initRZR() async {
     RZRToast.init(context);
-    checkUpdate(false);
     InitializationCheck.check();
     loadDefaultFont();
 

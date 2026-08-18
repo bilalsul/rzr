@@ -55,7 +55,6 @@
   "navBarHome": "Proyectos",
   "navBarFileExplorer": "Explorador de Archivos",
   "navBarEditor": "Editor",
-  "navBarAI": "IA",
   "navBarGitHistory": "Historial Git",
   "navBarTerminal": "Terminal",
   "navBarSettings": "Ajustes",
@@ -81,32 +80,7 @@
   "settingsEditorFontFamily": "Familia de fuentes",
   "settingsEditorZoomInOut": "Habilitar Zoom In/Out",
   "settingsEditorRenderUnsupportedCharacters": "Mostrar caracteres no admitidos con advertencia 🔔",
-  "settingsAiSettings": "Configuración de IA",
-  "settingsAiModelProvider": "Proveedor de modelo",
-  "settingsAiMaxTokens": "Máx. tokens",
-  "settingsApiKeySecure": "Clave API (segura)",
-  "settingsApplyAiSettings": "Aplicar ajustes de IA",
   "settingsConfigure": "Configurar",
-  "settingsConfigureProvider": "Configurar {provider}",
-  "@settingsConfigureProvider": {
-    "description": "Título del diálogo al configurar un proveedor",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsProviderSaved": "Configuración de {provider} guardada",
-  "@settingsProviderSaved": {
-    "description": "Mensaje Snackbar después de guardar la configuración del proveedor",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsResetAiSettings": "Restablecer configuración de IA",
-  "settingsResetAiConfirm": "¿Estás seguro de que deseas eliminar permanentemente las URLs de IA y las claves API?",
-  "settingsAiSettingsReset": "Configuración de IA restablecida",
-  "settingsModelLabel": "Modelo",
-  "settingsApiUrlOptional": "URL de la API (opcional)",
-  "settingsApiKey": "Clave API",
   "settingsTerminalSettings": "Configuración del terminal",
   "settingsTerminalShellExecutable": "Shell ejecutable",
   "settingsTerminalFontSize": "Tamaño de fuente",
@@ -116,9 +90,6 @@
   "settingsFileExplorerPreviewMarkdown": "Vista previa de Markdown",
   "settingsResetPluginDefaults": "Restablecer ajustes del plugin",
   "settingsThemeApplied": "Colores del tema aplicados",
-  "settingsApiKeySet": "Clave establecida",
-  "settingsApiKeyNotSet": "Ninguna clave establecida",
-  "settingsSetApiKey": "Establecer clave API",
   "connectionFailed": "Conexión fallida",
   "connectionSuccessful": "Conexión exitosa",
   "commonDelete": "Eliminar",
@@ -358,7 +329,5 @@
   "terminalName": "Terminal integrado",
   "terminalDescription": "Ejecuta comandos sin salir del editor",
   "themeCustomizerName": "Personalizador de tema",
-  "themeCustomizerDescription": "Personaliza la apariencia del editor y la app",
-  "aiAssistName": "Asistente de IA",
-  "aiAssistDescription": "Obtén sugerencias de código impulsadas por IA"
+  "themeCustomizerDescription": "Personaliza la apariencia del editor y la app",,
 }

@@ -14,7 +14,6 @@ import 'package:rzr/providers/shared_preferences_provider.dart';
 import 'package:rzr/screens/home_screen.dart';
 import 'package:rzr/screens/editor_screen_2.dart';
 import 'package:rzr/screens/zip_manager/zip_manager_screen.dart';
-import 'package:rzr/screens/ai_screen.dart';
 import 'package:rzr/screens/settings_screen.dart';
 
 // Widgets
@@ -360,9 +359,6 @@ Widget _buildEditorSheet(BuildContext context, Prefs prefs) {
           key: ValueKey(prefs.themeMode.toString()),
         );
         break;
-      case Screen.ai:
-        activePage = const AIScreen();
-        break;
       default:
         activePage = const SizedBox.shrink();
     }
@@ -657,15 +653,6 @@ Widget _buildEditorSheet(BuildContext context, Prefs prefs) {
         ),
         activeIcon: Icon(Icons.edit, color: prefs.secondaryColor),
         pluginKey: null,
-      ),
-      NavItem(
-        screen: Screen.ai,
-        label: L10n.of(context).navBarAI,
-        icon: Icon(Icons.chat_outlined,
-        color: Prefs().lastKnownScreen == Screen.editor ? Colors.grey[400] : null,
-        ),
-        activeIcon: Icon(Icons.chat_rounded, color: prefs.secondaryColor),
-        pluginKey: 'ai_assist',
       ),
       NavItem(
         screen: Screen.gitHistory,

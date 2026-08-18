@@ -55,7 +55,6 @@
   "navBarHome": "Progetti",
   "navBarFileExplorer": "Esplora File",
   "navBarEditor": "Editor",
-  "navBarAI": "AI",
   "navBarGitHistory": "Cronologia Git",
   "navBarTerminal": "Terminale",
   "navBarSettings": "Impostazioni",
@@ -81,35 +80,7 @@
   "settingsEditorFontFamily": "Famiglia caratteri",
   "settingsEditorZoomInOut": "Abilita Zoom In/Out",
   "settingsEditorRenderUnsupportedCharacters": "Visualizza caratteri non supportati con avviso 🔔",
-  "settingsAiSettings": "Impostazioni AI",
-  "settingsAiModelProvider": "Provider modello",
-  "settingsAiMaxTokens": "Token massimi",
-  "settingsApiKeySecure": "Chiave API (sicura)",
-  "settingsApplyAiSettings": "Applica impostazioni AI",
   "settingsConfigure": "Configura",
-  "settingsConfigureProvider": "Configura {provider}",
-  "@settingsConfigureProvider": {
-    "description": "Dialog title when configuring a provider",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsProviderSaved": "Impostazioni {provider} salvate",
-  "@settingsProviderSaved": {
-    "description": "Snackbar after saving provider configuration",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsResetAiSettings": "Ripristina impostazioni AI",
-  "settingsResetAiConfirm": "Sei sicuro di voler eliminare permanentemente URL e chiavi API dell'AI?",
-  "settingsAiSettingsReset": "Impostazioni AI ripristinate",
-  "settingsModelLabel": "Modello",
-  "settingsApiUrlOptional": "URL API (opzionale)",
-  "settingsApiKey": "Chiave API",
-  "settingsApiKeySet": "Chiave impostata",
-  "settingsApiKeyNotSet": "Nessuna chiave impostata",
-  "settingsSetApiKey": "Imposta chiave API",
   "connectionFailed": "Connessione fallita",
   "connectionSuccessful": "Connessione riuscita",
   "settingsTerminalSettings": "Impostazioni Terminale",
@@ -355,7 +326,5 @@
   "terminalName": "Terminale Integrato",
   "terminalDescription": "Esegui comandi senza uscire dall'editor",
   "themeCustomizerName": "Personalizzatore Tema",
-  "themeCustomizerDescription": "Personalizza l'aspetto dell'editor e dell'app",
-  "aiAssistName": "Assistente Codice AI",
-  "aiAssistDescription": "Ottieni suggerimenti di codice basati su AI"
+  "themeCustomizerDescription": "Personalizza l'aspetto dell'editor e dell'app",,
 }

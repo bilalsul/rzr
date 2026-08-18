@@ -55,7 +55,6 @@
   "navBarHome": "Projets",
   "navBarFileExplorer": "Explorateur de fichiers",
   "navBarEditor": "Éditeur",
-  "navBarAI": "IA",
   "navBarGitHistory": "Historique Git",
   "navBarTerminal": "Terminal",
   "navBarSettings": "Paramètres",
@@ -81,35 +80,7 @@
   "settingsEditorFontFamily": "Police de caractères",
   "settingsEditorZoomInOut": "Activer le Zoom In/Out",
   "settingsEditorRenderUnsupportedCharacters": "Afficher les caractères non pris en charge avec avertissement 🔔",
-  "settingsAiSettings": "Paramètres IA",
-  "settingsAiModelProvider": "Fournisseur de modèle",
-  "settingsAiMaxTokens": "Tokens maximum",
-  "settingsApiKeySecure": "Clé API (sécurisée)",
-  "settingsApplyAiSettings": "Appliquer les paramètres IA",
   "settingsConfigure": "Configurer",
-  "settingsConfigureProvider": "Configurer {provider}",
-  "@settingsConfigureProvider": {
-    "description": "Titre de la boîte de dialogue lors de la configuration d'un fournisseur",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsProviderSaved": "Paramètres de {provider} enregistrés",
-  "@settingsProviderSaved": {
-    "description": "Message Snackbar après l'enregistrement de la configuration du fournisseur",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsResetAiSettings": "Réinitialiser les paramètres IA",
-  "settingsResetAiConfirm": "Êtes-vous sûr de vouloir supprimer définitivement les URL d'IA et les clés API ?",
-  "settingsAiSettingsReset": "Paramètres IA réinitialisés",
-  "settingsModelLabel": "Modèle",
-  "settingsApiUrlOptional": "URL de l'API (optionnel)",
-  "settingsApiKey": "Clé API",
-  "settingsApiKeySet": "Clé définie",
-  "settingsApiKeyNotSet": "Aucune clé définie",
-  "settingsSetApiKey": "Définir la clé API",
   "connectionFailed": "Échec de la connexion",
   "connectionSuccessful": "Connexion réussie",
   "settingsFileExplorerSettings": "Paramètres de l'explorateur de fichiers",
@@ -351,7 +322,5 @@
   "terminalName": "Terminal Intégré",
   "terminalDescription": "Exécuter des commandes sans quitter l'éditeur",
   "themeCustomizerName": "Personnalisateur de Thème",
-  "themeCustomizerDescription": "Personnaliser l'apparence de l'éditeur et de l'application",
-  "aiAssistName": "Assistant IA pour le Code",
-  "aiAssistDescription": "Obtenir des suggestions de code alimentées par l'IA"
+  "themeCustomizerDescription": "Personnaliser l'apparence de l'éditeur et de l'application",,
 }

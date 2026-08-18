@@ -43,22 +43,18 @@ Explore any Github, Gitlab or Bitbucket repository – just download it as a .zi
 
 ## Features
 
-- Download GitHub, GitLab and Bitbucket repos as zip with the in-app Zip Manager plugin.
+- Download GitHub, GitLab and Bitbucket repositories as zip archives.
 - Read source code in the Monaco editor with support for 100+ programming languages. Customizable with plugins.
-- In-app folder/file tree browser for managing extracted zip projects once enabled.
+- Browse extracted projects with an in-app folder and file tree.
 - Read-only code editor with Monaco syntax highlighting (via WebView).
-- Instant Markdown preview for READMEs and `.md` files once enabled.
-- Rich Settings for managing file explorer and editor options (word wrap, minimap, line numbers, zoom) through the Plugins system.
+- Preview READMEs and `.md` files instantly.
+- Customize file explorer and editor options such as word wrap, minimap, line numbers, and zoom.
 - Supports English and 13 other languages.
-- Optional AI assistant plugin, using user-supplied API keys for OpenAI, Anthropic, and Gemini.
+The app uses the INTERNET permission only to download repository archives. No tracking or analytics.
 
-The app uses the INTERNET permission to download repository archives and check for new versions on GitHub. No tracking or analytics.
-
-The AI plugin is not implemented yet and will be added in upcoming versions.
-
-| Imported Projects          | Plugins Manager            |
+| Imported Projects          | Markdown Previewer         |
 |----------------------------|----------------------------|
-| ![Home Screen](screens/export/projects%20dir.png) | ![Plugins Manager](screens/export/plugin%20manager.png) |
+| ![Home Screen](screens/export/projects%20dir.png) | ![Markdown Previewer](screens/export/md_preview.png) |
 
 | Markdown Previewer         | Code Editor                |
 |----------------------------|----------------------------|

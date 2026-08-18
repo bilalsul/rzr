@@ -8,11 +8,7 @@
 * Instant Markdown preview for READMEs and .md files once enabled.
 * Rich Settings for managing file explorer and editor options (word wrap, minimap, line numbers, zoom) through the Plugins system.
 * Supports English and 13 other languages.
-* Optional AI assistant plugin, using user-supplied API keys for OpenAI, Anthropic, and Gemini.
-
-The app uses the <i>INTERNET</i> permission to download repository archives, check for new versions on GitHub and AI plugin. No tracking or analytics.
-
-The AI plugin is not implemented yet in 0.6.9 and will be added in upcoming releases.
+The app uses the <i>INTERNET</i> permission only to download repository archives. No tracking or analytics.
 
 Read RZR User guide <a href="bilalsul.github.io/rzr">here</a>
 

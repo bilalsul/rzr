@@ -55,7 +55,6 @@
   "navBarHome": "项目",
   "navBarFileExplorer": "文件管理器",
   "navBarEditor": "编辑器",
-  "navBarAI": "AI",
   "navBarGitHistory": "Git 历史",
   "navBarTerminal": "终端",
   "navBarSettings": "设置",
@@ -81,35 +80,7 @@
   "settingsEditorFontFamily": "字体系列",
   "settingsEditorZoomInOut": "启用放大/缩小",
   "settingsEditorRenderUnsupportedCharacters": "以警告形式显示不支持的字符 🔔",
-  "settingsAiSettings": "AI 设置",
-  "settingsAiModelProvider": "模型提供商",
-  "settingsAiMaxTokens": "最大 Token 数",
-  "settingsApiKeySecure": "API 密钥（安全存储）",
-  "settingsApplyAiSettings": "应用 AI 设置",
   "settingsConfigure": "配置",
-  "settingsConfigureProvider": "配置 {provider}",
-  "@settingsConfigureProvider": {
-    "description": "Dialog title when configuring a provider",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsProviderSaved": "{provider} 设置已保存",
-  "@settingsProviderSaved": {
-    "description": "Snackbar after saving provider configuration",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsResetAiSettings": "重置 AI 设置",
-  "settingsResetAiConfirm": "确定要永久删除所有 AI URL 和 API 密钥吗？",
-  "settingsAiSettingsReset": "AI 设置已重置",
-  "settingsModelLabel": "模型",
-  "settingsApiUrlOptional": "API 地址（可选）",
-  "settingsApiKey": "API 密钥",
-  "settingsApiKeySet": "已设置密钥",
-  "settingsApiKeyNotSet": "未设置密钥",
-  "settingsSetApiKey": "设置 API 密钥",
   "connectionFailed": "连接失败",
   "connectionSuccessful": "连接成功",
   "settingsFileExplorerSettings": "文件管理器设置",
@@ -351,7 +322,5 @@
   "terminalName": "集成终端",
   "terminalDescription": "无需离开编辑器即可运行命令",
   "themeCustomizerName": "主题定制器",
-  "themeCustomizerDescription": "自定义编辑器与应用外观",
-  "aiAssistName": "AI 代码助手",
-  "aiAssistDescription": "获取 AI 驱动的代码建议"
+  "themeCustomizerDescription": "自定义编辑器与应用外观",,
 }

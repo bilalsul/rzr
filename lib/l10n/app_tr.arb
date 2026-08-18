@@ -55,7 +55,6 @@
   "navBarHome": "Projeler",
   "navBarFileExplorer": "Dosya Gezgini",
   "navBarEditor": "Editör",
-  "navBarAI": "AI",
   "navBarGitHistory": "Git Geçmişi",
   "navBarTerminal": "Terminal",
   "navBarSettings": "Ayarlar",
@@ -81,35 +80,7 @@
   "settingsEditorFontFamily": "Yazı Tipi Ailesi",
   "settingsEditorZoomInOut": "Yakınlaştırma/Uzaklaştırma'yı Etkinleştir",
   "settingsEditorRenderUnsupportedCharacters": "Desteklenmeyen karakterleri uyarıyla göster 🔔",
-  "settingsAiSettings": "AI Ayarları",
-  "settingsAiModelProvider": "Model sağlayıcısı",
-  "settingsAiMaxTokens": "Maksimum token",
-  "settingsApiKeySecure": "API Anahtarı (güvenli)",
-  "settingsApplyAiSettings": "AI ayarlarını uygula",
   "settingsConfigure": "Yapılandır",
-  "settingsConfigureProvider": "{provider} Yapılandır",
-  "@settingsConfigureProvider": {
-    "description": "Dialog title when configuring a provider",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsProviderSaved": "{provider} ayarları kaydedildi",
-  "@settingsProviderSaved": {
-    "description": "Snackbar after saving provider configuration",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsResetAiSettings": "AI ayarlarını sıfırla",
-  "settingsResetAiConfirm": "AI URL'lerini ve API anahtarlarını kalıcı olarak silmek istediğinizden emin misiniz?",
-  "settingsAiSettingsReset": "AI ayarları sıfırlandı",
-  "settingsModelLabel": "Model",
-  "settingsApiUrlOptional": "API URL (isteğe bağlı)",
-  "settingsApiKey": "API Anahtarı",
-  "settingsApiKeySet": "Anahtar ayarlı",
-  "settingsApiKeyNotSet": "Anahtar yok",
-  "settingsSetApiKey": "API Anahtarı Ayarla",
   "connectionFailed": "Bağlantı başarısız",
   "connectionSuccessful": "Bağlantı başarılı",
   "settingsFileExplorerSettings": "Dosya Gezgini Ayarları",
@@ -351,7 +322,5 @@
   "terminalName": "Entegre Terminal",
   "terminalDescription": "Editörden çıkmadan komut çalıştırın",
   "themeCustomizerName": "Tema Özelleştirici",
-  "themeCustomizerDescription": "Editör ve uygulama görünümünü özelleştirin",
-  "aiAssistName": "AI Kod Asistanı",
-  "aiAssistDescription": "AI destekli kod önerileri alın"
+  "themeCustomizerDescription": "Editör ve uygulama görünümünü özelleştirin",,
 }

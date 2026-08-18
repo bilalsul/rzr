@@ -55,7 +55,6 @@
   "navBarHome": "專案",
   "navBarFileExplorer": "檔案探秘",
   "navBarEditor": "編輯閣",
-  "navBarAI": "人工智能",
   "navBarGitHistory": "Git 史記",
   "navBarTerminal": "終端",
   "navBarSettings": "設定",
@@ -81,35 +80,7 @@
   "settingsEditorFontFamily": "字體家族",
   "settingsEditorZoomInOut": "啟用放大／縮小",
   "settingsEditorRenderUnsupportedCharacters": "以警告顯示不支援之字元 🔔",
-  "settingsAiSettings": "人工智能設定",
-  "settingsAiModelProvider": "模型供應者",
-  "settingsAiMaxTokens": "至多符數",
-  "settingsApiKeySecure": "密鑰（安藏）",
-  "settingsApplyAiSettings": "施人工智能之設",
   "settingsConfigure": "配置",
-  "settingsConfigureProvider": "配置{provider}",
-  "@settingsConfigureProvider": {
-    "description": "Dialog title when configuring a provider",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsProviderSaved": "{provider}之設已存",
-  "@settingsProviderSaved": {
-    "description": "Snackbar after saving provider configuration",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsResetAiSettings": "復人工智能之設",
-  "settingsResetAiConfirm": "欲永刪人工智能網址與密鑰乎？",
-  "settingsAiSettingsReset": "人工智能之設已復",
-  "settingsModelLabel": "模型",
-  "settingsApiUrlOptional": "接口網址（可闕）",
-  "settingsApiKey": "密鑰",
-  "settingsApiKeySet": "密鑰已設",
-  "settingsApiKeyNotSet": "密鑰未設",
-  "settingsSetApiKey": "設密鑰",
   "connectionFailed": "通訊未果",
   "connectionSuccessful": "通訊已成",
   "settingsFileExplorerSettings": "檔案探秘設定",
@@ -351,7 +322,5 @@
   "terminalName": "內建終端",
   "terminalDescription": "不離編輯閣而運命",
   "themeCustomizerName": "主題自定",
-  "themeCustomizerDescription": "自定編輯閣與應用之形貌",
-  "aiAssistName": "人工智能碼佐",
-  "aiAssistDescription": "藉人工智能助碼"
+  "themeCustomizerDescription": "自定編輯閣與應用之形貌",,
 }

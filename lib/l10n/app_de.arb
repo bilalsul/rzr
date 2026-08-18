@@ -55,7 +55,6 @@
   "navBarHome": "Projekte",
   "navBarFileExplorer": "Datei-Explorer",
   "navBarEditor": "Editor",
-  "navBarAI": "KI",
   "navBarGitHistory": "Git-Verlauf",
   "navBarTerminal": "Terminal",
   "navBarSettings": "Einstellungen",
@@ -81,35 +80,7 @@
   "settingsEditorFontFamily": "Schriftart",
   "settingsEditorZoomInOut": "Zoom In/Out aktivieren",
   "settingsEditorRenderUnsupportedCharacters": "Nicht unterstützte Zeichen mit Warnung anzeigen 🔔",
-  "settingsAiSettings": "KI-Einstellungen",
-  "settingsAiModelProvider": "Modell-Anbieter",
-  "settingsAiMaxTokens": "Maximale Tokens",
-  "settingsApiKeySecure": "API-Schlüssel (sicher)",
-  "settingsApplyAiSettings": "KI-Einstellungen anwenden",
   "settingsConfigure": "Konfigurieren",
-  "settingsConfigureProvider": "{provider} konfigurieren",
-  "@settingsConfigureProvider": {
-    "description": "Titel des Dialogs beim Konfigurieren eines Anbieters",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsProviderSaved": "{provider}-Einstellungen gespeichert",
-  "@settingsProviderSaved": {
-    "description": "Snackbar-Meldung nach dem Speichern der Anbieterkonfiguration",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsResetAiSettings": "KI-Einstellungen zurücksetzen",
-  "settingsResetAiConfirm": "Möchtest du die KI-URLs und API-Schlüssel wirklich dauerhaft löschen?",
-  "settingsAiSettingsReset": "KI-Einstellungen wurden zurückgesetzt",
-  "settingsModelLabel": "Modell",
-  "settingsApiUrlOptional": "API-URL (optional)",
-  "settingsApiKey": "API-Schlüssel",
-  "settingsApiKeySet": "Schlüssel gesetzt",
-  "settingsApiKeyNotSet": "Kein Schlüssel gesetzt",
-  "settingsSetApiKey": "API-Schlüssel setzen",
   "connectionFailed": "Verbindung fehlgeschlagen",
   "connectionSuccessful": "Verbindung erfolgreich",
   "settingsFileExplorerSettings": "Datei-Explorer-Einstellungen",
@@ -351,7 +322,5 @@
   "terminalName": "Integriertes Terminal",
   "terminalDescription": "Befehle ausführen ohne den Editor zu verlassen",
   "themeCustomizerName": "Theme-Anpasser",
-  "themeCustomizerDescription": "Editor- und App-Erscheinungsbild anpassen",
-  "aiAssistName": "KI-Code-Assistent",
-  "aiAssistDescription": "KI-gestützte Code-Vorschläge erhalten"
+  "themeCustomizerDescription": "Editor- und App-Erscheinungsbild anpassen",,
 }

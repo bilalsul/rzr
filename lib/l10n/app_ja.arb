@@ -55,7 +55,6 @@
   "navBarHome": "プロジェクト",
   "navBarFileExplorer": "ファイルエクスプローラー",
   "navBarEditor": "エディター",
-  "navBarAI": "AI",
   "navBarGitHistory": "Git 履歴",
   "navBarTerminal": "ターミナル",
   "navBarSettings": "設定",
@@ -81,35 +80,7 @@
   "settingsEditorFontFamily": "フォントファミリー",
   "settingsEditorZoomInOut": "ズームイン/ズームアウトを有効にする",
   "settingsEditorRenderUnsupportedCharacters": "サポートされていない文字を警告付きで表示 🔔",
-  "settingsAiSettings": "AI 設定",
-  "settingsAiModelProvider": "モデルプロバイダー",
-  "settingsAiMaxTokens": "最大トークン数",
-  "settingsApiKeySecure": "API キー（安全に保存）",
-  "settingsApplyAiSettings": "AI 設定を適用",
   "settingsConfigure": "設定",
-  "settingsConfigureProvider": "{provider} を設定",
-  "@settingsConfigureProvider": {
-    "description": "Dialog title when configuring a provider",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsProviderSaved": "{provider} の設定を保存しました",
-  "@settingsProviderSaved": {
-    "description": "Snackbar after saving provider configuration",
-    "placeholders": {
-      "provider": {}
-    }
-  },
-  "settingsResetAiSettings": "AI 設定をリセット",
-  "settingsResetAiConfirm": "AI の URL と API キーを完全に削除してもよろしいですか？",
-  "settingsAiSettingsReset": "AI 設定をリセットしました",
-  "settingsModelLabel": "モデル",
-  "settingsApiUrlOptional": "API URL（任意）",
-  "settingsApiKey": "API キー",
-  "settingsApiKeySet": "キーが設定済み",
-  "settingsApiKeyNotSet": "キーが未設定",
-  "settingsSetApiKey": "API キーを設定",
   "connectionFailed": "接続に失敗しました",
   "connectionSuccessful": "接続成功",
   "settingsTerminalSettings": "ターミナル設定",
@@ -355,7 +326,5 @@
   "terminalName": "統合ターミナル",
   "terminalDescription": "エディターを離れずにコマンド実行",
   "themeCustomizerName": "テーマカスタマイザー",
-  "themeCustomizerDescription": "エディターとアプリの外観を自由にカスタマイズ",
-  "aiAssistName": "AI コードアシスタント",
-  "aiAssistDescription": "AI によるコード補完・提案"
+  "themeCustomizerDescription": "エディターとアプリの外観を自由にカスタマイズ",,
 }

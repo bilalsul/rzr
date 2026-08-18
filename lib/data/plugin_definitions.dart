@@ -47,13 +47,6 @@ List<PluginDefinition> utilityPlugins = [
 ];
 
 List<PluginDefinition> experimentalPlugins = [
-  // PluginDefinition(
-  //   id: Plugin.ai.id,
-  //   name: Plugin.ai.id,
-  //   description: Plugin.ai.id,
-  //   icon: Icons.auto_awesome_outlined,
-  //   category: PluginCategory.experimental,
-  // ),
   PluginDefinition(
     id: Plugin.zipManager.id,
     name: Plugin.zipManager.id,

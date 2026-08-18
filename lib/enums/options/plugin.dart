@@ -12,8 +12,6 @@ enum Plugin {
   editorRenderControlCharacters('editor_render_control_characters'),
   editorWordWrap('editor_word_wrap'),
 
-  ai('ai_assist'),
-
   fileExplorer('file_explorer'),
   previewMarkdown('preview_markdown'),
 

@@ -1,11 +1,9 @@
 import 'package:rzr/enums/options/plugin.dart';
 import 'package:rzr/providers/shared_preferences_provider.dart';
-import 'package:rzr/enums/version_check_type.dart';
 import 'package:rzr/main.dart';
 import 'package:rzr/utils/app_version.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rzr/screens/onboarding_screen.dart';
-import 'package:rzr/screens/changelog_screen.dart';
 import 'package:rzr/utils/log/common.dart';
 import 'package:flutter/material.dart';
 
@@ -28,30 +26,22 @@ class InitializationCheck {
   }
 
   static Future<void> check() async {
-    final result = await _checkVersion();
-    RZRLog.info('Version check result: $result');
-    if (result == VersionCheckType.firstLaunch) {
+    final firstLaunch = await _checkVersion();
+    RZRLog.info('First launch: $firstLaunch');
+    if (firstLaunch) {
       _handleFirstLaunch();
       _initDefaultPlugins();
 
-    } else if (result == VersionCheckType.updated) {
-      _handleUpdateAvailable();
-    } else {
-      _handleNormalStartup();
     }
   }
 
-  static Future<VersionCheckType> _checkVersion() async {
+  static Future<bool> _checkVersion() async {
     _lastVersion = Prefs().lastAppVersion;
     _currentVersion = await getAppVersion();
     if (_lastVersion == null) {
-      return VersionCheckType.firstLaunch;
+      return true;
     } else {
-      if (_lastVersion != _currentVersion) {
-        return VersionCheckType.updated;
-      } else {
-        return VersionCheckType.normal;
-      }
+      return false;
     }
   }
 
@@ -87,26 +77,4 @@ class InitializationCheck {
     });
   }
 
-  static Future<void> _handleUpdateAvailable() async {
-    final lv = await lastVersion;
-    final cv = await currentVersion;
-    RZRLog.info('Version update detected: $lv -> $cv');
-    Future.delayed(const Duration(milliseconds: 800), () {
-      showCupertinoSheet(
-        context: navigatorKey.currentContext!,
-        builder: (context) => ChangelogScreen(
-          lastVersion: lv,
-          currentVersion: cv,
-          onComplete: () {
-            Prefs().lastAppVersion = cv;
-            Navigator.pop(context);
-          },
-        ),
-      );
-    });
-  }
-
-  static void _handleNormalStartup() {
-    RZRLog.info('Normal startup, proceeding to main app');
-  }
 }
