@@ -19,8 +19,6 @@ RZR features a plugins system which lets you toggle individual features on and o
 - file explorer
 - markdown preview
 - syntax highlighting
-- code folding
-- bracket matching
 - editor zoom in/out
 - line numbers
 - minimap
@@ -33,7 +31,7 @@ RZR features a plugins system which lets you toggle individual features on and o
 <img src="./images/advanced_editor.jpg" width="250" />
 </p>
 
-Enabled plugins are reflected in the bottom navigation bar, so you only see the features you actually use.
+These settings control the editor and file-reading experience; the main navigation remains available independently.
 
 ## 5.3 Interface Languages
 

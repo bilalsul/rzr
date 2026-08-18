@@ -1,6 +1,6 @@
-RZR is a FOSS project brought to you free of charge. You can make a donation to foster future development via one of the methods below.
+Repo Zip Reader (RZR) is a FOSS project by [bilalsul](https://github.com/bilalsul). I built it to read source code on mobile without setting up git. Download public git repositories as ZIP directly from git providers, extract it and start reading.
 
-If you are a business and find this app useful for your business, please consider becoming [an official sponsor of the project](https://github.com/bilalsul/rzr#sponsors).
+I earn 0$ for my contributions. Please support me and make donation via one of the methods below.
 
 ### Liberapay
 

@@ -10,4 +10,4 @@ Tap a `README.md` (or any `.md` file) in the file tree to see it rendered as for
 
 ## 4.2 Preview Settings
 
-The markdown preview can be toggled from the **Plugins** system. When the markdown plugin is enabled, markdown files open in the previewer by default; otherwise they open as plain text in the code editor.
+Markdown preview is available from the file tree for README and `.md` files.

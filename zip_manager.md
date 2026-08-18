@@ -12,7 +12,7 @@ Downloads can be cancelled at any time. After a cancellation, RZR allows you to 
 
 ## 2.2 Branch Selection
 
-Before downloading, you can select the branch to download. RZR uses the repository default branch when none is selected, but you can pick a specific branch from the available ones. We will soon support tags.
+Before downloading, you can select the branch to download. RZR uses the repository default branch when none is selected, but you can pick a specific branch from the available ones.
 
 ## 2.3 Extract Projects
 

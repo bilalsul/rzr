@@ -15,26 +15,22 @@ No. RZR is a read-only viewer: you can browse, search and read code, but you can
 
 **Can I read a repository offline?**
 
-Yes. Once a repository archive has been imported and extracted, all the files are stored locally in app sandbox and can be read offline. Internet access is only used to download repository archives and to check for new versions on GitHub.
+Yes. Once a repository archive has been imported and extracted, all the files are stored locally in app sandbox and can be read offline. Internet access is only used to download repository archives.
 <br/><br/>
 
 **Can I download a specific branch?**
 
-Yes. The Zip Manager lets you select the branch (or tag) to download before starting the download. By default the repository default branch is used.
+Yes. The Zip Manager lets you select a branch to download before starting the download. By default the repository default branch is used.
 <br/><br/>
 
 **Why do some features appear disabled?**
 
-All plugins are disabled by default. RZR uses a plugins system: some features, like the file explorer, markdown preview or the theme customizer, can be toggled on and off from the Settings screen. Enable the corresponding plugin to use the feature.
+RZR uses a plugins system for supported settings such as the file explorer, markdown preview, theme customization, and editor options. These can be adjusted from the Settings screen.
 <br/><br/>
 
 **Which languages are supported?**
 
 RZR is available in 14 languages, including English, Italian, French, German, Arabic, Spanish, Portuguese, Turkish, Chinese (Simplified & Traditional), Japanese, Korean and Russian. Please Update/Support your language [here](https://github.com/bilalsul/rzr/blob/develop-live/CONTRIBUTING.md#translations).
 <br/><br/>
-
-**Are there any AI features?**
-
-AI chat plugin is not fully implemented yet and will be added in a future versions.
 
 For any questions, contact me at [bilalsul@disroot.org](mailto:bilalsul@disroot.org)

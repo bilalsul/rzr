@@ -27,7 +27,6 @@ Imported repositories appear in the home screen, where you can open, rename or d
 Tap on an imported project to open it. RZR shows the full folder/file tree of the repository, so you can navigate through directories just like a file explorer.
 
 <p align="center">
-<!-- <img src="./images/plugin_manager.jpg" width="250" /> -->
 add image inside a repository
 </p>
 

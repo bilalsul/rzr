@@ -12,14 +12,12 @@ The editor is read-only: you can browse and study the code, but you cannot modif
 
 ## 3.2 Editor Options
 
-Several editor options can be toggled from the **Plugins** system or the editor toolbar:
+Several editor options can be configured from Settings or toggled from the editor toolbar:
 
 - word wrap
 - minimap
 - line numbers
 - zoom in/out
-- code folding
-- bracket matching
 - render control characters
 
 ## 3.3 Font Size and Font Family
