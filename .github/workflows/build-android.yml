@@ -29,15 +29,15 @@ jobs:
           - target: android-arm
             abi: armeabi-v7a
             out_file: app-armeabi-v7a-release.apk
-            flags: --split-per-abi --target-platform=android-arm
+            flags: --split-per-abi --target-platform=android-arm --dart-define=isFdroid=true
           - target: android-arm64
             abi: arm64-v8a
             out_file: app-arm64-v8a-release.apk
-            flags: --split-per-abi --target-platform=android-arm64
+            flags: --split-per-abi --target-platform=android-arm64 --dart-define=isFdroid=true
           - target: android-x64
             abi: x86_64
             out_file: app-x86_64-release.apk
-            flags: --split-per-abi --target-platform=android-x64
+            flags: --split-per-abi --target-platform=android-x64 --dart-define=isFdroid=true
           - target: universal
             abi: universal
             out_file: app-release.apk
