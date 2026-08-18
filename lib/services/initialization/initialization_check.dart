@@ -4,6 +4,7 @@ import 'package:rzr/main.dart';
 import 'package:rzr/utils/app_version.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rzr/screens/onboarding_screen.dart';
+import 'package:rzr/screens/changelog_screen.dart';
 import 'package:rzr/utils/log/common.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,8 @@ class InitializationCheck {
     if (firstLaunch) {
       _handleFirstLaunch();
       _initDefaultPlugins();
-
+    } else if (_lastVersion != _currentVersion) {
+      _handleUpdateAvailable();
     }
   }
 
@@ -43,6 +45,24 @@ class InitializationCheck {
     } else {
       return false;
     }
+  }
+
+  static Future<void> _handleUpdateAvailable() async {
+    final lastVersion = await InitializationCheck.lastVersion;
+    final currentVersion = await InitializationCheck.currentVersion;
+    Future.delayed(const Duration(milliseconds: 800), () {
+      showCupertinoSheet(
+        context: navigatorKey.currentContext!,
+        builder: (context) => ChangelogScreen(
+          lastVersion: lastVersion,
+          currentVersion: currentVersion,
+          onComplete: () {
+            Prefs().lastAppVersion = currentVersion;
+            Navigator.pop(context);
+          },
+        ),
+      );
+    });
   }
 
   static Future<void> _initDefaultPlugins() async {

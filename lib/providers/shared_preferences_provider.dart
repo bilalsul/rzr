@@ -854,11 +854,6 @@ class Prefs extends ChangeNotifier {
   //   return isPluginEnabled('theme_customizer');
   // }
 
-  // Getter and setter for AI Code Assistant plugin (experimental)
-  // bool get aiAssistEnabled {
-  //   return isPluginEnabled('ai_assist');
-  // }
-
   // Getter and setter for Real-time Collaboration plugin (experimental)
   // bool get realTimeCollabEnabled {
   //   return isPluginEnabled("real_time_collab");

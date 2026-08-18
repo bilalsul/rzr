@@ -15,8 +15,6 @@ class EnvVar {
 
   static bool get isStoreBuild => isAppStore || isPlayStore;
 
-  static bool get enableCheckUpdate => !isStoreBuild && !isFdroid;
-
   static bool get enableDonation => !isStoreBuild;
   static bool get enableInAppPurchase => isStoreBuild;
 

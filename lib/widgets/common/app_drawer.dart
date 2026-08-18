@@ -588,8 +588,6 @@ class _AppDrawerState extends ConsumerState<AppDrawer> {
         return l.terminalName;
       case 'theme_customizer':
         return l.themeCustomizerName;
-      case 'ai_assist':
-        return l.aiAssistName;
       case 'zip_manager':
         return l.zipManagerTitle;
       default:
@@ -614,8 +612,6 @@ class _AppDrawerState extends ConsumerState<AppDrawer> {
         return l.terminalDescription;
       case 'theme_customizer':
         return l.themeCustomizerDescription;
-      case 'ai_assist':
-        return l.aiAssistDescription;
       case 'zip_manager':
         return l.zipManagerDescription;
       default:

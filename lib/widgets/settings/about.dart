@@ -9,7 +9,7 @@ import 'package:rzr/utils/env_var.dart';
 import 'package:rzr/utils/toast/common.dart';
 // import 'package:rzr/utils/toast/common.dart';
 import 'package:rzr/widgets/settings/link_icon.dart';
-import 'package:rzr/utils/check_update.dart';
+import 'package:rzr/screens/changelog_screen.dart';
 import 'package:rzr/widgets/settings/show_donate_dialog.dart';
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -18,7 +18,6 @@ import 'package:flutter/services.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:rzr/widgets/markdown/styled_markdown.dart';
 
 class About extends StatefulWidget {
   const About({
@@ -136,43 +135,12 @@ Future<void> openAboutDialog(BuildContext context) async {
                 ),
                 ListTile(
                   title: Text(L10n.of(context).appChangelog),
-                  onTap: () async {
-                    var content =
-                        await rootBundle.loadString('assets/CHANGELOG.md');
-                    // Remove the first line (file title) because dialog shows its own title
-                    final lines = content.split('\n');
-                    if (lines.isNotEmpty) {
-                      // remove first line regardless of whether it's empty or not
-                      lines.removeAt(0);
-                      content = lines.join('\n');
-                    }
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext ctx) => AlertDialog(
-                        title: Text(L10n.of(ctx).appChangelog),
-                        content: ConstrainedBox(
-                          constraints: const BoxConstraints(
-                            maxWidth: 700,
-                            minWidth: 300,
-                          ),
-                          child: SingleChildScrollView(
-                            child: StyledMarkdown(data: content),
-                          ),
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.of(ctx).pop(),
-                            child: Text(L10n.of(ctx).commonOk, style: TextStyle(color: Prefs().accentColor),),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const ChangelogScreen(),
+                    ),
+                  ),
                 ),
-                if (EnvVar.enableCheckUpdate)
-                  ListTile(
-                      title: Text(L10n.of(context).aboutCheckForUpdates),
-                      onTap: () => checkUpdate(true)),
                 if (EnvVar.enableDonation)
                   ListTile(
                     title: Text(L10n.of(context).appDonate),

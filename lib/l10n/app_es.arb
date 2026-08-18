@@ -329,5 +329,5 @@
   "terminalName": "Terminal integrado",
   "terminalDescription": "Ejecuta comandos sin salir del editor",
   "themeCustomizerName": "Personalizador de tema",
-  "themeCustomizerDescription": "Personaliza la apariencia del editor y la app",,
+  "themeCustomizerDescription": "Personaliza la apariencia del editor y la app"
 }

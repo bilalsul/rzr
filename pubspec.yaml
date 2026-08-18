@@ -113,7 +113,6 @@ flutter:
     - assets/fonts/SourceHanSerifSC-Regular.otf
     - assets/icons/
     - assets/images/
-    - assets/images/ai/
     - assets/images/zip_services/
     - assets/CHANGELOG.md
     - pubspec.yaml

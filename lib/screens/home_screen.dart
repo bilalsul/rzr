@@ -14,7 +14,6 @@ import 'package:archive/archive.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:rzr/services/initialization/initialization_check.dart';
 import 'package:rzr/utils/load_default_font.dart';
-import 'package:rzr/utils/check_update.dart';
 import 'package:rzr/utils/toast/common.dart';
 import 'package:path/path.dart' as p;
 
