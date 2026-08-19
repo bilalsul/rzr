@@ -32,7 +32,7 @@
 - Fix: Give INTERNET permission for downloading ZIPs and Check for Updates
 - Fix: Udate changelog Check for Updates
 
- Fix： 允许通过 Internet 下载 ZIP 文件并检查更新
+- Fix： 允许通过 Internet 下载 ZIP 文件并检查更新
 - Fix： 更新变更日志并检查更新
 
 ## 0.6.0
@@ -101,7 +101,7 @@
 # 0.0.11
 - Fix: Detect device language, not supported? show english by default.
 
- Fix: 检测设备语言，如果不支持？默认显示英文
+- Fix: 检测设备语言，如果不支持？默认显示英文
 
 # 0.0.10
 - Fix: Cleaned plugin definitions from breakage

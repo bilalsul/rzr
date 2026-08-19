@@ -57,7 +57,6 @@ Explore any Github, Gitlab or Bitbucket repository – just download it as a .zi
 - Customize file explorer and editor options such as word wrap, minimap, line numbers, and zoom.
 - Supports English and 13 other languages.
 
-The app uses the INTERNET permission only to download repository archives. No tracking or analytics.
 
 | Imported Projects          | Zip Manager         |
 |----------------------------|----------------------------|
@@ -79,6 +78,9 @@ The app uses the INTERNET permission only to download repository archives. No tr
 3. Tap **Import Project** → select your `.zip` file
 4. Wait for extraction (progress shown for large projects)
 5. Browse, search, and read code offline!
+6. Read RZR User guide [here]("https://bilalsul.github.io/rzr")
+
+Help us translate the app to your languague and check local strings [here]("https://github.com/bilalsul/rzr/blob/HEAD/CONTRIBUTING.md#translations")
 
 ## Privacy & Permissions
 
