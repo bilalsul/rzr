@@ -1,123 +1,213 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:rzr/l10n/generated/L10n.dart';
 import 'package:rzr/providers/shared_preferences_provider.dart';
 import 'package:rzr/utils/get_current_language_code.dart';
-import 'package:rzr/utils/log/common.dart';
 import 'package:rzr/widgets/markdown/styled_markdown.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:rzr/utils/log/common.dart';
 
+/// Changelog screen for showing app updates
+/// Displays version history and new features
 class ChangelogScreen extends StatefulWidget {
+  final String lastVersion;
+  final String currentVersion;
+  final VoidCallback onComplete;
+
   const ChangelogScreen({
     super.key,
-    this.lastVersion,
-    this.currentVersion,
-    this.onComplete,
+    required this.lastVersion,
+    required this.currentVersion,
+    required this.onComplete,
   });
-
-  final String? lastVersion;
-  final String? currentVersion;
-  final VoidCallback? onComplete;
 
   @override
   State<ChangelogScreen> createState() => _ChangelogScreenState();
 }
 
 class _ChangelogScreenState extends State<ChangelogScreen> {
-  String _content = '';
-  bool _loading = true;
+  String _changelogContent = '';
+  bool _isLoading = true;
+
+  String get currentVersion => widget.currentVersion.split('+').first;
+  String get lastVersion => widget.lastVersion.split('+').first;
 
   @override
   void initState() {
     super.initState();
-    _loadChangelog();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    await _loadChangelog();
+    });
+
   }
 
   Future<void> _loadChangelog() async {
     try {
-      final fullChangelog = await rootBundle.loadString('assets/CHANGELOG.md');
-      final version = widget.currentVersion?.split('+').first;
-      _content = _process(_extractVersion(fullChangelog, version));
-    } catch (error) {
-      RZRLog.warning('Failed to load changelog from assets: $error');
-      _content = _process('- Fixed some bugs\n- 修复已知问题');
-    }
-    if (mounted) {
-      setState(() => _loading = false);
+      // Load changelog from assets
+      final String fullChangelog =
+          await rootBundle.loadString('assets/CHANGELOG.md');
+      _changelogContent = _extractVersionChangelog(fullChangelog);
+    } catch (e) {
+      RZRLog.warning('Failed to load changelog from assets: $e');
+      _changelogContent = _getDefaultChangelog();
+    } finally {
+      _changelogContent = processChangelogContent(_changelogContent);
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
-  String _extractVersion(String changelog, String? version) {
-    if (version == null) return changelog;
-    final lines = changelog.split('\n');
-    final start = lines.indexWhere((line) => line.trim() == '## $version');
-    if (start == -1) return changelog;
-    var end = lines.length;
-    for (var index = start + 1; index < lines.length; index++) {
-      if (lines[index].trim().startsWith('## ')) {
-        end = index;
+  String processChangelogContent(String content) {
+    bool isChinese() => getCurrentLanguageCode().startsWith('zh');
+
+    final lines = content.split('\n');
+    var processedLines = <String>[];
+
+    for (int i = 0; i < lines.length; i++) {
+      final line = lines[i].trim();
+      if (line.isEmpty) {
+        continue;
+      }
+
+      if (line.startsWith('- ') || line.startsWith('* ')) {
+        processedLines.add(line);
+        continue;
+      }
+    }
+    if (isChinese()) {
+      processedLines = processedLines.sublist(processedLines.length ~/ 2);
+    } else {
+      processedLines = processedLines.sublist(0, processedLines.length ~/ 2);
+    }
+
+    return processedLines.join('\n');
+  }
+
+  String _extractVersionChangelog(String fullChangelog) {
+    // Extract version number from currentVersion (e.g., "1.2.3+1234" -> "1.2.3")
+    final versionMatch = RegExp(r'^(\d+\.\d+\.\d+)').firstMatch(currentVersion);
+    if (versionMatch == null) {
+      return _getDefaultChangelog();
+    }
+
+    final version = versionMatch.group(1)!;
+    final versionHeader = '## $version';
+
+    // Find the version section in the changelog
+    final lines = fullChangelog.split('\n');
+    final startIndex = lines.indexWhere((line) => line.trim() == versionHeader);
+
+    if (startIndex == -1) {
+      RZRLog.warning('Version $version not found in changelog');
+      return _getDefaultChangelog();
+    }
+
+    // Find the end of this version section (next version header or end of file)
+    int endIndex = lines.length;
+    for (int i = startIndex + 1; i < lines.length; i++) {
+      if (lines[i].trim().startsWith('## ') &&
+          lines[i].trim() != versionHeader) {
+        endIndex = i;
         break;
       }
     }
-    return lines.sublist(start + 1, end).join('\n').trim();
+
+    // Extract the content for this version (skip the header line)
+    final versionContent =
+        lines.sublist(startIndex + 1, endIndex).join('\n').trim();
+
+    if (versionContent.isEmpty) {
+      return _getDefaultChangelog();
+    }
+
+    return versionContent;
   }
 
-  String _process(String content) {
-    final bullets = content
-        .split('\n')
-        .map((line) => line.trim())
-        .where((line) => line.startsWith('- ') || line.startsWith('* '))
-        .toList();
-    if (bullets.isEmpty) return content;
-    final midpoint = bullets.length ~/ 2;
-    return getCurrentLanguageCode().startsWith('zh')
-        ? bullets.sublist(midpoint).join('\n')
-        : bullets.sublist(0, midpoint).join('\n');
+  String _getDefaultChangelog() {
+    return '''
+- Fixed some bugs
+- 修复已知问题
+''';
   }
 
   @override
   Widget build(BuildContext context) {
-    final currentVersion = widget.currentVersion?.split('+').first;
     return Scaffold(
-      appBar: AppBar(title: Text(L10n.of(context).appChangelog)),
-      body: _loading
-          ? Center(
-              child: CircularProgressIndicator(color: Prefs().secondaryColor),
-            )
+      appBar: AppBar(
+        title: Text(L10n.of(context).whatsNew),
+        elevation: 0,
+        actions: [],
+      ),
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator(
+            color: Prefs().secondaryColor.withAlpha(50),
+          ))
           : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (currentVersion != null)
-                  ListTile(
-                    leading: Icon(Icons.update, color: Prefs().accentColor),
-                    title: Text(L10n.of(context).welcomeToVersion(currentVersion)),
-                    subtitle: widget.lastVersion == null
-                        ? null
-                        : Text(L10n.of(context).updateFromVersion(
-                            widget.lastVersion!.split('+').first,
-                          )),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  color: Theme.of(context).colorScheme.surface,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.update,
+                            color: Prefs().accentColor,
+                            size: 24,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            L10n.of(context).updateFromVersion(lastVersion),
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 25),
+                      Text(
+                        L10n.of(context).welcomeToVersion(currentVersion),
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
+                    ],
                   ),
+                ),
                 Expanded(
                   child: SingleChildScrollView(
                     padding: const EdgeInsets.all(16),
-                    child: StyledMarkdown(data: _content),
+                    child: StyledMarkdown(data: _changelogContent),
                   ),
                 ),
-                Padding(
+                Container(
+                  width: double.infinity,
                   padding: const EdgeInsets.all(16),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-                      onPressed: () {
-                        widget.onComplete?.call();
-                        if (widget.onComplete == null && Navigator.of(context).canPop()) {
-                          Navigator.of(context).pop();
-                        }
-                      },
-                      child: Text(L10n.of(context).commonOk),
+                  child: FilledButton(
+                    onPressed: _onComplete,
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(Prefs().secondaryColor)
                     ),
+                    child: Text(L10n.of(context).commonOk),
                   ),
                 ),
               ],
             ),
     );
+  }
+
+  void _onComplete() async {
+    widget.onComplete();
   }
 }

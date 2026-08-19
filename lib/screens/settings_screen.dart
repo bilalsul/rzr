@@ -68,6 +68,23 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             const SizedBox(height: 15),
             ChangeThemeMode(),
             const SizedBox(height: 15),
+
+            // Language selection
+            const SizedBox(height: 15),
+            // Text(L10n.of(context).settingsAppearanceLanguage, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            // const SizedBox(height: 8),
+            SettingsTile.navigation(
+              title: Text(L10n.of(context).settingsAppearanceLanguage),
+              value: Text(languageSubtitle),
+              leading: const Icon(Icons.language),
+              onPressed: (context) {
+                showLanguagePickerDialog(context);
+              },
+            ),
+            const SizedBox(height: 15),
+            const About(),
+            const SizedBox(height: 15),
+
             themeCustomizerEnabled
                 ? PluginSettingsPanel(
                     title: L10n.of(context).settingsAppearanceTheme,

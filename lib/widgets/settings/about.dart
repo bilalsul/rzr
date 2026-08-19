@@ -139,7 +139,11 @@ Future<void> openAboutDialog(BuildContext context) async {
                   title: Text(L10n.of(context).appChangelog),
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (_) => const ChangelogScreen(),
+                      builder: (_) => ChangelogScreen(
+                        lastVersion: Prefs().lastAppVersion ?? version,
+                        currentVersion: version,
+                        onComplete: () => Navigator.of(context).pop(),
+                      ),
                     ),
                   ),
                 ),
