@@ -1,6 +1,6 @@
 ## 1.1 What is RZR
 
-RZR (repo zip reader) is an open source mobile app to browse and read GitHub, GitLab and Bitbucket repositories. Instead of cloning a repository with Git, you open its `.zip` archive in a read-only code editor and markdown viewer. The common use cases include:
+RZR (Repo Zip Reader) is an open source mobile app to browse and read GitHub, GitLab and Bitbucket repositories. Instead of cloning a repository with Git, you open its `.zip` archive in a read-only code editor and markdown viewer. The common use cases include:
 
 - Studying open-source projects on the go
 - Reviewing code during travel or commutes

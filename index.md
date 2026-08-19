@@ -26,4 +26,6 @@ Welcome to the RZR User Guide.
 - [7. Donate](donate)
 - [8. Privacy Policy](privacy)
 
+Please help us translate the app to your language [here](https://github.com/bilalsul/rzr/blob/develop-live/CONTRIBUTING.md#translations).
+
 For any questions, contact me at [bilalsul@disroot.org](mailto:bilalsul@disroot.org)

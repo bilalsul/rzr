@@ -30,7 +30,7 @@ RZR uses a plugins system for supported settings such as the file explorer, mark
 
 **Which languages are supported?**
 
-RZR is available in 14 languages, including English, Italian, French, German, Arabic, Spanish, Portuguese, Turkish, Chinese (Simplified & Traditional), Japanese, Korean and Russian. Please Update/Support your language [here](https://github.com/bilalsul/rzr/blob/develop-live/CONTRIBUTING.md#translations).
+RZR is available in 14 languages, including English, Italian, French, German, Arabic, Spanish, Portuguese, Turkish, Chinese (Simplified & Traditional), Japanese, Korean and Russian. Please Update/Support your language [here](https://github.com/bilalsul/rzr/blob/HEAD/CONTRIBUTING.md#translations).
 <br/><br/>
 
 For any questions, contact me at [bilalsul@disroot.org](mailto:bilalsul@disroot.org)
