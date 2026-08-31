@@ -1,22 +1,26 @@
-<i>RZR</i> is a mobile code reader for reading git projects in a code editor. Download source code from GitHub, GitLab or Bitbucket in "owner/repo" format and read it on the go.
+<p><i>RZR</i> is a mobile code reader for reading git projects in a code editor. Download source code from GitHub, GitLab, or Bitbucket in <b>owner/repo</b> format and read it on the go.</p>
 
-<b>Features</b>
-* Download GitHub, GitLab and Bitbucket repos as zip with the in-app Zip Manager plugin.
-* Read source code in the Monaco editor with support for 100+ programming languages. Customizable with plugins.
-* In-app folder/file tree browser for managing extracted zip projects once enabled.
-* Read-only code editor with Monaco syntax highlighting (via WebView).
-* Instant Markdown preview for READMEs and .md files once enabled.
-* Rich Settings for managing file explorer and editor options (word wrap, minimap, line numbers, zoom) through the Plugins system.
-* Supports English and 13 other languages.
+<p><b>Features</b></p>
+<ul>
+  <li>Download GitHub, GitLab, and Bitbucket repos as zip with the in-app Zip Manager plugin.</li>
+  <li>Read source code in the Monaco editor with support for 100+ programming languages. Customizable with plugins.</li>
+  <li>In-app folder/file tree browser for managing extracted zip projects once enabled.</li>
+  <li>Read-only code editor with Monaco syntax highlighting (via WebView).</li>
+  <li>Instant Markdown preview for README files and .md files once enabled.</li>
+  <li>Rich settings for managing file explorer and editor options (word wrap, minimap, line numbers, zoom) through the Plugins system.</li>
+  <li>Supports English and 13 other languages.</li>
+</ul>
 
-The app uses the <i>INTERNET</i> permission to download repository archives. No tracking or analytics.
+<p>The app uses the <i>INTERNET</i> permission to download repository archives. No tracking or analytics.</p>
 
-<b>How to Use</b>
-1. Download any repository as `.zip` from GitHub, GitLab, etc.
-2. Open **Repo Zip Reader (RZR)**
-3. Tap **Import Project** → select your `.zip` file
-4. Wait for extraction (progress shown for large projects)
-5. Browse, search, and read code offline!
-6. Read RZR User guide <a href="https://bilalsul.github.io/rzr">here</a>
+<p><b>How to Use</b></p>
+<ol>
+  <li>Download any repository as <code>.zip</code> from GitHub, GitLab, etc.</li>
+  <li>Open <b>Repo Zip Reader (RZR)</b></li>
+  <li>Tap <b>Import Project</b> → select your <code>.zip</code> file</li>
+  <li>Wait for extraction (progress shown for large projects)</li>
+  <li>Browse, search, and read code offline!</li>
+  <li>Read the RZR user guide <a href="https://bilalsul.github.io/rzr">here</a></li>
+</ol>
 
-Help us translate the app to your languague and check local strings <a href="https://github.com/bilalsul/rzr/blob/HEAD/CONTRIBUTING.md#translations">here</a>
+<p>Help us translate the app to your language and check local strings <a href="https://github.com/bilalsul/rzr/blob/HEAD/CONTRIBUTING.md#translations">here</a>.</p>
