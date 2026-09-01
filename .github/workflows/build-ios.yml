@@ -46,7 +46,7 @@ jobs:
           cp RZR-ios-${{ inputs.version }}-unsigned.zip ../../ios/
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ios-artifacts
           path: |
