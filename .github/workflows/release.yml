@@ -44,7 +44,7 @@ jobs:
       MASTODON_INSTANCE: ${{ secrets.MASTODON_INSTANCE }}
     steps:
       - name: Checkout tagged source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.tag }}
           fetch-depth: 0
