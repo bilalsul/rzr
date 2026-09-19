@@ -2,9 +2,9 @@ Repo Zip Reader (RZR) is a FOSS project by [bilalsul](https://github.com/bilalsu
 
 I earn 0$ for my contributions. Please support me and make donation via one of the methods below.
 
-### Liberapay
+### Bank Transfer
 
-[![liberapay](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://liberapay.com/bilalsul)
+[![Bank Transfer](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://bilalsul.github.io/blog/2026/09/17/support-me-through-bank-transfer.html)
 
 ### Bitcoin
 
